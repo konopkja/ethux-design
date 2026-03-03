@@ -656,7 +656,19 @@ function renderAgents() {
 // ===========================
 function toggleProblem(catId, index) {
   const el = document.getElementById(`problem-${catId}-${index}`);
-  if (el) { el.classList.toggle('open'); const h=el.querySelector('.problem-head'); if(h) h.setAttribute('aria-expanded',el.classList.contains('open')); }
+  if (!el) return;
+  const body = el.querySelector('.problem-body');
+  el.classList.toggle('open');
+  const isOpen = el.classList.contains('open');
+  const h = el.querySelector('.problem-head');
+  if (h) h.setAttribute('aria-expanded', isOpen);
+  if (body) {
+    if (isOpen) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+      body.style.maxHeight = '';
+    }
+  }
 }
 function toggleCrit(index) {
   const el = document.getElementById(`crit-${index}`);

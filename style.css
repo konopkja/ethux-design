@@ -1107,7 +1107,7 @@ html.light .cl-agent-bar-text code { background: rgba(0,0,0,0.06); }
   max-height: 0; overflow: hidden;
   transition: max-height 0.4s ease;
 }
-.problem-card.open .problem-body { max-height: 800px; }
+.problem-card.open .problem-body { /* max-height set dynamically by JS */ }
 .problem-content {
   padding: 0 32px 48px 32px;
 }
@@ -1219,6 +1219,11 @@ html.light .cl-agent-bar-text code { background: rgba(0,0,0,0.06); }
 }
 @media (max-width: 768px) {
   .problem-meta-grid { grid-template-columns: 1fr; }
+  .problem-head { padding: 16px 16px; gap: 10px; flex-wrap: wrap; }
+  .problem-title { font-size: 1rem; }
+  .problem-badges { width: 100%; order: 3; }
+  .problem-expand { order: 2; }
+  .problem-content { padding: 0 16px 32px 16px; }
 }
 .problem-checklist-link {
   display: inline-block;
