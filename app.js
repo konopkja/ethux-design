@@ -76,6 +76,7 @@ function renderNav(active) {
         <span class="nav-wordmark">EthUX</span>
       </a>
       <div class="nav-links">
+        <a href="#/" class="${active==='map'?'active':''}">Pain Points</a>
         <a href="#/checklists" class="${active==='checklists'?'active':''}">Checklists</a>
         <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
         <a href="#/about" class="${active==='about'?'active':''}">About</a>
