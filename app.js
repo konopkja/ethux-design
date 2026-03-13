@@ -118,7 +118,7 @@ function renderHome() {
   DATA.categories.forEach((cat, i) => {
     const s = getCategoryStats(cat);
     const num = String(i + 1).padStart(2, '0');
-    catCards += `<div class="cat-card fade-up stagger-${i+1}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} pain points</div><div class="cat-card-bar-wrap"><div class="cat-card-bar"><div class="cat-card-bar-fill" style="width:${s.progress}%;--bar-progress-color:${progressColor(s.progress)}"></div></div><span class="cat-card-pct">${s.progress}%</span></div></div></div>`;
+    catCards += `<div class="cat-card fade-up stagger-${i+1}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} pain points</div></div></div>`;
   });
 
   let critItems = '';
