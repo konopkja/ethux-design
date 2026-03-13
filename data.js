@@ -25,7 +25,7 @@ const DATA = {
     ]},
     { id:'cross-chain', title:'Cross-chain & Networks', icon:'chain', color:'var(--cat-3)', desc:'Managing assets, switching networks, and bridging across L1 and L2 chains.', problems:[
       { title:'Fragmented Asset View', severity:'critical', status:'in-progress', desc:'Users must manually switch networks to see their full balances. Portfolio tracking across chains requires cognitive overhead.', solutions:[{name:'Unified balance display',status:'Live',adoption:'6/10 wallets'},{name:'EIP-7811 unified balances',status:'Research',adoption:'Draft'},{name:'Chain abstraction',status:'In Progress',adoption:'Testnet'}], eips:['EIP-7811'], checklist:'multichain' },
-      { title:'Manual Network Switching', severity:'high', status:'in-progress', desc:'When a wallet is connected to chain A and the user wants chain B, they must manually switch.', solutions:[{name:'EIP-3085 add chain',status:'Live',adoption:'8/10 wallets'},{name:'Auto-switching dapps',status:'In Progress',adoption:'3/10 dapps'}], eips:['EIP-3085','EIP-3326'], checklist:'multichain' },
+      { title:'Manual Network Switching', severity:'high', status:'in-progress', desc:'When a wallet is connected to chain A and the user wants chain B, they must manually switch.', solutions:[{name:'ERC-7828 chain-specific addresses',status:'Live',adoption:'Growing'},{name:'Auto-switching dapps',status:'In Progress',adoption:'3/10 dapps'}], eips:['ERC-7828','EIP-3326'], checklist:'multichain' },
       { title:'Different L2 Addresses', severity:'high', status:'unsolved', desc:'Smart contract accounts are deployed per chain, risking different addresses on different L2s.', solutions:[{name:'CREATE2 deterministic addresses',status:'Live',adoption:'Limited'},{name:'Keystore rollups',status:'Research',adoption:'Conceptual'}], eips:['EIP-7701','EIP-8141'], checklist:'multichain' },
       { title:'Bridging Pain', severity:'critical', status:'in-progress', desc:'Bridging between chains is expensive for small amounts, slow, and anxiety-inducing.', solutions:[{name:'ERC-7683 cross-chain intents',status:'In Progress',adoption:'Growing'},{name:'Native bridges',status:'Live',adoption:'Per-chain'}], eips:['ERC-7683'], checklist:'multichain' },
       { title:'Asset Fragmentation', severity:'high', status:'in-progress', desc:'Tokens scattered across chains create artificial friction.', solutions:[{name:'Intent-based protocols',status:'In Progress',adoption:'Growing'},{name:'Interop layer (EIL)',status:'In Progress',adoption:'Testnet live'}], eips:[], checklist:'multichain' }
@@ -84,10 +84,10 @@ const DATA = {
       { text:'Show fee breakdown: base fee, priority fee, L1 data fee (on L2s)', eip:'EIP-1559', priority:'medium', benefit:'Power users can optimize timing and priority. Transparency builds trust when fees spike unexpectedly.' },
       { text:'Warn before transactions with unusually high gas costs', eip:null, priority:'medium', benefit:'Prevents accidental overpayment during network congestion. Users avoid $50 fees on $10 transactions.' }
     ]},
-    { id:'multichain', title:'Multi-Chain', desc:'Cross-chain balance aggregation, automatic network switching, bridging UX, and smart account address consistency.', available:true, patterns:5, standards:['ERC-7683','EIP-3770','EIP-3085'], items:[
+    { id:'multichain', title:'Multi-Chain', desc:'Cross-chain balance aggregation, automatic network switching, bridging UX, and smart account address consistency.', available:true, patterns:5, standards:['ERC-7683','ERC-7930','ERC-7828'], items:[
       { text:'Display unified balances across all connected chains', eip:'EIP-7811', priority:'critical', benefit:'Users see their true net worth in one view. No more switching networks to find hidden funds.' },
-      { text:'Auto-switch networks when user interacts with a different chain', eip:'EIP-3085', priority:'high', benefit:'Removes the manual "switch network" step. Users interact with dapps without thinking about which chain they are on.' },
-      { text:'Use chain-specific address format to prevent wrong-chain sends', eip:'EIP-3770', priority:'high', benefit:'Catches cross-chain transfer mistakes before funds are sent to unreachable addresses.' },
+      { text:'Auto-switch networks when user interacts with a different chain', eip:'ERC-7828', priority:'high', benefit:'Removes the manual "switch network" step. Users interact with dapps without thinking about which chain they are on.' },
+      { text:'Use chain-specific address format to prevent wrong-chain sends', eip:'ERC-7930', priority:'high', benefit:'Catches cross-chain transfer mistakes before funds are sent to unreachable addresses.' },
       { text:'Abstract bridging into single-click cross-chain transfers via intents', eip:'ERC-7683', priority:'high', benefit:'Users move assets between chains as easily as sending to a friend. No bridge UI, no waiting, no anxiety.' },
       { text:'Ensure consistent smart account addresses across L2s with CREATE2', eip:null, priority:'medium', benefit:'Users have one address everywhere. Funds sent to any L2 arrive at the same account.' }
     ]},
@@ -305,8 +305,8 @@ const DOC_URLS = {
   'EIP-7702': 'https://eips.ethereum.org/EIPS/eip-7702',
   'EIP-1559': 'https://eips.ethereum.org/EIPS/eip-1559',
   'EIP-7811': 'https://eips.ethereum.org/EIPS/eip-7811',
-  'EIP-3085': 'https://eips.ethereum.org/EIPS/eip-3085',
-  'EIP-3770': 'https://eips.ethereum.org/EIPS/eip-3770',
+  'ERC-7828': 'https://eips.ethereum.org/EIPS/eip-7828',
+  'ERC-7930': 'https://eips.ethereum.org/EIPS/eip-7930',
   'ERC-7683': 'https://eips.ethereum.org/EIPS/eip-7683',
   'BIP-39': 'https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki',
   'WCAG 2.2': 'https://www.w3.org/TR/WCAG22/',
