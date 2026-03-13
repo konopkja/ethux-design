@@ -48,7 +48,7 @@ function getCategoryStats(cat) {
   const t = cat.problems.length;
   let s=0, ip=0, u=0, r=0;
   cat.problems.forEach(p => { if(p.status==='solved')s++; else if(p.status==='in-progress')ip++; else if(p.status==='research')r++; else u++; });
-  return { total:t, solved:s, inProgress:ip, unsolved:u, research:r, progress: Math.round(((s*1+ip*0.5+r*0.25)/t)*100) };
+  return { total:t, solved:s, inProgress:ip, unsolved:u, research:r, progress: Math.round(((s+ip+r)/t)*100) };
 }
 function getTotalStats() {
   let t=0,s=0,ip=0,u=0,c=0;
