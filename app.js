@@ -60,6 +60,22 @@ function getCriticalProblems() {
   DATA.categories.forEach(cat => { cat.problems.forEach(p => { if(p.severity==='critical') r.push({...p,catId:cat.id,catTitle:cat.title}); }); });
   return r;
 }
+function progressColor(pct) {
+  // Red (low) → Amber (mid) → Green (high)
+  if (pct <= 50) {
+    const t = pct / 50;
+    const r = Math.round(224 + (210 - 224) * t);
+    const g = Math.round(85 + (160 - 85) * t);
+    const b = Math.round(69 + (60 - 69) * t);
+    return `rgb(${r},${g},${b})`;
+  } else {
+    const t = (pct - 50) / 50;
+    const r = Math.round(210 + (69 - 210) * t);
+    const g = Math.round(160 + (196 - 160) * t);
+    const b = Math.round(60 + (112 - 60) * t);
+    return `rgb(${r},${g},${b})`;
+  }
+}
 function severityBadge(s) { return `<span class="badge badge-${s}">${s}</span>`; }
 function statusBadge(s) { const l={'solved':'Solved','in-progress':'In Progress','unsolved':'Unsolved','research':'Research'}; return `<span class="badge badge-${s}">${l[s]||s}</span>`; }
 function solStatusBadge(s) { const m={'Live':'solved','Ongoing':'in-progress','In Progress':'in-progress','Research':'research','None':'unsolved'}; return `<span class="badge badge-${m[s]||'unsolved'}">${s}</span>`; }
@@ -77,7 +93,7 @@ function renderNav(active) {
       </a>
       <div class="nav-links">
         <a href="#/" class="${active==='map'?'active':''}">Pain Points</a>
-        <a href="#/checklists" class="${active==='checklists'?'active':''}">Checklists</a>
+        <a href="#/checklists" class="${active==='checklists'?'active':''}">Solutions</a>
         <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
         <a href="#/about" class="${active==='about'?'active':''}">About</a>
         <a href="#/submit" class="${active==='submit'?'active':''}">Submit</a>
@@ -101,7 +117,7 @@ function renderHome() {
   DATA.categories.forEach((cat, i) => {
     const s = getCategoryStats(cat);
     const num = String(i + 1).padStart(2, '0');
-    catCards += `<div class="cat-card fade-up stagger-${i+1}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} pain points</div><div class="cat-card-bar-wrap"><div class="cat-card-bar"><div class="cat-card-bar-fill" style="width:${s.progress}%"></div></div><span class="cat-card-pct">${s.progress}%</span></div></div></div>`;
+    catCards += `<div class="cat-card fade-up stagger-${i+1}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} pain points</div><div class="cat-card-bar-wrap"><div class="cat-card-bar"><div class="cat-card-bar-fill" style="width:${s.progress}%;--bar-progress-color:${progressColor(s.progress)}"></div></div><span class="cat-card-pct">${s.progress}%</span></div></div></div>`;
   });
 
   let critItems = '';
@@ -128,7 +144,7 @@ function renderHome() {
           <p class="hero-desc" style="margin-top:8px;">A living catalog of the usability and comprehension barriers that stand between blockchain applications and their next million users.</p>
           <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
             <a href="#/category/getting-started" class="hero-cta">View Pain Points ${ICONS.arrow}</a>
-            <a href="#/checklists" class="hero-cta" style="background:none;color:var(--amber);padding-left:0;">Explore Checklists ${ICONS.arrow}</a>
+            <a href="#/checklists" class="hero-cta" style="background:none;color:var(--amber);padding-left:0;">Explore Solutions ${ICONS.arrow}</a>
           </div>
         </section>
       </div>
@@ -136,9 +152,9 @@ function renderHome() {
       <div class="container">
         <div class="stats-bar">
           <div class="stat-cell"><div class="stat-value">${stats.total}</div><div class="stat-label">Pain Points</div></div>
-          <div class="stat-cell"><div class="stat-value accent">${stats.inProgress}</div><div class="stat-label">In Progress</div></div>
-          <div class="stat-cell"><div class="stat-value">${stats.totalPatterns}</div><div class="stat-label">Code Patterns</div></div>
-          <div class="stat-cell"><div class="stat-value">7</div><div class="stat-label">Guides</div></div>
+          <div class="stat-cell"><div class="stat-value accent">${stats.inProgress}</div><div class="stat-label">Being Solved</div></div>
+          <div class="stat-cell"><div class="stat-value">${stats.solved}</div><div class="stat-label">Solved</div></div>
+          <div class="stat-cell"><div class="stat-value">${DATA.checklists.length}</div><div class="stat-label">Solutions</div></div>
         </div>
       </div>
 
@@ -182,10 +198,10 @@ function renderHome() {
 
         <section class="section">
           <div class="section-eyebrow">For Builders</div>
-          <div class="section-title">Checklists</div>
-          <div class="section-desc">Each guide ships as a UI checklist for design reviews and an agent-readable SKILL.md for AI coding assistants. Decision trees, code examples, and wallet support matrices included.</div>
+          <div class="section-title">Solutions</div>
+          <div class="section-desc">Each solution ships as a UI checklist for design reviews and an agent-readable SKILL.md for AI coding assistants. Decision trees, code examples, and wallet support matrices included.</div>
           <div class="guide-grid">${guideCards}</div>
-          <a href="#/checklists" class="btn btn-ghost" style="margin-top:24px;">All Guides</a>
+          <a href="#/checklists" class="btn btn-ghost" style="margin-top:24px;">All Solutions</a>
         </section>
 
         <div class="cta-section">
@@ -210,7 +226,7 @@ function renderCategory(catId) {
     let eipTags = '';
     if (p.eips.length) { eipTags = `<div class="problem-eips"><span class="problem-eips-label">Related standards:</span>${p.eips.map(e=>`<span class="eip-tag">${e}</span>`).join('')}</div>`; }
     let clLink = '';
-    if (p.checklist) { clLink = `<a class="problem-checklist-link" href="#/checklists">View ${p.checklist} checklist &rarr;</a>`; }
+    if (p.checklist) { clLink = `<a class="problem-checklist-link" href="#/checklists">View ${p.checklist} solution &rarr;</a>`; }
     let metaGrid = '';
     if (details.opportunity || details.risk) {
       metaGrid = `<div class="problem-meta-grid">${details.opportunity ? `<div class="problem-meta-box"><div class="problem-meta-label opp">Opportunity if fixed</div><div class="problem-meta-text">${details.opportunity}</div></div>` : ''}${details.risk ? `<div class="problem-meta-box"><div class="problem-meta-label risk">Risk if ignored</div><div class="problem-meta-text">${details.risk}</div></div>` : ''}</div>`;
@@ -292,18 +308,18 @@ function renderChecklists() {
     <main id="main-content">
       <div class="container" style="padding-top:80px;min-height:100vh;">
         <div class="section-eyebrow">Reference</div>
-        <div class="section-title">Checklists</div>
-        <div class="section-desc">${tp} patterns across 7 guides. Tick items off as you implement them. Your progress is saved locally. Each guide also ships as an agent-readable SKILL.md.</div>
+        <div class="section-title">Solutions</div>
+        <div class="section-desc">${tp} patterns across ${DATA.checklists.length} solutions. Tick items off as you implement them. Your progress is saved locally. Each solution also ships as an agent-readable SKILL.md.</div>
         <div style="display:flex;gap:40px;margin-bottom:40px;">
-          <div><div class="stat-value">7</div><div class="stat-label">Guides</div></div>
+          <div><div class="stat-value">${DATA.checklists.length}</div><div class="stat-label">Solutions</div></div>
           <div><div class="stat-value">${tp}</div><div class="stat-label">Patterns</div></div>
           <div><div class="stat-value accent">${ts}+</div><div class="stat-label">Standards</div></div>
         </div>
         <div class="cl-accordion">${sections}</div>
         <div class="section" style="margin-top:64px;">
           <div class="section-eyebrow">Recipes</div>
-          <div class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px;">Which guides to combine</div>
-          <div class="section-desc">Most features touch multiple guides. Here's which to combine:</div>
+          <div class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px;">Which solutions to combine</div>
+          <div class="section-desc">Most features touch multiple solutions. Here's which to combine:</div>
           <div style="border:1px solid var(--border);background:var(--bg-panel-solid);padding:24px;border-radius:12px;color:var(--text);">
             <table class="recipe-table"><thead><tr><th>Feature</th><th>Primary</th><th>Also Read</th></tr></thead><tbody>
               <tr><td>Swap interface</td><td><span class="eip-tag">approvals</span></td><td>signing, gas, onboarding</td></tr>
@@ -333,7 +349,7 @@ function renderAbout() {
           <h2>Collaborate</h2>
           <p>Join the conversation on <a href="https://discord.gg/tFmDq3c7" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX.</p>
           <h2>For AI Agents</h2>
-          <p>Our practice guides are designed to be consumed by AI coding agents. Each guide is a markdown file with YAML frontmatter, decision trees, and code examples.</p>
+          <p>Our solutions are designed to be consumed by AI coding agents. Each solution is a markdown file with YAML frontmatter, decision trees, and code examples.</p>
           <p>Point your agent to <code class="code-path" style="display:inline;">ux.ethereum.org/SKILL.md</code> for the root index.</p>
           <h2>Contributing</h2>
           <p>This project is open source. Submit UX issues through our <a href="#/submit">feedback form</a>, contribute on <a href="https://github.com/ethereum/ux" target="_blank" rel="noopener noreferrer">GitHub</a>, or reach out at <a href="mailto:ux@ethereum.org">ux@ethereum.org</a>.</p>
@@ -500,7 +516,7 @@ function renderOnboarding() {
             <div class="cross-links-list">
               <a href="#/category/onboarding" class="cross-link">User Onboarding</a>
               <a href="#/chasm" class="cross-link">The Chasm</a>
-              <a href="#/checklists" class="cross-link">Onboarding Checklist</a>
+              <a href="#/checklists" class="cross-link">Onboarding Solution</a>
               <a href="#/paradigms" class="cross-link">Investing vs Transacting</a>
             </div>
           </div>
@@ -643,7 +659,7 @@ function renderAgents() {
           <div style="display:flex;flex-direction:column;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
             <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 1</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Download or point to the SKILL.md</div><div style="font-size:0.9rem;color:var(--text-dim);">Add the file to your project root or reference the URL. Most AI agents (Cursor, Claude Code, GitHub Copilot) can read markdown files as context.</div></div>
             <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 2</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Tell your agent to follow it</div><div style="font-size:0.9rem;color:var(--text-dim);">Prompt: "Follow the UX patterns in checklists/gas/SKILL.md when implementing this feature." The agent reads the decision tree and applies the correct pattern.</div></div>
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 3</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Review against the UI Checklist</div><div style="font-size:0.9rem;color:var(--text-dim);">Use the <a href="#/checklists" style="color:var(--amber);text-decoration:none;border-bottom:1px solid var(--amber-dim);">Checklists</a> to manually verify the agent's output matches each checklist item.</div></div>
+            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 3</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Review against the UI Checklist</div><div style="font-size:0.9rem;color:var(--text-dim);">Use the <a href="#/checklists" style="color:var(--amber);text-decoration:none;border-bottom:1px solid var(--amber-dim);">Solutions</a> to manually verify the agent's output matches each checklist item.</div></div>
           </div>
         </div>
       </div>
