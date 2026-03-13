@@ -153,7 +153,6 @@ function renderHome() {
         <div class="stats-bar">
           <div class="stat-cell"><div class="stat-value">${stats.total}</div><div class="stat-label">Pain Points</div></div>
           <div class="stat-cell"><div class="stat-value accent">${stats.inProgress}</div><div class="stat-label">Being Solved</div></div>
-          <div class="stat-cell"><div class="stat-value">${stats.solved}</div><div class="stat-label">Solved</div></div>
           <div class="stat-cell"><div class="stat-value">${DATA.checklists.length}</div><div class="stat-label">Solutions</div></div>
         </div>
       </div>
