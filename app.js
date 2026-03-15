@@ -40,6 +40,7 @@ function getIcon(n) { return ICONS[n] || ''; }
 
 
 function getDocUrl(eip) { return eip ? DOC_URLS[eip] || null : null; }
+function getResourceUrl(eip) { return eip && typeof RESOURCE_URLS !== 'undefined' ? RESOURCE_URLS[eip] || null : null; }
 
 // ===========================
 // UTILITIES
@@ -289,8 +290,11 @@ function renderChecklists() {
       const key = `${cl.id}-${j}`;
       const isDone = checked[key];
       const docUrl = getDocUrl(item.eip);
-      const docLink = docUrl ? `<a class="cl-item-doc" href="${docUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Docs</a>` : '';
-      items += `<div class="cl-item ${isDone ? 'done' : ''}" data-cl="${key}"><button class="cl-checkbox ${isDone ? 'checked' : ''}" onclick="toggleCheckItem('${cl.id}',${j})" aria-label="Toggle ${item.text}"></button><span class="cl-item-num">${j+1}</span><div class="cl-item-content" onclick="toggleCheckItem('${cl.id}',${j})"><div class="cl-item-text">${item.text}</div>${item.benefit ? `<div class="cl-item-benefit">${item.benefit}</div>` : ''}<div class="cl-item-meta">${item.eip ? `<span class="cl-item-eip">${item.eip}</span>` : ''}<span class="cl-item-priority ${item.priority}">${item.priority}</span>${docLink}</div></div></div>`;
+      const resUrl = getResourceUrl(item.eip);
+      const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+      const docLink = docUrl ? `<a class="cl-item-doc" href="${docUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${linkIcon}EIP</a>` : '';
+      const resLink = resUrl ? `<a class="cl-item-doc" href="${resUrl.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${linkIcon}${resUrl.label}</a>` : '';
+      items += `<div class="cl-item ${isDone ? 'done' : ''}" data-cl="${key}"><button class="cl-checkbox ${isDone ? 'checked' : ''}" onclick="toggleCheckItem('${cl.id}',${j})" aria-label="Toggle ${item.text}"></button><span class="cl-item-num">${j+1}</span><div class="cl-item-content" onclick="toggleCheckItem('${cl.id}',${j})"><div class="cl-item-text">${item.text}</div>${item.benefit ? `<div class="cl-item-benefit">${item.benefit}</div>` : ''}<div class="cl-item-meta">${item.eip ? `<span class="cl-item-eip">${item.eip}</span>` : ''}<span class="cl-item-priority ${item.priority}">${item.priority}</span>${docLink}${resLink}</div></div></div>`;
     });
 
     sections += `<div class="cl-section fade-up stagger-${Math.min(i+1,7)}" id="cl-${cl.id}"><div class="cl-header" onclick="toggleCLSection('${cl.id}')"><span class="cl-expand" aria-hidden="true">&#9654;</span><div class="cl-header-info"><div class="cl-header-title">${cl.title}</div><div class="cl-header-desc">${cl.desc}</div></div><div class="cl-header-meta"><div class="cl-progress-ring"><svg><circle class="track" cx="20" cy="20" r="17" /><circle class="fill" cx="20" cy="20" r="17" style="stroke-dasharray:${circ.toFixed(1)};stroke-dashoffset:${offset.toFixed(1)}" /></svg><div class="cl-progress-text">${pct}%</div></div></div></div><div class="cl-body"><div class="cl-body-inner"><div class="cl-items">${items}</div><div class="cl-agent-bar"><div class="cl-agent-bar-text"><strong>AI Agent:</strong> Point your coding agent to <code>checklists/${cl.id}/SKILL.md</code></div><button class="cl-dl-btn" onclick="event.stopPropagation();downloadSkill('${cl.id}')">Download</button></div></div></div></div>`;

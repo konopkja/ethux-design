@@ -322,6 +322,21 @@ const DOC_URLS = {
 
 
 // ===========================================
+// BETTER RESOURCE URLS (user-friendly docs beyond the EIP page)
+// ===========================================
+const RESOURCE_URLS = {
+  'ERC-7828': { url: 'https://interopaddress.com', label: 'interopaddress.com' },
+  'ERC-4337': { url: 'https://www.erc4337.io/', label: 'erc4337.io' },
+  'EIP-7702': { url: 'https://eip7702.io/', label: 'eip7702.io' },
+  'Permit2': { url: 'https://docs.uniswap.org/contracts/permit2/overview', label: 'Uniswap Docs' },
+  'EIP-6963': { url: 'https://eip6963.org/', label: 'eip6963.org' },
+  'ERC-7683': { url: 'https://across.to/intents', label: 'Across Intents' },
+  'EIP-4361': { url: 'https://login.xyz/', label: 'login.xyz' },
+  'ERC-7730': { url: 'https://clear-signing.org/', label: 'clear-signing.org' },
+  'ENS': { url: 'https://docs.ens.domains/', label: 'ENS Docs' }
+};
+
+// ===========================================
 // SKILL ICONS
 // ===========================================
 const SKILL_ICONS = {
