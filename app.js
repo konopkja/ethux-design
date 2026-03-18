@@ -109,9 +109,15 @@ function renderNav(active) {
 function toggleMobileNav() {
   const links = document.querySelector('.nav-links');
   const btn = document.querySelector('.nav-hamburger');
+  const nav = document.querySelector('.nav');
   if (links && btn) {
     const open = links.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
+    if (nav) nav.classList.toggle('has-open-menu', open);
+    // Switch between hamburger and X icon
+    btn.innerHTML = open
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
   }
 }
 
@@ -831,7 +837,12 @@ function router() {
   const mobileNav = document.querySelector('.nav-links');
   if (mobileNav) mobileNav.classList.remove('open');
   const hamburger = document.querySelector('.nav-hamburger');
-  if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  if (hamburger) {
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  }
+  const navEl = document.querySelector('.nav');
+  if (navEl) navEl.classList.remove('has-open-menu');
   const hash = window.location.hash.slice(1) || '/';
   const app = document.getElementById('app');
   app.classList.remove('ready');
