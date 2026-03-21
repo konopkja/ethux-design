@@ -139,16 +139,9 @@ function renderHome() {
   DATA.categories.forEach((cat, i) => {
     const s = getCategoryStats(cat);
     const num = String(i + 1).padStart(2, '0');
-    catCards += `<div class="cat-card fade-up stagger-${i+1}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} issues</div></div></div>`;
+    catCards += `<div class="cat-card fade-up stagger-${Math.min(i+1,12)}" style="--cat-color:${cat.color};" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} issues</div></div></div>`;
   });
 
-  let critItems = '';
-  crits.forEach((p, i) => {
-    const num = String(i + 1).padStart(2, '0');
-    const details = CRITICAL_DETAILS[p.title] || {};
-    const solTags = p.solutions.map(s => `<span class="crit-sol-tag">${s.name}</span>`).join('');
-    critItems += `<div class="crit-card" id="crit-${i}"><div class="crit-item" onclick="toggleCrit(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCrit(${i})}" role="button" tabindex="0" aria-expanded="false"><span class="crit-num">${num}</span><div class="crit-info"><div class="crit-info-title">${p.title}</div><div class="crit-info-cat">${p.catTitle}</div></div><span class="crit-severity">Critical</span><span class="crit-expand" aria-hidden="true">&#9654;</span></div><div class="crit-detail"><div class="crit-detail-inner">${details.story ? `<div class="crit-story">${details.story}</div>` : `<div class="crit-story">${p.desc}</div>`}<div class="crit-solutions-row">${solTags}</div><div class="crit-meta-grid">${details.opportunity ? `<div class="crit-meta-box"><div class="crit-meta-label opp">Opportunity</div><div class="crit-meta-text">${details.opportunity}</div></div>` : ''} ${details.risk ? `<div class="crit-meta-box"><div class="crit-meta-label risk">Risk of inaction</div><div class="crit-meta-text">${details.risk}</div></div>` : ''}</div><a class="crit-link-cat" href="#/category/${p.catId}">View in ${p.catTitle} &rarr;</a></div></div></div>`;
-  });
 
   let guideCards = '';
   DATA.checklists.forEach(cl => {
@@ -163,10 +156,10 @@ function renderHome() {
         <section class="hero">
           <h1 class="hero-title">Mapping<br><span class="accent">Ethereum UX</span></h1>
           <p class="hero-desc"><a href="#/chasm" class="hero-desc-link">What got us here won't get us there.</a> Early adopters adopt for different reasons than majority adopters.</p>
-          <p class="hero-desc" style="margin-top:8px;">A living catalog of the UX improvements that will take blockchain applications from early adopters to their next million users.</p>
-          <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
+          <p class="hero-desc hero-desc--secondary">A living catalog of the UX improvements that will take blockchain applications from early adopters to their next million users.</p>
+          <div class="hero-cta-group">
             <a href="#" class="hero-cta" onclick="event.preventDefault();document.getElementById('ux-map').scrollIntoView({behavior:'smooth'})">Browse Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
-            <a href="#/checklists" class="hero-cta" style="background:none;color:var(--amber);padding-left:0;">Explore Solutions ${ICONS.arrow}</a>
+            <a href="#/checklists" class="hero-cta hero-cta--ghost">Explore Solutions ${ICONS.arrow}</a>
           </div>
         </section>
       </div>
@@ -236,13 +229,13 @@ function renderCategory(catId) {
     if (details.opportunity || details.risk) {
       metaGrid = `<div class="problem-meta-grid">${details.opportunity ? `<div class="problem-meta-box"><div class="problem-meta-label opp">Opportunity</div><div class="problem-meta-text">${details.opportunity}</div></div>` : ''}${details.risk ? `<div class="problem-meta-box"><div class="problem-meta-label risk">Risk of inaction</div><div class="problem-meta-text">${details.risk}</div></div>` : ''}</div>`;
     }
-    cards += `<div class="problem-card fade-up stagger-${Math.min(i+1,8)}" id="problem-${catId}-${i}"><div class="problem-head" role="button" tabindex="0" aria-expanded="false" aria-controls="pb-${catId}-${i}" onclick="toggleProblem('${catId}',${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleProblem('${catId}',${i})}"><span class="problem-expand" aria-hidden="true">&#9654;</span><span class="problem-title">${p.title}</span><div class="problem-badges">${severityBadge(p.severity)}${statusBadge(p.status)}</div></div><div class="problem-body" id="pb-${catId}-${i}" role="region" aria-label="${p.title} details"><div class="problem-content"><div class="problem-desc">${p.desc}</div><div class="sol-section"><table class="sol-table"><thead><tr><th>Solution</th><th>Status</th></tr></thead><tbody>${solRows}</tbody></table></div>${metaGrid}${eipTags}${clLink}</div></div></div>`;
+    cards += `<div class="problem-card fade-up stagger-${Math.min(i+1,12)}" id="problem-${catId}-${i}"><div class="problem-head" role="button" tabindex="0" aria-expanded="false" aria-controls="pb-${catId}-${i}" onclick="toggleProblem('${catId}',${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleProblem('${catId}',${i})}"><span class="problem-expand" aria-hidden="true">&#9654;</span><span class="problem-title">${p.title}</span><div class="problem-badges">${severityBadge(p.severity)}${statusBadge(p.status)}</div></div><div class="problem-body" id="pb-${catId}-${i}" role="region" aria-label="${p.title} details"><div class="problem-content"><div class="problem-desc">${p.desc}</div><div class="sol-section"><table class="sol-table"><thead><tr><th>Solution</th><th>Status</th></tr></thead><tbody>${solRows}</tbody></table></div>${metaGrid}${eipTags}${clLink}</div></div></div>`;
   });
   let catNav = DATA.categories.map(c => c.id === catId ? `<span class="cat-nav-item active">${c.title}</span>` : `<a class="cat-nav-item" href="#/category/${c.id}">${c.title}</a>`).join('');
   return `
     ${renderNav('map')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <a class="cat-back" href="#/">Back to map</a>
         <div class="cat-page-title">${cat.title}</div>
         <div class="cat-page-desc">${cat.desc}</div>
@@ -262,7 +255,7 @@ function renderSubmit() {
   return `
     ${renderNav('submit')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <div style="max-width:640px;">
           <div class="section-eyebrow">Community</div>
           <h2 class="section-title">Report a UX Issue</h2>
@@ -305,7 +298,7 @@ function renderChecklists() {
       const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
       const docLink = docUrl ? `<a class="cl-item-doc" href="${docUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${linkIcon}EIP</a>` : '';
       const resLink = resUrl ? `<a class="cl-item-doc" href="${resUrl.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${linkIcon}${resUrl.label}</a>` : '';
-      items += `<div class="cl-item ${isDone ? 'done' : ''}" data-cl="${key}"><button class="cl-checkbox ${isDone ? 'checked' : ''}" onclick="toggleCheckItem('${cl.id}',${j})" aria-label="Toggle ${item.text}" role="checkbox" aria-checked="${isDone ? 'true' : 'false'}"></button><span class="cl-item-num">${j+1}</span><div class="cl-item-content" onclick="toggleCheckItem('${cl.id}',${j})"><div class="cl-item-text">${item.text}</div>${item.benefit ? `<div class="cl-item-benefit">${item.benefit}</div>` : ''}<div class="cl-item-meta">${item.eip ? `<span class="cl-item-eip">${item.eip}</span>` : ''}<span class="cl-item-priority ${item.priority}">${item.priority}</span>${docLink}${resLink}</div></div></div>`;
+      items += `<div class="cl-item ${isDone ? 'done' : ''}" data-cl="${key}" onclick="toggleCheckItem('${cl.id}',${j})" style="cursor:pointer;"><button class="cl-checkbox ${isDone ? 'checked' : ''}" onclick="event.stopPropagation();toggleCheckItem('${cl.id}',${j})" aria-label="Toggle ${item.text}" role="checkbox" aria-checked="${isDone ? 'true' : 'false'}"></button><span class="cl-item-num">${j+1}</span><div class="cl-item-content"><div class="cl-item-text">${item.text}</div>${item.benefit ? `<div class="cl-item-benefit">${item.benefit}</div>` : ''}<div class="cl-item-meta">${item.eip ? `<span class="cl-item-eip">${item.eip}</span>` : ''}<span class="cl-item-priority ${item.priority}">${item.priority}</span>${docLink}${resLink}</div></div></div>`;
     });
 
     sections += `<div class="cl-section fade-up stagger-${Math.min(i+1,7)}" id="cl-${cl.id}"><div class="cl-header" onclick="toggleCLSection('${cl.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCLSection('${cl.id}')}" role="button" tabindex="0" aria-expanded="false"><span class="cl-expand" aria-hidden="true">&#9654;</span><div class="cl-header-info"><div class="cl-header-title">${cl.title}</div><div class="cl-header-desc">${cl.desc}</div></div><div class="cl-header-meta"><div class="cl-progress-ring"><svg><circle class="track" cx="20" cy="20" r="17" /><circle class="fill" cx="20" cy="20" r="17" style="stroke-dasharray:${circ.toFixed(1)};stroke-dashoffset:${offset.toFixed(1)}" /></svg><div class="cl-progress-text">${pct}%</div></div></div></div><div class="cl-body"><div class="cl-body-inner"><div class="cl-items">${items}</div><div class="cl-agent-bar"><div class="cl-agent-bar-text"><strong>AI Agent:</strong> Point your coding agent to <code>checklists/${cl.id}/SKILL.md</code></div><button class="cl-dl-btn" onclick="event.stopPropagation();downloadSkill('${cl.id}')">Download</button></div></div></div></div>`;
@@ -314,7 +307,7 @@ function renderChecklists() {
   return `
     ${renderNav('checklists')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <div class="section-eyebrow">Reference</div>
         <h2 class="section-title">Solutions</h2>
         <div class="section-desc">${tp} patterns across ${DATA.checklists.length} solutions. Tick items off as you implement them. Your progress is saved locally. Each solution also ships as an agent-readable SKILL.md.</div>
@@ -328,7 +321,7 @@ function renderAbout() {
   return `
     ${renderNav('about')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <div style="max-width:640px;" class="about-content">
           <h1>About<br>EthUX</h1>
           <p>EthUX is a living, community-sourced map of Ethereum's highest-impact UX issues, matched with the solutions being built to address them.</p>
@@ -351,7 +344,7 @@ function renderInsights() {
   return `
     ${renderNav('insights')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <div class="section-eyebrow">Research</div>
         <h2 class="section-title">Insights</h2>
         <div class="section-desc">Foundational UX frameworks from the CRADL research. How Ethereum UX can scale from early adopters to the mainstream, and what builders can do about it.</div>
@@ -667,7 +660,7 @@ function renderAgents() {
   return `
     ${renderNav('agents')}
     <main id="main-content">
-      <div class="container" style="padding-top:80px;min-height:100vh;">
+      <div class="container page-container">
         <div class="section-eyebrow">For AI Coding Agents</div>
         <h2 class="section-title">SKILL.md Files</h2>
         <div class="section-desc" style="margin-bottom:32px;">Each SKILL.md is a structured markdown file your AI coding agent can read to implement Ethereum UX patterns correctly. Point your agent to the file path and it gets decision trees, code examples, NEVER/ALWAYS rules, and wallet support data.</div>
@@ -687,9 +680,9 @@ function renderAgents() {
           <div class="section-eyebrow">How it works</div>
           <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px;">Integration Guide</h2>
           <div style="display:flex;flex-direction:column;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 1</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Download or point to the SKILL.md</div><div style="font-size:0.9rem;color:var(--text-dim);">Add the file to your project root or reference the URL. Most AI agents (Cursor, Claude Code, GitHub Copilot) can read markdown files as context.</div></div>
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 2</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Tell your agent to follow it</div><div style="font-size:0.9rem;color:var(--text-dim);">Prompt: "Follow the UX patterns in checklists/gas/SKILL.md when implementing this feature." The agent reads the decision tree and applies the correct pattern.</div></div>
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Step 3</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Review against the UI Checklist</div><div style="font-size:0.9rem;color:var(--text-dim);">Use the <a href="#/checklists" style="color:var(--amber);text-decoration:none;border-bottom:1px solid var(--amber-dim);">Solutions</a> to manually verify the agent's output matches each checklist item.</div></div>
+            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 1</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Download or point to the SKILL.md</div><div style="font-size:0.9rem;color:var(--text-dim);">Add the file to your project root or reference the URL. Most AI agents (Cursor, Claude Code, GitHub Copilot) can read markdown files as context.</div></div>
+            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 2</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Tell your agent to follow it</div><div style="font-size:0.9rem;color:var(--text-dim);">Prompt: "Follow the UX patterns in checklists/gas/SKILL.md when implementing this feature." The agent reads the decision tree and applies the correct pattern.</div></div>
+            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 3</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Review against the UI Checklist</div><div style="font-size:0.9rem;color:var(--text-dim);">Use the <a href="#/checklists" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--amber-dim);">Solutions</a> to manually verify the agent's output matches each checklist item.</div></div>
           </div>
         </div>
       </div>
@@ -775,6 +768,10 @@ function updateCLProgress(guideId) {
   const txt = document.querySelector(`#cl-${guideId} .cl-progress-text`);
   if (ring) { const c = 2 * Math.PI * 17; ring.style.strokeDashoffset = c - (c * pct / 100); }
   if (txt) { txt.textContent = pct + '%'; }
+  const section = document.getElementById('cl-'+guideId);
+  if (section) {
+    if (pct === 100) { section.classList.add('cl-complete'); } else { section.classList.remove('cl-complete'); }
+  }
 }
 // ===========================
 // SKILL.MD GENERATION & DOWNLOAD
@@ -854,7 +851,13 @@ function router() {
     if (scrollToChecklist) { const el=document.getElementById('cl-'+scrollToChecklist); if(el){toggleCLSection(scrollToChecklist);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);} else { window.scrollTo(0,0); } }
     else { window.scrollTo(0,0); }
     requestAnimationFrame(()=>{
-      document.querySelectorAll('.progress-fill[data-width]').forEach(el=>{requestAnimationFrame(()=>{el.style.width=el.dataset.width;});});
+      document.querySelectorAll('.progress-fill[data-width]').forEach(el=>{
+        const visited = sessionStorage.getItem('visited-'+el.closest('[id]')?.id);
+        if (visited) { el.style.transition='none'; el.style.width=el.dataset.width; }
+        else { requestAnimationFrame(()=>{el.style.width=el.dataset.width;}); }
+      });
+      const pageId = window.location.hash.slice(1) || '/';
+      sessionStorage.setItem('visited-'+pageId, '1');
       app.classList.add('ready');
     });
   }, delay);
