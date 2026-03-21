@@ -88,6 +88,7 @@ function solStatusBadge(s) { const m={'Live':'solved','Ongoing':'in-progress','I
 function renderNav(active) {
   return `
     <nav class="nav" aria-label="Main navigation">
+      <div class="nav-inner">
       <a href="#/" class="nav-home" aria-label="EthUX home">
         ${ICONS.ethDiamond}
         <span class="nav-wordmark">EthUX</span>
@@ -103,6 +104,7 @@ function renderNav(active) {
       <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
+      </div>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
       <a href="#/category/getting-started" class="${active==='map'?'active':''}">UX Map</a>
@@ -139,14 +141,13 @@ function renderHome() {
   DATA.categories.forEach((cat, i) => {
     const s = getCategoryStats(cat);
     const num = String(i + 1).padStart(2, '0');
-    catCards += `<div class="cat-card fade-up stagger-${Math.min(i+1,12)}" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} issues</div></div></div>`;
+    catCards += `<div class="cat-card" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-icon">${getIcon(cat.icon)}</div><div class="cat-card-title">${cat.title}</div><div class="cat-card-bottom"><div class="cat-card-count">${s.total} issues</div></div></div>`;
   });
 
 
   let guideCards = '';
   DATA.checklists.forEach(cl => {
-    const tags = (cl.standards||[]).map(s => `<span class="guide-tag-pill">${s}</span>`).join('');
-    guideCards += `<a href="#/checklists/${cl.id}" class="guide-card-v2"><div class="guide-card-v2-header"><span class="guide-card-v2-title">${cl.title}</span><span class="guide-card-v2-patterns">${cl.patterns} patterns</span></div><div class="guide-card-v2-desc">${cl.desc}</div><div class="guide-card-v2-tags">${tags}</div></a>`;
+    guideCards += `<a href="#/checklists/${cl.id}" class="guide-card-v2"><div class="guide-card-v2-header"><span class="guide-card-v2-title">${cl.title}</span><span class="guide-card-v2-desc">${cl.desc}</span></div><span class="guide-card-v2-patterns">${cl.patterns}</span></a>`;
   });
 
   return `
@@ -166,51 +167,42 @@ function renderHome() {
 
       <div class="container">
         <section class="section" id="ux-map">
-          <div class="section-eyebrow">Categories</div>
-          <h2 class="section-title">${stats.total} Issues Across 8 Categories</h2>
-          <div class="section-desc">The full problem map. Click any category to explore severity, solutions, and wallet adoption.</div>
-          <div class="cat-grid">${catCards}</div>
+          <div class="section-eyebrow reveal">The UX Map</div>
+          <h2 class="section-title reveal">Opportunities for Growth</h2>
+          <div class="section-desc reveal">${stats.total} areas for improvement across 8 categories, sourced from 14,900+ real user stories. Each one is a chance to make Ethereum work better for the next wave of users.</div>
+          <div class="cat-grid reveal-grid">${catCards}</div>
         </section>
       </div>
 
-      <div class="section-band">
-        <div class="container">
-          <section class="section">
-            <div class="section-eyebrow">For Builders</div>
-            <h2 class="section-title section-title--sm">Implementation Guides</h2>
-            <div class="section-desc">Pattern checklists with EIP references, priority levels, and real adoption data. Use them in design reviews or feed them to your AI coding agent.</div>
-            <div class="guide-grid-v2">${guideCards}</div>
-          </section>
-        </div>
-      </div>
-
       <div class="container">
+        <div class="pull-quote reveal">700 million people hold crypto. Fewer than 70 million use it actively onchain.</div>
+
         <section class="section">
           <div class="section-eyebrow">Research</div>
-          <h2 class="section-title section-title--sm">Insights</h2>
-          <div class="section-desc">Foundational UX frameworks from the CRADL research. How Ethereum UX can scale from early adopters to the mainstream, and what builders can do about it.</div>
+          <h2 class="section-title section-title--sm">Why It's Stuck</h2>
+          <div class="section-desc">Three frameworks from CRADL research that explain the gap.</div>
           <div class="insight-grid">
             <a href="#/chasm" class="insight-card">
               <div class="insight-card-eyebrow">Adoption</div>
               <div class="insight-card-title">The Chasm</div>
-              <div class="insight-card-desc">How to bridge the gap between early adopter and mainstream UX. Why good UI alone isn't enough.</div>
+              <div class="insight-card-desc">87% of new wallet users leave within a week. Beautiful UI won't save you if the mental model is wrong.</div>
             </a>
             <a href="#/onboarding" class="insight-card">
               <div class="insight-card-eyebrow">Framework</div>
               <div class="insight-card-title">Onboarding Journey</div>
-              <div class="insight-card-desc">Five stages between curiosity and competence. The minimum viable knowledge gap.</div>
+              <div class="insight-card-desc">Five stages between first curiosity and confident use. Most products lose people at stage two.</div>
             </a>
             <a href="#/paradigms" class="insight-card">
               <div class="insight-card-eyebrow">Design</div>
               <div class="insight-card-title">Investing vs Transacting</div>
-              <div class="insight-card-desc">Ethereum serves two user mindsets. Separating investment and payment UX is a design opportunity.</div>
+              <div class="insight-card-desc">Wallets show your portfolio and a Send button on the same screen. These are two different products pretending to be one.</div>
             </a>
           </div>
         </section>
 
         <div class="cta-section">
-          <div class="cta-text"><strong>Spotted a UX issue?</strong> Your report helps builders prioritize.</div>
-          <a href="#/submit" class="btn btn-primary">Report It</a>
+          <div class="cta-text"><strong>Seen something we missed?</strong> This map is built on real user stories. Yours could be next.</div>
+          <a href="#/submit" class="btn btn-primary">Share a UX Story</a>
         </div>
       </div>
 
@@ -837,10 +829,8 @@ function router() {
   document.body.style.overflow = '';
   const hash = window.location.hash.slice(1) || '/';
   const app = document.getElementById('app');
-  app.classList.remove('ready');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const delay = reduceMotion ? 0 : 120;
-  setTimeout(() => {
+  {
     let html='';
     let scrollToChecklist = null;
     if (hash.startsWith('/category/')) { const id=hash.replace('/category/',''); const cat=DATA.categories.find(c=>c.id===id); html=cat?renderCategory(cat.id):renderHome(); }
@@ -865,9 +855,18 @@ function router() {
       });
       const pageId = window.location.hash.slice(1) || '/';
       sessionStorage.setItem('visited-'+pageId, '1');
-      app.classList.add('ready');
+      // Scroll-triggered reveals
+      const revealEls = document.querySelectorAll('.reveal, .reveal-grid');
+      if (!reduceMotion) {
+        const revealObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); } });
+        }, { threshold: 0 });
+        revealEls.forEach(el => revealObs.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('revealed'));
+      }
     });
-  }, delay);
+  }
 }
 
 document.addEventListener('click', (e) => {
@@ -897,6 +896,16 @@ window.addEventListener('DOMContentLoaded', () => {
   if (scrollToChecklist) { const el=document.getElementById('cl-'+scrollToChecklist); if(el){toggleCLSection(scrollToChecklist);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);} }
   requestAnimationFrame(()=>{
     document.querySelectorAll('.progress-fill[data-width]').forEach(el=>{requestAnimationFrame(()=>{el.style.width=el.dataset.width;});});
-    app.classList.add('ready');
+    // Scroll-triggered reveals
+    const revealEls = document.querySelectorAll('.reveal, .reveal-grid');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); } });
+      }, { threshold: 0 });
+      revealEls.forEach(el => revealObs.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('revealed'));
+    }
   });
 });
