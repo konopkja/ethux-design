@@ -267,7 +267,7 @@ body {
 .hero-desc--secondary { margin-top: 8px; }
 .hero-cta svg { width: 14px; height: 14px; }
 
-.page-container { padding-top: 80px; min-height: 100vh; }
+.page-container { padding-top: 96px; min-height: 100vh; }
 
 
 
@@ -340,14 +340,14 @@ body {
   flex-direction: column;
 }
 .cat-card:hover { background: var(--surface-hover); }
-.cat-card:hover .cat-card-icon { color: var(--cat-color); }
 .cat-card-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--accent);
-  margin-bottom: 32px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
 }
-.cat-card-icon svg { width: 100%; height: 100%; }
+.cat-card-icon img { width: 100%; height: 100%; object-fit: contain; }
+.cat-card-icon svg { width: 100%; height: 100%; color: var(--accent); }
+.cat-card:hover .cat-card-icon svg { color: var(--cat-color); }
 .cat-card-title {
   font-family: var(--font-body);
   font-size: 1.35rem;
@@ -2193,7 +2193,7 @@ html.light .agents-hero-box code { background: rgba(0,0,0,0.06); }
   .cat-nav-item { padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
   .cross-link { padding: 12px 16px; min-height: 44px; display: inline-flex; align-items: center; }
   .cl-dl-btn { padding: 12px 20px; min-height: 44px; }
-  .cat-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .crit-item { grid-template-columns: 1fr auto 20px; gap: 8px; }
   .crit-num { display: none; }
   .guide-grid { grid-template-columns: 1fr; }

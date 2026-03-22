@@ -141,7 +141,7 @@ function renderHome() {
   DATA.categories.forEach((cat, i) => {
     const s = getCategoryStats(cat);
     const num = String(i + 1).padStart(2, '0');
-    catCards += `<div class="cat-card" style="--cat-color:${cat.color}" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-icon">${getIcon(cat.icon)}</div><div class="cat-card-title">${cat.title}</div><div class="cat-card-hook">${cat.hook || ''}</div></div>`;
+    catCards += `<div class="cat-card" style="--cat-color:${cat.color}" role="button" tabindex="0" aria-label="View ${cat.title}" onclick="navigate('/category/${cat.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/category/${cat.id}')}"><div class="cat-card-icon">${cat.img ? `<img src="${cat.img}" alt="${cat.title}">` : getIcon(cat.icon)}</div><div class="cat-card-title">${cat.title}</div><div class="cat-card-hook">${cat.hook || ''}</div></div>`;
   });
 
 
@@ -322,7 +322,7 @@ function renderAbout() {
           <h1>About<br>EthUX</h1>
           <p>EthUX is a living, community-sourced map of Ethereum's highest-impact UX issues, matched with the solutions being built to address them.</p>
           <p>The goal is to surface critical UX issues from the user's perspective, triage them, coordinate builders around solutions, and track adoption of solutions across the ecosystem.</p>
-          <p>This is not a polished report. It's a collaborative, evolving tracker. Based on research from <strong>14,900+ real Ethereum user stories</strong>.</p>
+          <p>This is not a polished report. It's a collaborative, evolving tracker. Based on research from <strong>32,000+ real Ethereum user stories</strong>.</p>
           <p>Our work aligns with the Ethereum Foundation's CROPS principles: Censorship Resistance, Open source, Privacy, and Security. Every UX issue we track and every solution we recommend is evaluated through this lens.</p>
           <h2>Collaborate</h2>
           <p>Join the conversation on <a href="https://discord.gg/tFmDq3c7" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX.</p>
