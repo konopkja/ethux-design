@@ -2199,8 +2199,8 @@ html.light .agents-hero-box code { background: rgba(0,0,0,0.06); }
   .guide-grid { grid-template-columns: 1fr; }
   .guide-card-v2 { grid-template-columns: 1fr; gap: 8px; }
   .guide-card-v2-patterns { text-align: left; }
-  .insight-card:first-child { grid-column: auto; }
-  .insight-grid { grid-template-columns: 1fr; }
+  .insight-card:first-child { grid-column: 1 / -1; }
+  .insight-grid { grid-template-columns: repeat(2, 1fr); }
   .pull-quote { font-size: 1.1rem; padding: 32px 0; margin-bottom: 56px; }
   .tracks-grid { grid-template-columns: 1fr; }
   .cat-page-title { font-size: clamp(2rem, 8vw, 3rem); }
