@@ -65,6 +65,8 @@
   --shadow-lg: 0 8px 30px rgba(0,0,0,0.04);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Layout */
+  --nav-height: 56px;
   /* Typography */
   --font-display: 'Libre Baskerville', Georgia, serif;
   --font-body: 'Geist', system-ui, sans-serif;
@@ -96,6 +98,7 @@ body {
   background: var(--bg);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: var(--nav-height);
 }
 
 /* ==========================================================
@@ -116,7 +119,7 @@ body {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 200;
   display: flex; align-items: center; justify-content: center;
-  height: 56px;
+  height: var(--nav-height);
   background: var(--bg-panel);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -208,7 +211,7 @@ body {
    HERO
    ========================================================== */
 .hero {
-  padding-top: 160px;
+  padding-top: 104px;
   padding-bottom: 200px;
   position: relative;
 }
@@ -267,7 +270,7 @@ body {
 .hero-desc--secondary { margin-top: 8px; }
 .hero-cta svg { width: 14px; height: 14px; }
 
-.page-container { padding-top: 96px; min-height: 100vh; }
+.page-container { padding-top: 40px; min-height: 100vh; }
 
 
 
@@ -1455,7 +1458,7 @@ a.eip-tag:hover { text-decoration: underline; }
 .prose {
   max-width: 640px;
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: 40px;
   min-height: 100vh;
 }
 .prose h1 {
@@ -2178,7 +2181,7 @@ html.light .agents-hero-box code { background: rgba(0,0,0,0.06); }
   .nav-wordmark { display: none; }
   .nav-links-desktop { display: none; }
   .nav-hamburger { display: flex; margin-left: auto; }
-  .hero { padding-top: 100px; padding-bottom: 96px; }
+  .hero { padding-top: 48px; padding-bottom: 64px; }
   .hero::before { display: none; }
   .hero-title { font-size: clamp(2rem, 9vw, 3.5rem); margin-bottom: 20px; }
   .section { margin-bottom: 56px; }
