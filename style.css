@@ -270,6 +270,7 @@ body {
 .hero-desc--secondary { margin-top: 8px; }
 .hero-cta svg { width: 14px; height: 14px; }
 
+main { padding-bottom: 120px; }
 .page-container { padding-top: calc(var(--nav-height) + 40px); min-height: 100vh; }
 
 
