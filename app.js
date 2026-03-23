@@ -707,8 +707,17 @@ function toggleProblem(catId, index) {
   if (body) {
     if (isOpen) {
       body.style.maxHeight = body.scrollHeight + 'px';
+      body.addEventListener('transitionend', function handler() {
+        if (el.classList.contains('open')) {
+          body.style.maxHeight = 'none';
+        }
+        body.removeEventListener('transitionend', handler);
+      });
     } else {
-      body.style.maxHeight = '';
+      body.style.maxHeight = body.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        body.style.maxHeight = '';
+      });
     }
   }
 }
@@ -737,7 +746,21 @@ function toggleCLSection(id) {
   const body = el.querySelector('.cl-body');
   el.classList.toggle('open');
   if (body) {
-    body.style.maxHeight = el.classList.contains('open') ? body.scrollHeight + 'px' : '';
+    const isOpen = el.classList.contains('open');
+    if (isOpen) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+      body.addEventListener('transitionend', function handler() {
+        if (el.classList.contains('open')) {
+          body.style.maxHeight = 'none';
+        }
+        body.removeEventListener('transitionend', handler);
+      });
+    } else {
+      body.style.maxHeight = body.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        body.style.maxHeight = '';
+      });
+    }
   }
   const header = el.querySelector('.cl-header');
   if (header) header.setAttribute('aria-expanded', el.classList.contains('open'));
