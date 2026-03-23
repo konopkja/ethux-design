@@ -140,7 +140,7 @@ function toggleMobileNav() {
 }
 
 function renderFooter() {
-  return '';
+  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="#/submit">Submit an issue</a><a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
 }
 
 function renderHome() {
