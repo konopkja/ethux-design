@@ -109,7 +109,7 @@ function renderNav(active) {
         <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
         <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
         <a href="#/about" class="${active==='about'?'active':''}">About</a>
-        <a href="#/submit" class="${active==='submit'?'active':''}">Submit</a>
+        <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit</a>
       </div>
       <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -122,7 +122,7 @@ function renderNav(active) {
       <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
       <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
       <a href="#/about" class="${active==='about'?'active':''}">About</a>
-      <a href="#/submit" class="${active==='submit'?'active':''}">Submit</a>
+      <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit</a>
     </div>`;
 }
 
@@ -140,7 +140,7 @@ function toggleMobileNav() {
 }
 
 function renderFooter() {
-  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="#/submit">Submit an issue</a><a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
+  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit an issue</a><a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
 }
 
 function renderHome() {
@@ -170,7 +170,7 @@ function renderHome() {
           <p class="hero-desc hero-desc--secondary">A living catalog of the improvements that will take blockchain applications from early adopters to the majority.</p>
           <div class="hero-cta-group">
             <a href="#" class="hero-cta" onclick="event.preventDefault();document.getElementById('ux-map').scrollIntoView({behavior:'smooth'})">Browse Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
-            <a href="#/checklists" class="hero-cta hero-cta--ghost">Explore Solutions ${ICONS.arrow}</a>
+            <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">Report a Problem ${ICONS.arrow}</a>
           </div>
         </section>
       </div>
@@ -215,7 +215,7 @@ function renderHome() {
             <h3 class="cta-headline">Seen something we missed?</h3>
             <div class="cta-text">Every item on this map started as one person's story. Share yours and help shape what builders fix next.</div>
           </div>
-          <a href="#/submit" class="btn btn-primary">Add to the Map</a>
+          <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Add to the Map</a>
         </div>
       </div>
 
@@ -270,30 +270,6 @@ function renderCategory(catId) {
     </main>`;
 }
 
-function renderSubmit() {
-  return `
-    ${renderNav('submit')}
-    <main id="main-content">
-      <div class="container page-container">
-        <div style="max-width:640px;">
-          <div class="section-eyebrow">Community</div>
-          <h2 class="section-title">Report a UX Issue</h2>
-          <div class="section-desc">Every submission is reviewed and triaged. Your experience helps us build the case for better UX across the ecosystem.</div>
-          <div class="form-card">
-            <form id="submit-form" onsubmit="handleSubmit(event)">
-              <div class="form-group"><label class="form-label" for="s-title">What happened</label><input class="form-input" id="s-title" type="text" placeholder="e.g., Can't see my tokens on Arbitrum" required></div>
-              <div class="form-group"><label class="form-label" for="s-desc">Tell us more</label><textarea class="form-textarea" id="s-desc" placeholder="What did you expect? What wallet or dapp were you using?" required></textarea></div>
-              <div class="form-group"><label class="form-label" for="s-cat">Category</label><select class="form-select" id="s-cat"><option value="" disabled selected>Pick the closest match...</option>${DATA.categories.map(c=>`<option value="${c.id}">${c.title}</option>`).join('')}<option value="other">Other / Not sure</option></select></div>
-              <div class="form-group"><label class="form-label" for="s-contact">Contact <span class="form-label-opt">(optional)</span></label><input class="form-input" id="s-contact" type="text" placeholder="Email, Telegram, or Twitter handle"><div class="form-hint">Only used if we need clarification. Never shared.</div></div>
-              <button class="btn btn-primary" type="submit">Submit</button>
-              <div class="success-msg" role="status">Thanks for sharing. We'll review this and add it to the tracker.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-      ${renderFooter()}
-    </main>`;
-}
 
 function renderChecklists() {
   const tp = DATA.checklists.reduce((s,c)=>s+(c.items?c.items.length:c.patterns||0),0);
@@ -353,7 +329,7 @@ function renderAbout() {
           <p>Our solutions are designed to be consumed by AI coding agents. Each solution is a markdown file with YAML frontmatter, decision trees, and code examples.</p>
           <p>Browse available skills on the <a href="#/agents">AI Agents page</a>.</p>
           <h2>Contributing</h2>
-          <p>This project is open source. Submit UX issues through our <a href="#/submit">feedback form</a>, contribute on <a href="https://github.com/ethereum/ux" target="_blank" rel="noopener noreferrer">GitHub</a>, or reach out at <a href="mailto:ux@ethereum.org">ux@ethereum.org</a>.</p>
+          <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/ethereum/ux" target="_blank" rel="noopener noreferrer">GitHub</a>, or reach out at <a href="mailto:ux@ethereum.org">ux@ethereum.org</a>.</p>
         </div>
       </div>
       ${renderFooter()}
@@ -830,11 +806,6 @@ function downloadAllSkills() {
   });
 }
 
-function handleSubmit(e) {
-  e.preventDefault();
-  const form=e.target, msg=form.querySelector('.success-msg');
-  if (msg) { msg.classList.add('show'); form.reset(); successTimeout=setTimeout(()=>msg.classList.remove('show'),5000); }
-}
 
 // ===========================
 // ROUTER
@@ -859,7 +830,6 @@ function router() {
     let html='';
     let scrollToChecklist = null;
     if (hash.startsWith('/category/')) { const id=hash.replace('/category/',''); const cat=DATA.categories.find(c=>c.id===id); html=cat?renderCategory(cat.id):renderHome(); }
-    else if (hash==='/submit') html=renderSubmit();
     else if (hash.startsWith('/checklists/')) { scrollToChecklist=hash.replace('/checklists/',''); html=renderChecklists(); }
     else if (hash==='/checklists') html=renderChecklists();
     else if (hash==='/insights') html=renderInsights();
