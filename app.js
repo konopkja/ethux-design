@@ -182,7 +182,7 @@ function renderHome() {
         <section class="section" id="ux-map">
           <div class="section-eyebrow reveal">The UX Map</div>
           <h2 class="section-title reveal">Opportunities for Growth</h2>
-          <div class="section-desc reveal">Sourced from 32,000+ real user stories collected by ethereum.org and the design community. Each one is a chance to make Ethereum work better for the next wave of users.</div>
+          <div class="section-desc reveal">Sourced from user feedback, community research, and ecosystem data. Each one is a chance to make Ethereum work better for the next wave of users.</div>
           <div class="cat-grid reveal-grid">${catCards}</div>
         </section>
       </div>
@@ -324,15 +324,14 @@ function renderAbout() {
           <h1>About<br>EthUX</h1>
           <p>EthUX is a living, community-sourced map of Ethereum's highest-impact UX issues, matched with the solutions being built to address them.</p>
           <p>The goal is to surface critical UX issues from the user's perspective, triage them, coordinate builders around solutions, and track adoption of solutions across the ecosystem.</p>
-          <p>This is not a polished report. It's a collaborative, evolving tracker. Based on research from <strong>32,000+ real Ethereum user stories</strong>.</p>
-          <p>Our work aligns with the Ethereum Foundation's CROPS principles: Censorship Resistance, Open source, Privacy, and Security. Every UX issue we track and every solution we recommend is evaluated through this lens.</p>
+          <p>This is not a polished report. It's a collaborative, evolving tracker. Sourced from user feedback surveys, social media monitoring, community research, and ecosystem data.</p>
           <h2>Collaborate</h2>
           <p>Join the conversation on <a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX.</p>
           <h2>For AI Agents</h2>
           <p>Our solutions are designed to be consumed by AI coding agents. Each solution is a markdown file with YAML frontmatter, decision trees, and code examples.</p>
           <p>Browse available skills on the <a href="#/agents">AI Agents page</a>.</p>
           <h2>Contributing</h2>
-          <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/ethereum/ux" target="_blank" rel="noopener noreferrer">GitHub</a>, or reach out at <a href="mailto:ux@ethereum.org">ux@ethereum.org</a>.</p>
+          <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </div>
       </div>
       ${renderFooter()}
@@ -346,7 +345,7 @@ function renderInsights() {
       <div class="container page-container">
         <div class="section-eyebrow">Research</div>
         <h2 class="section-title">Insights</h2>
-        <div class="section-desc">Foundational UX frameworks from the CRADL research. How Ethereum UX can scale from early adopters to the mainstream, and what builders can do about it.</div>
+        <div class="section-desc">Foundational UX frameworks that explain the adoption gap. How Ethereum UX can scale from early adopters to the mainstream, and what builders can do about it.</div>
         <div class="insight-grid" style="margin-top:32px;">
           <a href="#/chasm" class="insight-card">
             <div class="insight-card-eyebrow">Adoption</div>
