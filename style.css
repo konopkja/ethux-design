@@ -302,6 +302,14 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
 .hero-image img {
   width: 100%;
   height: auto;
+  animation: heroColorShift 20s ease-in-out infinite;
+}
+@keyframes heroColorShift {
+  0%   { filter: hue-rotate(0deg); }
+  25%  { filter: hue-rotate(45deg); }
+  50%  { filter: hue-rotate(120deg); }
+  75%  { filter: hue-rotate(220deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 .hero-image .hero-image-light { display: block; }
 .hero-image .hero-image-dark { display: none; }
