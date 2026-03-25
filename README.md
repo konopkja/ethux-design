@@ -6,7 +6,7 @@ A community-sourced map of Ethereum UX pain points, solution tracking, and adopt
 
 ## What this is
 
-EthUX tracks 38+ usability problems across 8 categories that affect Ethereum wallets, dapps, and protocols. Each pain point includes:
+EthUX tracks usability problems that affect Ethereum wallets, dapps, and protocols. Each pain point includes:
 
 - Real user quotes from community research
 - Solutions with researched adoption data from sources like [bundlebear.com](https://www.bundlebear.com), [walletbeat.eth](https://beta.walletbeat.eth.limo), [7702beat](https://swiss-knife.xyz/7702beat), and [trilliondollarsecurity.org](https://trilliondollarsecurity.org)
