@@ -680,7 +680,6 @@ function renderAgents() {
             <div class="quickstart-label">Copy all skill content into .cursorrules:</div>
             <div class="quickstart-code"><code>8 skill files — approvals, signing, gas, multi-chain, onboarding, wallets, safety, + shared patterns</code><button class="quickstart-copy" onclick="copyAllSkillContent(this)">Copy All Skills</button></div>
           </div>
-          <div class="quickstart-note">8 files covering approvals, signing, gas, multi-chain, onboarding, wallets, safety, and shared patterns. Each file references <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a> for implementation-level code.</div>
         </div>
 
         <div class="ethskills-bar">
