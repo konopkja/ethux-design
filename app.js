@@ -107,12 +107,12 @@ function renderNav(active) {
         <span class="nav-wordmark">EthUX</span>
       </a>
       <div class="nav-links-desktop">
-        <a href="#/category/getting-started" class="${active==='map'?'active':''}">UX Map</a>
+        <a href="#/" class="${active==='map'?'active':''}" onclick="event.preventDefault();navigate('/');setTimeout(()=>{const el=document.getElementById('ux-map');if(el)el.scrollIntoView({behavior:'smooth'})},100)">UX Map</a>
         <a href="#/checklists" class="${active==='checklists'?'active':''}">Solutions</a>
         <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
-        <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
+        <a href="#/agents" class="${active==='agents'?'active':''}">For Builders</a>
 
-        <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit</a>
+        <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
       </div>
       <button class="nav-theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">${ICONS.moon}${ICONS.sun}</button>
       <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false">
@@ -121,11 +121,11 @@ function renderNav(active) {
       </div>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#/category/getting-started" class="${active==='map'?'active':''}">UX Map</a>
+      <a href="#/" class="${active==='map'?'active':''}" onclick="event.preventDefault();navigate('/');setTimeout(()=>{const el=document.getElementById('ux-map');if(el)el.scrollIntoView({behavior:'smooth'})},100)">UX Map</a>
       <a href="#/checklists" class="${active==='checklists'?'active':''}">Solutions</a>
       <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
-      <a href="#/agents" class="${active==='agents'?'active':''}">AI Agents</a>
-      <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit</a>
+      <a href="#/agents" class="${active==='agents'?'active':''}">For Builders</a>
+      <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
     </div>`;
 }
 
@@ -308,7 +308,7 @@ function renderChecklists() {
       <div class="container page-container">
         <div class="section-eyebrow">Reference</div>
         <h2 class="section-title">Solutions</h2>
-        <div class="section-desc">${tp} patterns across ${DATA.checklists.length} solutions. Tick items off as you implement them. Your progress is saved locally. Each solution also ships as an agent-readable SKILL.md.</div>
+        <div class="section-desc">${tp} patterns across ${DATA.checklists.length} solutions. Tick items off as you implement them. Your progress is saved locally.</div>
         <div class="cl-accordion">${sections}</div>
       </div>
       ${renderFooter()}
@@ -327,9 +327,8 @@ function renderAbout() {
           <p>This is not a polished report. It's a collaborative, evolving tracker. Sourced from user feedback surveys, social media monitoring, community research, and ecosystem data.</p>
           <h2>Collaborate</h2>
           <p>Join the conversation on <a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX.</p>
-          <h2>For AI Agents</h2>
-          <p>Our solutions are designed to be consumed by AI coding agents. Each solution is a markdown file with YAML frontmatter, decision trees, and code examples.</p>
-          <p>Browse available skills on the <a href="#/agents">AI Agents page</a>.</p>
+          <h2>For Builders</h2>
+          <p>Our UX checklists are available as structured markdown files for AI coding agents. For implementation-level skills with code examples and decision trees, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
           <h2>Contributing</h2>
           <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </div>
@@ -655,35 +654,28 @@ function renderAgents() {
     const tags = (cl.standards || []).map(s => `<span class="eip-tag">${s}</span>`).join('');
 
     const icon = SKILL_ICONS[cl.id] || '';
-    skillCards += `<div class="skill-card fade-up stagger-${Math.min(i+1,7)}"><div class="skill-card-info"><div class="skill-card-head"><div class="skill-card-icon">${icon}</div><div><div class="skill-card-title">${cl.title}</div><div class="skill-card-path">checklists/${cl.id}/SKILL.md</div></div></div><div class="skill-card-desc">${info.humanDesc || cl.desc}</div><div class="skill-card-what"><div class="skill-card-what-title">When to use</div>${useCases}</div><div class="skill-card-tags" style="margin-top:12px;">${tags}</div></div><div class="skill-card-actions"><button class="cl-dl-btn" onclick="downloadSkill('${cl.id}')">Download</button></div></div>`;
+    skillCards += `<div class="skill-card fade-up stagger-${Math.min(i+1,7)}"><div class="skill-card-info"><div class="skill-card-head"><div class="skill-card-icon">${icon}</div><div><div class="skill-card-title">${cl.title}</div><div class="skill-card-path">${cl.items.length} items</div></div></div><div class="skill-card-desc">${info.humanDesc || cl.desc}</div><div class="skill-card-what"><div class="skill-card-what-title">When to use</div>${useCases}</div><div class="skill-card-tags" style="margin-top:12px;">${tags}</div></div><div class="skill-card-actions"><button class="cl-dl-btn" onclick="downloadSkill('${cl.id}')">Download .md</button></div></div>`;
   });
 
   return `
     ${renderNav('agents')}
     <main id="main-content">
       <div class="container page-container">
-        <div class="section-eyebrow">For AI Coding Agents</div>
-        <h2 class="section-title">SKILL.md Files</h2>
-        <div class="section-desc" style="margin-bottom:32px;">Each SKILL.md is a structured markdown file your AI coding agent can read to implement Ethereum UX patterns correctly. Point your agent to the file path and it gets decision trees, code examples, NEVER/ALWAYS rules, and wallet support data.</div>
-
-        <div class="agents-hero-box">
-          <div class="agents-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-          <div class="agents-hero-content">
-            <div class="agents-hero-title">Quick Start</div>
-            <p>Point your agent to <code>ux.ethereum.org/SKILL.md</code> for the root index. It contains all 7 skill files with decision trees, code examples, and wallet support matrices. Or download individual files below.</p>
-            <div class="agents-dl-all"><button class="cl-dl-btn" onclick="downloadAllSkills()" style="margin-top:0;">Download All Skills</button><span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">7 files &middot; ${tp} patterns</span></div>
-          </div>
-        </div>
+        <div class="section-eyebrow">For Builders</div>
+        <h2 class="section-title">UX Checklists</h2>
+        <div class="section-desc" style="margin-bottom:32px;">Prioritized UX guidelines derived from real user pain point data. Each checklist covers a specific area of Ethereum UX with items ranked by impact. Download them as structured markdown files for your AI coding agent or use them as a manual review guide.</div>
 
         <div class="skill-grid">${skillCards}</div>
 
         <div class="section" style="margin-top:64px;">
-          <div class="section-eyebrow">How it works</div>
-          <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px;">Integration Guide</h2>
-          <div style="display:flex;flex-direction:column;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 1</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Download or point to the SKILL.md</div><div style="font-size:0.9rem;color:var(--text-dim);">Add the file to your project root or reference the URL. Most AI agents (Cursor, Claude Code, GitHub Copilot) can read markdown files as context.</div></div>
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 2</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Tell your agent to follow it</div><div style="font-size:0.9rem;color:var(--text-dim);">Prompt: "Follow the UX patterns in checklists/gas/SKILL.md when implementing this feature." The agent reads the decision tree and applies the correct pattern.</div></div>
-            <div style="background:var(--bg-panel-solid);padding:24px 28px;"><div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Step 3</div><div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;">Review against the UI Checklist</div><div style="font-size:0.9rem;color:var(--text-dim);">Use the <a href="#/checklists" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--amber-dim);">Solutions</a> to manually verify the agent's output matches each checklist item.</div></div>
+          <div class="section-eyebrow">Implementation</div>
+          <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px;">Want code-level rules?</h2>
+          <div class="agents-hero-box">
+            <div class="agents-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <div class="agents-hero-content">
+              <div class="agents-hero-title">ethskills.com</div>
+              <p>These checklists tell you <strong>what</strong> to worry about. For <strong>how</strong> to implement the fixes, including decision trees, code examples, and NEVER/ALWAYS rules, point your AI agent to <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">ethskills.com</a>. 19 implementation-level skills covering gas, wallets, standards, security, frontend UX, and more.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -874,35 +866,14 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', () => {
-  const hash=window.location.hash.slice(1)||'/';
-  const app=document.getElementById('app');
-  let html='';
-  let scrollToChecklist = null;
-  if (hash.startsWith('/category/')) { const id=hash.replace('/category/',''); const cat=DATA.categories.find(c=>c.id===id); html=cat?renderCategory(cat.id):renderHome(); }
-  else if (hash==='/submit') html=renderSubmit();
-  else if (hash.startsWith('/checklists/')) { scrollToChecklist=hash.replace('/checklists/',''); html=renderChecklists(); }
-  else if (hash==='/checklists') html=renderChecklists();
-  else if (hash==='/insights') html=renderInsights();
-  else if (hash==='/agents') html=renderAgents();
-  else if (hash==='/about') html=renderAbout();
-  else if (hash==='/chasm') html=renderChasm();
-  else if (hash==='/onboarding') html=renderOnboarding();
-  else if (hash==='/paradigms') html=renderParadigms();
-  else html=renderHome();
-  app.innerHTML=html;
-  if (scrollToChecklist) { const el=document.getElementById('cl-'+scrollToChecklist); if(el){toggleCLSection(scrollToChecklist);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);} }
-  requestAnimationFrame(()=>{
-    document.querySelectorAll('.progress-fill[data-width]').forEach(el=>{requestAnimationFrame(()=>{el.style.width=el.dataset.width;});});
-    // Scroll-triggered reveals
-    const revealEls = document.querySelectorAll('.reveal, .reveal-grid');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion) {
-      const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); } });
-      }, { threshold: 0 });
-      revealEls.forEach(el => revealObs.observe(el));
-    } else {
-      revealEls.forEach(el => el.classList.add('revealed'));
+  router();
+  // Close mobile menu on any link tap
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.mobile-menu a')) {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.querySelector('.nav-hamburger');
+      if (menu) menu.classList.remove('open');
+      if (btn) btn.setAttribute('aria-expanded', false);
     }
   });
 });
