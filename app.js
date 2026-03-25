@@ -168,12 +168,18 @@ function renderHome() {
     <main id="main-content">
       <div class="container">
         <section class="hero">
-          <h1 class="hero-title">Mapping<br><span class="accent">Ethereum UX</span></h1>
-          <p class="hero-desc">Ethereum's infrastructure is a masterpiece of cryptography. Now, let's build the UX renaissance.</p>
-          <p class="hero-desc hero-desc--secondary">A living catalog of the improvements that will take blockchain applications from early adopters to the majority.</p>
-          <div class="hero-cta-group">
-            <a href="#" class="hero-cta" onclick="event.preventDefault();document.getElementById('ux-map').scrollIntoView({behavior:'smooth'})">Browse Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
-            <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">Add UX Problem ${ICONS.external}</a>
+          <div class="hero-content">
+            <h1 class="hero-title">Mapping<br><span class="accent">Ethereum UX</span></h1>
+            <p class="hero-desc">Ethereum's infrastructure is a masterpiece of cryptography. Now, let's build the UX renaissance.</p>
+            <p class="hero-desc hero-desc--secondary">A living catalog of the improvements that will take blockchain applications from early adopters to the majority.</p>
+            <div class="hero-cta-group">
+              <a href="#" class="hero-cta" onclick="event.preventDefault();document.getElementById('ux-map').scrollIntoView({behavior:'smooth'})">Browse Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
+              <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">Add UX Problem ${ICONS.external}</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img class="hero-image-light" src="images/header_light.png" alt="" width="420" height="420">
+            <img class="hero-image-dark" src="images/header_dark.png" alt="" width="420" height="420">
           </div>
         </section>
       </div>
