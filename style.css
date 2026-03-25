@@ -2137,118 +2137,107 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
   margin-top: 16px;
   display: inline-flex; align-items: center; gap: 10px;
 }
-/* Quick Start Box */
-.quickstart-box {
-  background: none;
-  border: none;
+/* Builders Hero */
+.builders-hero {
+  padding-bottom: 48px;
+  margin-bottom: 40px;
   border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  padding: 0 0 32px 0;
-  margin-bottom: 32px;
 }
-.quickstart-title {
+.builders-hero-eyebrow {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.builders-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
   color: var(--text);
+  line-height: 1.15;
   margin-bottom: 16px;
 }
-.quickstart-tabs {
+.builders-hero-desc {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.builders-hero-desc a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.builders-hero-desc a:hover { text-decoration: underline; }
+.builders-hero-action { max-width: 640px; }
+.builders-hero-tabs {
   display: flex;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: 0;
 }
-.quickstart-tab {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+.builders-hero-tab {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   font-weight: 500;
-  padding: 6px 14px;
+  padding: 8px 16px;
+  background: transparent;
   border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  background: none;
+  border-bottom: none;
   color: var(--text-muted);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: color var(--transition-fast), background var(--transition-fast);
 }
-.quickstart-tab.active {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
+.builders-hero-tab.active {
+  color: var(--text);
+  background: var(--accent-glow);
 }
-.quickstart-label {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  margin-bottom: 8px;
+.builders-hero-code-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 10px 16px 0;
+  background: var(--accent-glow);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-top: none;
 }
-.quickstart-code {
+.builders-hero-code-block {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 12px 16px;
+  background: var(--accent-glow);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  background: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
-.quickstart-code code {
+.builders-hero-code-block code {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  line-height: 1.4;
+  font-size: 0.85rem;
+  color: var(--text);
   flex: 1;
+  line-height: 1.5;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.quickstart-copy {
+.builders-hero-copy {
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 6px 16px;
-  border: none;
-  border-radius: var(--radius-full);
+  padding: 6px 14px;
   background: var(--accent);
   color: var(--bg);
+  border: none;
+  border-radius: var(--radius-md);
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: all var(--transition-fast);
+  transition: opacity var(--transition-fast);
 }
-.quickstart-copy:hover { opacity: 0.9; }
-.quickstart-copy.copied { background: var(--green); }
-.quickstart-note {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 14px;
-  line-height: 1.5;
-}
-.quickstart-note a { color: var(--accent); text-decoration: none; }
-
-/* ethskills callout */
-.ethskills-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 1rem;
-  color: var(--text-dim);
-  padding: 20px 0;
-  margin-bottom: 32px;
-}
-.ethskills-bar a {
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-}
-.ethskills-bar a:hover { text-decoration: underline; }
-.ethskills-bar-count {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background: var(--accent-dim);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-}
+.builders-hero-copy:hover { opacity: 0.88; }
+.builders-hero-copy.copied { background: var(--green); }
 
 /* Skill card action buttons */
 .skill-card-actions {
@@ -2256,19 +2245,19 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
   gap: 8px;
   flex-wrap: wrap;
 }
-.skill-btn-primary, .skill-btn-secondary, .skill-btn-tertiary {
-  transition: all var(--transition-fast) !important;
-}
 .skill-btn-primary {
   background: var(--accent) !important;
   color: var(--bg) !important;
   border-color: var(--accent) !important;
+  transition: opacity var(--transition-fast) !important;
 }
+.skill-btn-primary:hover { opacity: 0.88; }
 .skill-btn-primary.copied { background: var(--green) !important; border-color: var(--green) !important; }
 .skill-btn-secondary {
   background: none !important;
   color: var(--accent) !important;
   border-color: var(--accent-dim) !important;
+  transition: opacity var(--transition-fast) !important;
 }
 .skill-btn-secondary.copied { color: var(--green) !important; border-color: var(--green-dim) !important; }
 .skill-btn-tertiary {
@@ -2277,11 +2266,10 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
   border-color: var(--border) !important;
 }
 
-@media (max-width: 768px) {
-  .quickstart-code { flex-direction: column; gap: 8px; align-items: stretch; }
-  .quickstart-code code { white-space: normal; overflow: visible; text-overflow: unset; }
-  .quickstart-copy { align-self: flex-start; }
-  .ethskills-bar { font-size: 0.9rem; }
+@media (max-width: 640px) {
+  .builders-hero-code-block { flex-direction: column; align-items: stretch; gap: 8px; }
+  .builders-hero-code-block code { white-space: normal; overflow: visible; text-overflow: unset; }
+  .builders-hero-copy { align-self: flex-start; }
 }
 
 .skill-grid {

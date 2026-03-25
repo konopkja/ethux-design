@@ -662,31 +662,26 @@ function renderAgents() {
     ${renderNav('agents')}
     <main id="main-content">
       <div class="container page-container">
-        <div class="section-eyebrow">For Builders</div>
-        <h2 class="section-title">UX Skill Files</h2>
-        <div class="section-desc" style="margin-bottom:32px;">Structured Ethereum UX rules your AI coding agent can read directly. Built from real user pain data, updated as standards evolve.</div>
+        <section class="builders-hero">
+          <p class="builders-hero-eyebrow">For Builders</p>
+          <h2 class="builders-hero-title">UX Skill Files</h2>
+          <p class="builders-hero-desc">Structured Ethereum UX rules your AI agent can read directly. Built from real user pain data, updated as standards evolve. For implementation code and Solidity patterns, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
 
-        <div class="quickstart-box">
-          <div class="quickstart-title">Get started in one line</div>
-          <div class="quickstart-tabs">
-            <button class="quickstart-tab active" onclick="switchQuickstart('claude',this)">Claude Code</button>
-            <button class="quickstart-tab" onclick="switchQuickstart('cursor',this)">Cursor / Copilot</button>
+          <div class="builders-hero-action">
+            <div class="builders-hero-tabs" role="tablist">
+              <button class="builders-hero-tab active" role="tab" onclick="switchQuickstart('claude',this)">Claude Code</button>
+              <button class="builders-hero-tab" role="tab" onclick="switchQuickstart('cursor',this)">Cursor / Copilot</button>
+            </div>
+            <div class="builders-hero-code" id="qs-claude">
+              <span class="builders-hero-code-label">Add to project instructions</span>
+              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from protocol-ux/skills/ when building Ethereum dapp UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
+            </div>
+            <div class="builders-hero-code" id="qs-cursor" style="display:none;">
+              <span class="builders-hero-code-label">Copy all skill content into .cursorrules</span>
+              <div class="builders-hero-code-block"><code>8 skill files. Approvals, signing, gas, multi-chain, onboarding, wallets, safety, shared patterns.</code><button class="builders-hero-copy" onclick="copyAllSkillContent(this)">Copy All Skills</button></div>
+            </div>
           </div>
-          <div class="quickstart-panel" id="qs-claude">
-            <div class="quickstart-label">Add to your CLAUDE.md or project instructions:</div>
-            <div class="quickstart-code"><code>Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.</code><button class="quickstart-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
-          </div>
-          <div class="quickstart-panel" id="qs-cursor" style="display:none;">
-            <div class="quickstart-label">Copy all skill content into .cursorrules:</div>
-            <div class="quickstart-code"><code>8 skill files — approvals, signing, gas, multi-chain, onboarding, wallets, safety, + shared patterns</code><button class="quickstart-copy" onclick="copyAllSkillContent(this)">Copy All Skills</button></div>
-          </div>
-        </div>
-
-        <div class="ethskills-bar">
-          <span>These files define <strong>what</strong> to get right. For implementation code (Solidity patterns, contract ABIs, deployment), point your agent to</span>
-          <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>
-          <span class="ethskills-bar-count">19 skills</span>
-        </div>
+        </section>
 
         <div class="skill-grid">${skillCards}</div>
       </div>
@@ -721,8 +716,8 @@ function copyAllSkillContent(btn) {
   copyText(all.trim(), btn);
 }
 function switchQuickstart(tab, btn) {
-  document.querySelectorAll('.quickstart-panel').forEach(p => p.style.display = 'none');
-  document.querySelectorAll('.quickstart-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.builders-hero-code').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.builders-hero-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('qs-' + tab).style.display = 'block';
   btn.classList.add('active');
 }
