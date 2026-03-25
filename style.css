@@ -297,7 +297,7 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
 .hero-image {
   flex-shrink: 0;
   width: 440px;
-  opacity: 0.2;
+  opacity: 0.55;
 }
 .hero-svg { width: 100%; height: auto; }
 
