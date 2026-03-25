@@ -101,7 +101,7 @@ function solStatusTag(s) { const info = SOL_STATUS[s] || {cls:'unsolved',tip:''}
 function renderNav(active) {
   return `
     <nav class="nav" aria-label="Main navigation">
-      <div class="nav-inner">
+      <div class="nav-inner container">
       <a href="#/" class="nav-home" aria-label="EthUX home">
         ${ICONS.ethDiamond}
         <span class="nav-wordmark">EthUX</span>
