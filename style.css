@@ -283,7 +283,7 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
    ========================================================== */
 .hero {
   padding-top: calc(var(--nav-height) + 80px);
-  padding-bottom: 120px;
+  padding-bottom: 180px;
   position: relative;
   display: flex;
   align-items: center;
@@ -357,7 +357,7 @@ main { padding-bottom: 120px; }
 /* ==========================================================
    SECTION HEADERS
    ========================================================== */
-.section { margin-bottom: 96px; }
+.section { margin-bottom: 144px; }
 .section-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -396,8 +396,8 @@ main { padding-bottom: 120px; }
   color: var(--accent);
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 96px;
-  padding: 48px 0;
+  margin: 0 auto 144px;
+  padding: 72px 0;
 }
 
 /* ==========================================================
@@ -1008,7 +1008,7 @@ html:not(.dark) .cl-agent-bar-text code { background: rgba(0,0,0,0.06); }
   justify-content: space-between;
   gap: 32px;
   margin-top: 48px;
-  margin-bottom: 96px;
+  margin-bottom: 144px;
   background: linear-gradient(135deg, var(--accent-dim) 0%, var(--bg-raised) 60%);
 }
 .cta-headline {
