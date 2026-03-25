@@ -301,12 +301,12 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
 }
 .hero-svg { width: 100%; height: auto; }
 
-/* Circle — static, subtle */
-.hero-svg-circle { stroke: var(--text-muted); opacity: 0.3; }
+/* Circle + nodes — static, muted */
+.hero-svg-circle { stroke: var(--border); opacity: 1; }
+.hero-svg-nodes circle { fill: var(--bg); stroke: var(--border); }
 
-/* Glyph — color cycling */
+/* Glyph — vivid, color cycling */
 .hero-svg-glyph {
-  stroke: var(--accent);
   animation: glyphColor 12s ease-in-out infinite;
 }
 @keyframes glyphColor {
@@ -320,22 +320,10 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
 
 /* Rays — follow glyph with delay */
 .hero-svg-rays {
-  stroke: var(--accent);
-  opacity: 0.4;
+  opacity: 0.5;
   animation: glyphColor 12s ease-in-out infinite;
   animation-delay: -3s;
 }
-
-/* Nodes — pulse opacity */
-.hero-svg-nodes circle {
-  fill: var(--bg);
-  stroke: var(--accent);
-  animation: glyphColor 12s ease-in-out infinite;
-  animation-delay: -6s;
-}
-
-html.dark .hero-svg-circle { opacity: 0.2; }
-html.dark .hero-image { opacity: 0.6; }
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 8vw, 7rem);
