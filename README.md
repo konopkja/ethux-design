@@ -2,7 +2,7 @@
 
 A community-sourced map of Ethereum UX pain points, solution tracking, and adoption data. Built from 32,000+ real user reports across Telegram, Reddit, and X.
 
-**Live site:** [protocol-ux.vercel.app](https://protocol-ux.vercel.app)
+**Live site:** [ethux.design](https://ethux.design)
 
 ## What this is
 

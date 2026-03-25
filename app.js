@@ -143,7 +143,7 @@ function toggleMobileNav() {
 }
 
 function renderFooter() {
-  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit an issue</a><a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
+  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit an issue</a><a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
 }
 
 function renderHome() {
@@ -363,7 +363,7 @@ function renderAbout() {
           <h2>For Builders</h2>
           <p>Our UX checklists are available as structured markdown files for AI coding agents. For implementation-level skills with code examples and decision trees, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
           <h2>Contributing</h2>
-          <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/konopkja/protocol-ux" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+          <p>This project is open source. Submit UX issues through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, contribute on <a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </div>
       </div>
       ${renderFooter()}
@@ -678,7 +678,7 @@ function renderParadigms() {
 
 
 function renderAgents() {
-  const REPO_BASE = 'https://raw.githubusercontent.com/konopkja/protocol-ux/main/skills';
+  const REPO_BASE = 'https://raw.githubusercontent.com/konopkja/ethux-design/main/skills';
 
   let skillCards = '';
   DATA.checklists.forEach((cl, i) => {
@@ -707,7 +707,7 @@ function renderAgents() {
             </div>
             <div class="builders-hero-code" id="qs-claude">
               <span class="builders-hero-code-label">Add to project instructions</span>
-              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from protocol-ux/skills/ when building Ethereum dapp UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
+              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from ethux-design/skills/ when building Ethereum dapp UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
             </div>
             <div class="builders-hero-code" id="qs-cursor" style="display:none;">
               <span class="builders-hero-code-label">Copy all skill content into .cursorrules</span>
