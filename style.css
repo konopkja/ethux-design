@@ -1161,7 +1161,7 @@ html:not(.dark) .cl-agent-bar-text code { background: rgba(0,0,0,0.06); }
 .problem-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); }
 .cat-missing {
   margin-top: 24px;
-  text-align: right;
+  text-align: center;
 }
 .cat-missing a {
   font-size: 0.85rem;
