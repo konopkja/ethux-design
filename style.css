@@ -18,7 +18,7 @@
 
 :root {
   /* Backgrounds */
-  --bg: #FAFAF8;
+  --bg: #f1f1f1;
   --bg-raised: #ffffff;
   --bg-panel: rgba(255, 255, 255, 0.72);
   --bg-panel-solid: #ffffff;
@@ -138,9 +138,14 @@ body {
   min-height: 100vh;
   color: var(--text);
   background: var(--bg);
+  background-image: radial-gradient(circle, #d5d5d5 1px, transparent 1px);
+  background-size: 24px 24px;
   line-height: 1.6;
   overflow-x: hidden;
   transition: background 0.3s ease, color 0.3s ease;
+}
+html.dark body {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
 }
 
 /* ==========================================================
