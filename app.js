@@ -189,22 +189,16 @@ function renderHome() {
                 <path d="M197.756 171.605V289.875L100 227.37L197.756 171.605Z" stroke-width="2" stroke-linejoin="round"/>
               </g>
               <g class="hero-svg-rays">
-                <path d="M198.5 289L411.5 154" stroke-width="2"/>
-                <path d="M197.5 172L7 279.5" stroke-width="2"/>
-                <path d="M293.5 226.5L46.5 84.5" stroke-width="2"/>
                 <path d="M198 310.5L198 421" stroke-width="2"/>
-                <path d="M198 7L198 117.5" stroke-width="2"/>
+                <path d="M198 7L198 57" stroke-width="2"/>
               </g>
               <g class="hero-svg-nodes">
                 <circle cx="198" cy="421" r="6"/><circle cx="198" cy="7" r="6"/>
                 <circle cx="198" cy="393" r="6"/><circle cx="198" cy="308" r="6"/>
                 <circle cx="198" cy="289" r="6"/><circle cx="198" cy="172" r="6"/>
-                <circle cx="148" cy="144" r="6"/><circle cx="79" cy="104" r="6"/>
-                <circle cx="47" cy="85" r="6"/><circle cx="198" cy="55" r="6"/>
+                <circle cx="198" cy="55" r="6"/>
                 <circle cx="296" cy="248" r="6"/><circle cx="295" cy="228" r="6"/>
-                <circle cx="362" cy="186" r="6"/><circle cx="412" cy="154" r="6"/>
                 <circle cx="102" cy="248" r="6"/><circle cx="102" cy="226" r="6"/>
-                <circle cx="34" cy="264" r="6"/><circle cx="7" cy="280" r="6"/>
               </g>
             </svg>
           </div>
