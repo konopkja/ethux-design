@@ -307,6 +307,7 @@ html.dark .nav-theme-toggle svg:last-child { display: block; }
 .hero-image .hero-image-dark { display: none; }
 html.dark .hero-image .hero-image-light { display: none; }
 html.dark .hero-image .hero-image-dark { display: block; }
+html.dark .hero-image { opacity: 0.45; }
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 8vw, 7rem);
