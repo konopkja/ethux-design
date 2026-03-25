@@ -168,7 +168,6 @@ html.dark body {
 .nav {
   position: sticky; top: 0;
   z-index: 200;
-  display: flex; align-items: center; justify-content: center;
   height: var(--nav-height);
   background: var(--bg-panel);
   backdrop-filter: blur(16px);
@@ -177,7 +176,8 @@ html.dark body {
 }
 .nav-inner {
   display: flex; align-items: center;
-  width: 100%; max-width: 1200px;
+  height: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 48px;
 }
@@ -2270,6 +2270,7 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
   background: var(--accent) !important;
   color: var(--bg) !important;
   border-color: var(--accent) !important;
+  padding: 8px 18px !important;
   transition: opacity var(--transition-fast) !important;
 }
 .skill-btn-primary:hover { opacity: 0.88; }
@@ -2278,8 +2279,8 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
 .skill-btn-tertiary {
   background: none !important;
   border: none !important;
-  padding: 0 !important;
-  font-size: 0.78rem !important;
+  padding: 8px 0 !important;
+  font-size: 0.8rem !important;
   color: var(--accent) !important;
   text-decoration: none;
   cursor: pointer;
