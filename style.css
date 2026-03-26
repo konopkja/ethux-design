@@ -1022,6 +1022,7 @@ html:not(.dark) .cl-agent-bar-text code { background: rgba(0,0,0,0.06); }
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+  flex-wrap: wrap;
   margin-top: 48px;
   margin-bottom: 144px;
   background: linear-gradient(135deg, #d5dbf1 0%, var(--bg-raised) 60%);
@@ -1057,6 +1058,7 @@ html.dark .cta-section {
   transition: all var(--transition-fast);
   cursor: pointer;
   border: 1px solid;
+  white-space: nowrap;
 }
 .btn-primary {
   background: var(--accent);
