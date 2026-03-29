@@ -360,7 +360,7 @@ function renderAbout() {
           <p>The goal is to surface critical UX issues from the user's perspective, triage them, coordinate builders around solutions, and track adoption across the ecosystem.</p>
           <p>This is not a polished report. It's a collaborative, evolving tracker. Sourced from user feedback surveys, social media monitoring, community research, and ecosystem data.</p>
           <h2>Collaborate</h2>
-          <p>Join the conversation on <a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX.</p>
+          <p>Join the conversation on <a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a> to connect with designers, researchers, and builders working on Ethereum UX. The community meets monthly to discuss UX priorities and progress. See upcoming calls on <a href="https://luma.com/UXweb3" target="_blank" rel="noopener noreferrer">Luma</a>.</p>
           <h2>For Builders</h2>
           <p>Our UX checklists are available as structured markdown files for AI coding agents. For implementation-level skills with code examples and decision trees, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
           <h2>Contributing</h2>
