@@ -150,7 +150,8 @@ const CRITICAL_DETAILS = {
   'Prevalence of Scams': {
     story: [
       '"Is this frontend legit? When connecting my wallet it warns the domain has very low popularity. It actually got redirected to a spoofed domain." <span class="quote-source">User, community report</span>',
-      '"I get 10 of these scam DMs on the daily." <span class="quote-source">User, community report</span>'
+      '"I get 10 of these scam DMs on a daily basis." <span class="quote-source">User, community report</span>',
+      '"Tried to swap my ETH for a gold-backed token, got zero-balance fake tokens. The contract was fake and didn\'t match the legitimate one. These tokens were listed in the wallet\'s swap interface." <span class="quote-source">User, community report</span>'
     ],
     opportunity: '<div class="lead">Security-first wallets command premium user loyalty and retention.</div><ul><li>Proactive scam prevention saves users hundreds of millions annually</li><li>Simulation, warnings, and reputation scoring position wallets as trusted gatekeepers</li><li>Security features become the top differentiator in wallet selection</li></ul>',
     risk: '<div class="lead">Each major scam event suppresses adoption across the entire ecosystem.</div><ul><li>Media narratives after high-profile thefts erode public trust broadly</li><li>Regulatory responses triggered by cumulative phishing losses</li><li>Ecosystem credibility as a financial platform at stake</li></ul>'
@@ -199,6 +200,7 @@ const PROBLEM_DETAILS = {
     risk: '<div class="lead">The separate approval step is a common point where users abandon their first DeFi interaction.</div><ul><li>Creates permanent confusion about why two transactions are needed</li><li>First-time users assume the dapp is broken</li><li>Drop-off at this step is measurable and significant</li></ul>'
   },
   'Token Approval Management': {
+    story: '"Lost $300K in 10 minutes. Not a hack. A configuration error. A bot spotted a mistaken token approval on a corporate DEX wallet and drained it instantly." <span class="quote-source">Industry report, March 2026</span>',
     opportunity: '<div class="lead">In-wallet revocation turns security into a retention feature.</div><ul><li>Users who manage permissions feel safer and transact more frequently</li><li>Revocation UX is a differentiator for security-conscious users</li><li>Proactive management reduces exposure surface</li></ul>',
     risk: '<div class="lead">Stale unlimited approvals are ticking time bombs.</div><ul><li>Exploited contracts months later drain funds from forgotten approvals</li><li>Users have no visibility into their current exposure</li><li>A single compromised protocol can cascade across all approvers</li></ul>'
   },
@@ -260,6 +262,7 @@ const PROBLEM_DETAILS = {
   },
   // Protocol Design
   'No Default Native Account Abstraction': {
+    story: '"From our experience with ERC-4337, the biggest hurdle to AA adoption is that existing EOA users do not want to migrate to a new account, regardless of the UX benefits." <span class="quote-source">Builder, community report</span>',
     opportunity: '<div class="lead">Native AA would let every Ethereum user benefit from smart accounts without opting in.</div><ul><li>Smart wallets retain 70% of users vs 60% for seed-phrase wallets. Social recovery adoption is growing 44% YoY.</li><li>Gas sponsorship, social recovery, and session keys become universal rather than opt-in</li><li>Dapp developers can assume every user has a smart account, simplifying integration</li><li>Ethereum closes the gap with chains like Starknet where this is already the default</li></ul>',
     risk: '<div class="lead">Without native AA, the ecosystem remains split between EOA and smart account users.</div><ul><li>Dapps must support two account models, increasing complexity and fragmentation</li><li>Users on EOAs miss out on safety features like transaction simulation and spending limits</li><li>The UX gap between Ethereum and native-AA chains becomes a competitive disadvantage</li></ul>'
   },
@@ -270,7 +273,8 @@ const PROBLEM_DETAILS = {
   'On-chain Activity Is Public by Default': {
     story: [
       '"Every time you text someone your wallet address, you give them your full balance and your entire transaction history." <span class="quote-source">User, community report</span>',
-      '"I\'ve tried every major privacy tool in crypto. The reason most people gave before using them: they required juggling a completely separate wallet." <span class="quote-source">User, community report</span>'
+      '"I\'ve tried every major privacy tool in crypto. The reason most people gave before using them: they required juggling a completely separate wallet." <span class="quote-source">User, community report</span>',
+      '"My sharing of my holdings to tax auditors or law enforcement should not mean that I also have to expose that to the whole world on an explorer website." <span class="quote-source">User, community report</span>'
     ],
     opportunity: '<div class="lead">Privacy tools that maintain compliance would unlock mainstream financial use cases.</div><ul><li>Users could receive salary, pay merchants, and use DeFi without exposing their full financial history</li><li>Privacy Pools\' association set model demonstrates that privacy and compliance can coexist</li><li>Wallet-integrated privacy (via frameworks like Kohaku) would make protection seamless rather than requiring active effort</li></ul>',
     risk: '<div class="lead">Public-by-default transactions make everyday financial use of Ethereum untenable.</div><ul><li>Employers, merchants, and counterparties can see a user\'s complete balance and transaction history</li><li>Users who discover this after the fact feel deceived and leave permanently</li><li>The transparency that enables trustless verification also enables surveillance, a tradeoff most users never consented to</li></ul>'
