@@ -1726,11 +1726,11 @@ a.eip-tag:hover { text-decoration: underline; }
   text-transform: uppercase;
   font-weight: 500;
   text-decoration: none;
-  color: var(--text-muted);
+  color: var(--text);
   transition: color var(--transition);
 }
 .nav-dropdown-trigger:hover,
-.nav-dropdown-trigger.active { color: var(--text); }
+.nav-dropdown-trigger.active { color: var(--accent); }
 .nav-dropdown-trigger svg {
   width: 10px; height: 10px;
   transition: transform 0.2s ease;
