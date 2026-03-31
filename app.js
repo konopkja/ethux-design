@@ -360,7 +360,7 @@ function renderChecklists() {
       <div class="container page-container">
         <div class="section-eyebrow">Reference</div>
         <h2 class="section-title">Checklists</h2>
-        <div class="section-desc">${tp} patterns across ${DATA.checklists.length} checklists. Tick items off as you implement them. Your progress is saved locally.</div>
+        <div class="section-desc">A practical reference for building better Ethereum app experiences.</div>
         <div class="cl-accordion">${sections}</div>
       </div>
       ${renderFooter()}
@@ -485,7 +485,7 @@ function renderChasm() {
 
           <h2>Beautiful UI Masks Dangerous UX</h2>
           <blockquote><p>A polished interface can make a dangerous action feel safe. The "landmine" problem: everything looks fine until something goes catastrophically wrong.</p></blockquote>
-          <p>Modern wallets and dApps have significantly improved visual design. But aesthetic polish often obscures the underlying risks: unlimited token approvals hidden behind friendly "Approve" buttons, irreversible cross-chain transfers presented as simple sends, and phishing sites that look pixel-perfect.</p>
+          <p>Modern wallets and apps have significantly improved visual design. But aesthetic polish often obscures the underlying risks: unlimited token approvals hidden behind friendly "Approve" buttons, irreversible cross-chain transfers presented as simple sends, and phishing sites that look pixel-perfect.</p>
           <p>For majority adopters, the gap between perceived safety and actual safety is where trust collapses. One bad experience, one lost transaction, and they're gone permanently.</p>
 
           <h2>What Majority Adopters Need</h2>
@@ -696,7 +696,7 @@ function renderAgents() {
             </div>
             <div class="builders-hero-code" id="qs-claude">
               <span class="builders-hero-code-label">Add to project instructions</span>
-              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from ethux-design/skills/ when building Ethereum dapp UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum dapp UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
+              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from ethux-design/skills/ when building Ethereum app UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum app UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
             </div>
             <div class="builders-hero-code" id="qs-cursor" style="display:none;">
               <span class="builders-hero-code-label">Copy all skill content into .cursorrules</span>
