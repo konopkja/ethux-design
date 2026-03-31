@@ -1708,30 +1708,6 @@ a.eip-tag:hover { text-decoration: underline; }
 /* ==========================================================
    NAV DROPDOWN
    ========================================================== */
-.nav-dropdown {
-  position: relative;
-  display: inline-block;
-}
-.nav-dropdown-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  padding: 0;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--text);
-  transition: color var(--transition);
-}
-.nav-dropdown-trigger:hover,
-.nav-dropdown-trigger.active { color: var(--accent); }
 .nav-dropdown-trigger svg {
   width: 10px; height: 10px;
   transition: transform 0.2s ease;
