@@ -103,10 +103,10 @@ html.dark {
   --text: #F0EEEB;
   --text-dim: #A8A6A3;
   --text-muted: #858481;
-  --accent: #2563FF;
-  --accent-hover: #4580FF;
-  --accent-dim: rgba(37, 99, 255, 0.18);
-  --accent-glow: rgba(37, 99, 255, 0.10);
+  --accent: #0079FF;
+  --accent-hover: #339DFF;
+  --accent-dim: rgba(0, 121, 255, 0.18);
+  --accent-glow: rgba(0, 121, 255, 0.10);
   --accent-secondary: #3DD4C6;
   --accent-secondary-dim: rgba(61, 212, 198, 0.12);
   --red: #F87171;
@@ -525,7 +525,7 @@ main { padding-bottom: 120px; }
   flex-direction: column;
 }
 .cat-card:hover { background: #f0f3fe; }
-html.dark .cat-card:hover { background: #181c2b; }
+html.dark .cat-card:hover { background: #121f30; }
 .cat-card-icon {
   width: 48px;
   height: 48px;
