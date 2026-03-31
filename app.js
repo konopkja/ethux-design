@@ -117,7 +117,7 @@ function renderNav(active) {
         </div>
         <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
 
-        <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
+        <a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
       </div>
       <button class="nav-theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">${ICONS.moon}${ICONS.sun}</button>
       <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false">
@@ -131,7 +131,7 @@ function renderNav(active) {
       <a href="#/checklists" class="mobile-menu-sub ${active==='checklists'?'active':''}">Checklists</a>
       <a href="#/agents" class="mobile-menu-sub ${active==='agents'?'active':''}">Skill Files</a>
       <a href="#/insights" class="${active==='insights'?'active':''}">Insights</a>
-      <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
+      <a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer" class="nav-external">Submit ${ICONS.external}</a>
     </div>`;
 }
 
@@ -161,7 +161,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 function renderFooter() {
-  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit an issue</a><a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
+  return `<footer class="site-footer"><div class="container"><div class="footer-inner"><a href="https://ethereum.foundation" target="_blank" rel="noopener noreferrer" class="footer-initiative" aria-label="ethereum foundation initiative"><img src="iniciative.svg" alt="ethereum foundation initiative" height="31"></a><div class="footer-links"><a href="#/about">About</a><a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer">Submit an issue</a><a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://discord.gg/X8A7SuZ8" target="_blank" rel="noopener noreferrer">Discord</a></div></div></div></footer>`;
 }
 
 function renderHome() {
@@ -192,7 +192,7 @@ function renderHome() {
             <p class="hero-desc hero-desc--secondary">A living catalog of the improvements that will take blockchain applications from early adopters to the majority.</p>
             <div class="hero-cta-group">
               <a href="#" class="hero-cta" onclick="event.preventDefault();document.getElementById('ux-map').scrollIntoView({behavior:'smooth'})">Browse Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
-              <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">Add UX Problem ${ICONS.external}</a>
+              <a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">Add UX Problem ${ICONS.external}</a>
             </div>
           </div>
           <div class="hero-image">
@@ -269,7 +269,7 @@ function renderHome() {
             <h3 class="cta-headline">Seen something we missed?</h3>
             <div class="cta-text">Report a new UX problem or share feedback on existing ones. This map is maintained in collaboration with the Ethereum Foundation as an open channel for the ecosystem to surface UX issues. Every report helps build a clearer picture of what needs improving.</div>
           </div>
-          <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Add to the Map</a>
+          <a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Add to the Map</a>
         </div>
       </div>
 
@@ -319,7 +319,7 @@ function renderCategory(catId) {
         <div class="cat-page-title">${cat.title}</div>
         <div class="cat-page-desc">${cat.desc}</div>
         <div class="problem-list">${cards}</div>
-        <div class="cat-missing"><a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">Something missing or wrong? Share feedback ${ICONS.external}</a></div>
+        <div class="cat-missing"><a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer">Something missing or wrong? Share feedback ${ICONS.external}</a></div>
       </div>
       ${renderFooter()}
     </main>`;
@@ -382,7 +382,7 @@ function renderAbout() {
           <h2>For Builders</h2>
           <p>Our UX checklists are available as structured markdown files for AI coding agents. For implementation-level skills with code examples and decision trees, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
           <h2>Contributing</h2>
-          <p>This project is open source. Report new UX problems or share feedback on existing ones through our <a href="https://web3ux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, or contribute directly on <a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+          <p>This project is open source. Report new UX problems or share feedback on existing ones through our <a href="https://ethux.paperform.co/" target="_blank" rel="noopener noreferrer">feedback form</a>, or contribute directly on <a href="https://github.com/konopkja/ethux-design" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </div>
       </div>
       ${renderFooter()}
