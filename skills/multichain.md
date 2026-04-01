@@ -37,11 +37,8 @@ patterns: 5
 **When:** App loads or wallet connects. User should see all their assets across supported chains.
 
 **How:**
-1. Show a skeleton loading state for the balance view immediately. Display chain icons/names with shimmer placeholders for amounts. As each chain's balance resolves, populate that chain's entry individually. Do not wait for all chains to load before showing any data. (See [_shared.md](./_shared.md) Loading Labels.)
-2. Define your supported chains list (e.g., mainnet, Arbitrum, Optimism, Base, Polygon).
-3. For each chain, create a public client: `createPublicClient({ chain, transport: http(rpcUrl) })`.
-4. For native balances: call `getBalance` on each chain's client in parallel using `Promise.all`.
-5. For ERC-20 balances: use `multicall` on each chain to batch `balanceOf` calls for known token addresses. When the wallet supports `wallet_getAssets` (EIP-7811), prefer that as the primary approach and use manual multicall as fallback.
+1. Show shimmer placeholders per chain. Populate each chain's balance individually as it resolves. Do not wait for all chains before showing any data.
+2. Fetch native balances in parallel with `getBalance` per chain. For ERC-20 balances, use `multicall` to batch `balanceOf` calls. When the wallet supports `wallet_getAssets` (EIP-7811), prefer that as primary and use multicall as fallback.
 6. Aggregate results into a unified view:
    - Group by token (e.g., "USDC: $1,200 total" with breakdown by chain on expand)
    - Sort by total USD value descending
@@ -72,11 +69,8 @@ const results = await publicClient.multicall({
 **When:** User clicks an action that targets a different chain than currently connected (e.g., clicking "Stake on Arbitrum" while connected to mainnet).
 
 **How:**
-1. Before submitting the transaction, check the wallet's current chain: `useChainId` (wagmi) or read from the provider.
-2. If the current chain does not match the target chain:
-   - Call `useSwitchChain` (wagmi) or `wallet_switchEthereumChain` on the provider.
-   - Pass the target chain's `chainId` as a hex string.
-3. If the chain is not yet added to the wallet:
+1. Before submitting, check current chain. If mismatched, call `useSwitchChain` (wagmi) or `wallet_switchEthereumChain`.
+2. If the chain is not yet added to the wallet:
    - Catch the `4902` error code ("Unrecognized chain ID").
    - Call `wallet_addEthereumChain` with the chain parameters (name, RPC URLs, block explorer, native currency).
    - After adding, retry the switch.

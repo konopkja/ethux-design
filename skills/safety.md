@@ -90,69 +90,18 @@ Note: The $1000 threshold for "Caution" on new recipients may need to be configu
 
 **When:** Displaying any Ethereum address in the UI, or when a user enters a `.eth` name as a recipient.
 
-**How:**
-1. **Forward resolution (name to address):**
-   - Call `getEnsAddress` (viem) or `useEnsAddress` (wagmi) with the ENS name.
-   - Validate that the returned address is non-null and is a valid checksummed address.
-   - Display: "vitalik.eth (0xd8dA...6045)"
+Use `useEnsAddress`/`useEnsName`/`useEnsAvatar` (wagmi) or the viem equivalents for forward, reverse, and avatar resolution. Accept both hex addresses and ENS names in inputs. Show "Resolving..." during lookup.
 
-2. **Reverse resolution (address to name):**
-   - Call `getEnsName` (viem) or `useEnsName` (wagmi) with the address.
-   - If a name is found, display it as the primary identifier with the address as secondary.
-   - Cache results to avoid repeated lookups.
-
-3. **Avatar resolution (optional but recommended):**
-   - Call `getEnsAvatar` (viem) or `useEnsAvatar` (wagmi).
-   - Display alongside the name for visual identification.
-
-4. **In address inputs:**
-   - Accept both hex addresses and ENS names.
-   - When user types a `.eth` name, resolve it and show the resolved address below the input.
-   - Show a loading state during resolution: display a subtle spinner next to the input with "Resolving..." text. NEVER leave the input in an ambiguous state while resolution is in progress. (See [_shared.md](./_shared.md) Loading Labels.)
-   - After resolution, validate the address (Pattern 3).
-
-**Display pattern:**
-```
-With ENS:    [avatar] vitalik.eth  0xd8dA...6045
-Without ENS: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
-```
-
-**Fallback:** If ENS resolution fails (mainnet RPC issue, name expired, no resolver set), treat the input as invalid if it is a `.eth` name, or show the raw address if doing reverse lookup. Show: "Could not resolve this ENS name. Check the spelling or enter the address directly."
-
-**Error state:**
-- Name not found: "This ENS name does not resolve to an address. Verify the name and try again."
+**Key rules (not covered by standard ENS tutorials):**
+- Name resolves to zero address: treat as invalid. "This ENS name is not configured with an address."
 - Resolution timeout: "ENS lookup is taking longer than expected. You can enter the hex address directly."
-- Name resolves to zero address: Treat as invalid. "This ENS name is not configured with an address."
+- Always validate the resolved address with ERC-55 checksum (Pattern 3) after resolution.
 
 ---
 
 ### 3. ERC-55 Address Checksum Validation
 
-**When:** Any time an address is entered by the user or pasted from clipboard.
-
-**How:**
-1. Take the input address and check format:
-   - Must be exactly 42 characters.
-   - Must start with `0x`.
-   - Must contain only hex characters (0-9, a-f, A-F) after the prefix.
-2. Apply ERC-55 checksum:
-   - Take the lowercase address (without `0x` prefix).
-   - Compute `keccak256` of the lowercase address string.
-   - For each character in the address: if the corresponding nibble of the hash is >= 8, capitalize the letter; otherwise, lowercase it.
-   - Compare the result with the input.
-3. Use `getAddress` from viem, which validates and returns the checksummed address. It throws if the input has an invalid checksum.
-   ```
-   import { getAddress } from 'viem'
-
-   try {
-     const checksummed = getAddress(inputAddress)
-     // Valid - use checksummed version
-   } catch {
-     // Invalid checksum or format
-   }
-   ```
-4. If the address is all-lowercase or all-uppercase, it has no checksum. Accept it but convert to checksummed form internally.
-5. If the address has mixed case but does NOT match ERC-55 checksum, flag it.
+**When:** Any time an address is entered by the user or pasted from clipboard. Use `getAddress` from viem.
 
 **Decision tree:**
 ```
@@ -163,10 +112,8 @@ Is the address all lowercase or all uppercase (no mixed case)?
     NO  -> WARN: "This address has an invalid checksum. It may contain a typo or have been tampered with."
 ```
 
-**Fallback:** N/A. Always validate.
-
 **Error state:**
-- Invalid checksum: "This address has an invalid checksum. Please verify you copied the correct address." Show a "Use anyway" option for advanced users (some older systems produce non-checksummed addresses).
+- Invalid checksum: "This address has an invalid checksum. Please verify you copied the correct address." Show a "Use anyway" option for advanced users.
 - Invalid format: "This is not a valid Ethereum address."
 
 ---

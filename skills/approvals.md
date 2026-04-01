@@ -35,10 +35,9 @@ patterns: 5
 **When:** User needs to grant spending permission for a specific action (swap, deposit, stake).
 
 **How:**
-1. While checking current allowance, show the action button in a disabled/loading state with text "Checking permissions..." Do not show the approval step and then remove it. Determine the flow before showing UI. (See [_shared.md](./_shared.md) Loading Labels.)
-2. Read current allowance: `useReadContract` with the token's `allowance(owner, spender)` function.
-3. If allowance >= required amount, skip to the action transaction.
-4. If allowance < required, call `useWriteContract` with `approve(spender, exactAmount)`.
+1. While checking allowance, show button as disabled with "Checking permissions..." Determine the flow before showing UI.
+2. Read current allowance with `allowance(owner, spender)`. If sufficient, skip to the action transaction.
+3. If insufficient, call `approve(spender, exactAmount)`.
 5. For tokens that require zero-first reset (USDT pattern): check if current allowance is non-zero and the token is on a known list. If so, send `approve(spender, 0)` first, wait for confirmation, then send `approve(spender, exactAmount)`.
 6. After approval confirms, re-simulate the action transaction before submitting it. If conditions have changed (e.g., swap output dropped below minimum), show: "Prices have changed since you approved. New estimate: [amount]. Continue?" This prevents the frustrating experience of paying gas for an approval and then having the action revert.
 7. After the action transaction is submitted, show a post-action confirmation (see [_shared.md](./_shared.md) Post-Action Confirmation).

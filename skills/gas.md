@@ -87,20 +87,9 @@ Does user have enough native token for gas?
 **When:** Every time a fee or cost is shown to the user.
 
 **How:**
-1. While gas is being estimated, show a skeleton/placeholder in the fee area: "Estimating fee..." or a shimmer animation in the fee line. NEVER show "$0.00" or an empty space while loading. NEVER show a "Submit" button with no fee displayed. (See [_shared.md](./_shared.md) Loading States.)
-2. Estimate gas: `estimateGas` (viem) or `useEstimateGas` (wagmi) for the specific transaction.
-2. Get current gas price: `getGasPrice` or for EIP-1559 chains, `estimateFeesPerGas` which returns `maxFeePerGas` and `maxPriorityFeePerGas`.
-3. Calculate cost in native token: `gasEstimate * gasPrice`.
-4. Convert to fiat using an on-chain oracle (e.g., Chainlink price feed) or a cached price. Read the ETH/USD price feed: call `latestRoundData()` on the Chainlink aggregator contract for the relevant chain.
-5. Format: "$0.12" as primary, "0.00004 ETH" as secondary/tooltip.
-
-**Fiat conversion pattern:**
-```
-nativeCostWei = estimatedGas * effectiveGasPrice
-nativeCostEth = formatEther(nativeCostWei)
-fiatCost = nativeCostEth * ethUsdPrice
-display = `$${fiatCost.toFixed(2)}`
-```
+1. Show "Estimating fee..." placeholder while loading. NEVER show "$0.00" or empty space. NEVER show a "Submit" button with no fee displayed.
+2. Estimate gas with `estimateGas`/`estimateFeesPerGas` (viem). Convert to fiat using a Chainlink price feed (`latestRoundData()`) or cached price.
+3. Format: "$0.12" as primary, "0.00004 ETH" as secondary/tooltip.
 
 **Fallback:** If price feed is unavailable, show the native token amount only: "Fee: ~0.00004 ETH" with a note "(USD estimate unavailable)".
 
