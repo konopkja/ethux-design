@@ -1,15 +1,13 @@
 ---
-title: "Safety & Security"
-description: "Risk-differentiated warnings, ENS resolution, ERC-55 checksum validation, spam filtering, and safe max-send calculations."
-standards: ["ERC-55", "ENS", "ERC-7730"]
-patterns: 5
+name: safety
+description: "Safety and security UX patterns for Ethereum dApps: risk-differentiated warnings (info/caution/danger tiers), ENS name resolution, ERC-55 address checksum validation, spam token filtering, and safe max-send calculations. Use this skill whenever building or reviewing ANY address input, warning system, risk indicator, token filtering, ENS display, send-max feature, or phishing protection — even if the user just mentions 'safety', 'security', 'warnings', 'address validation', 'ENS', 'spam tokens', or 'send max'."
 ---
 
 # Safety & Security
 
 **Scope:** Address validation (ERC-55 checksum), ENS resolution, risk-differentiated warnings, spam token filtering, and safe max-send calculations.
-**Does NOT cover:** Token approval security (see [approvals.md](./approvals.md)), transaction signing verification (see [signing.md](./signing.md)), multi-chain address validation (see [multichain.md](./multichain.md)).
-**Cross-references:** [wallets.md](./wallets.md) (ENS display in wallet header), [_shared.md](./_shared.md) (address display standards, error formatting, loading states).
+**Does NOT cover:** Token approval security (see [approvals](../approvals/SKILL.md)), transaction signing verification (see [signing](../signing/SKILL.md)), multi-chain address validation (see [multichain](../multichain/SKILL.md)).
+**Cross-references:** [wallets](../wallets/SKILL.md) (ENS display in wallet header), [shared](../../SKILL.md) (address display standards, error formatting, loading labels).
 
 ## ALWAYS
 
@@ -72,7 +70,7 @@ Is the target a known bad-actor address?
     YES -> Danger
     NO  -> Is the target a new recipient OR fee > 10% of value OR unlimited approval?
       New recipient + large amount -> Caution
-      High fee ratio -> Caution (see gas.md Pattern 5)
+      High fee ratio -> Caution (see gas skill Pattern 5)
       Unlimited approval -> Danger
       Sending entire balance -> Caution
       None of the above -> Info or no warning
@@ -91,68 +89,20 @@ Note: The $1000 threshold for "Caution" on new recipients may need to be configu
 **When:** Displaying any Ethereum address in the UI, or when a user enters a `.eth` name as a recipient.
 
 **How:**
-1. **Forward resolution (name to address):**
-   - Call `getEnsAddress` (viem) or `useEnsAddress` (wagmi) with the ENS name.
-   - Validate that the returned address is non-null and is a valid checksummed address.
-   - Display: "vitalik.eth (0xd8dA...6045)"
+Use `useEnsAddress`/`useEnsName`/`useEnsAvatar` (wagmi) or the viem equivalents for forward, reverse, and avatar resolution. Accept both hex addresses and ENS names in inputs. Show "Resolving..." during lookup.
 
-2. **Reverse resolution (address to name):**
-   - Call `getEnsName` (viem) or `useEnsName` (wagmi) with the address.
-   - If a name is found, display it as the primary identifier with the address as secondary.
-   - Cache results to avoid repeated lookups.
-
-3. **Avatar resolution (optional but recommended):**
-   - Call `getEnsAvatar` (viem) or `useEnsAvatar` (wagmi).
-   - Display alongside the name for visual identification.
-
-4. **In address inputs:**
-   - Accept both hex addresses and ENS names.
-   - When user types a `.eth` name, resolve it and show the resolved address below the input.
-   - Show a loading state during resolution: display a subtle spinner next to the input with "Resolving..." text. NEVER leave the input in an ambiguous state while resolution is in progress. (See [_shared.md](./_shared.md) Loading States.)
-   - After resolution, validate the address (Pattern 3).
-
-**Display pattern:**
-```
-With ENS:    [avatar] vitalik.eth  0xd8dA...6045
-Without ENS: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
-```
-
-**Fallback:** If ENS resolution fails (mainnet RPC issue, name expired, no resolver set), treat the input as invalid if it is a `.eth` name, or show the raw address if doing reverse lookup. Show: "Could not resolve this ENS name. Check the spelling or enter the address directly."
-
-**Error state:**
-- Name not found: "This ENS name does not resolve to an address. Verify the name and try again."
+**Key rules (not covered by standard ENS tutorials):**
+- Name resolves to zero address: treat as invalid. "This ENS name is not configured with an address."
 - Resolution timeout: "ENS lookup is taking longer than expected. You can enter the hex address directly."
-- Name resolves to zero address: Treat as invalid. "This ENS name is not configured with an address."
+- Always validate the resolved address with ERC-55 checksum (Pattern 3) after resolution.
 
 ---
 
 ### 3. ERC-55 Address Checksum Validation
 
-**When:** Any time an address is entered by the user or pasted from clipboard.
+**When:** Any time an address is entered by the user or pasted from clipboard. Use `getAddress` from viem.
 
 **How:**
-1. Take the input address and check format:
-   - Must be exactly 42 characters.
-   - Must start with `0x`.
-   - Must contain only hex characters (0-9, a-f, A-F) after the prefix.
-2. Apply ERC-55 checksum:
-   - Take the lowercase address (without `0x` prefix).
-   - Compute `keccak256` of the lowercase address string.
-   - For each character in the address: if the corresponding nibble of the hash is >= 8, capitalize the letter; otherwise, lowercase it.
-   - Compare the result with the input.
-3. Use `getAddress` from viem, which validates and returns the checksummed address. It throws if the input has an invalid checksum.
-   ```
-   import { getAddress } from 'viem'
-
-   try {
-     const checksummed = getAddress(inputAddress)
-     // Valid - use checksummed version
-   } catch {
-     // Invalid checksum or format
-   }
-   ```
-4. If the address is all-lowercase or all-uppercase, it has no checksum. Accept it but convert to checksummed form internally.
-5. If the address has mixed case but does NOT match ERC-55 checksum, flag it.
 
 **Decision tree:**
 ```
@@ -166,7 +116,7 @@ Is the address all lowercase or all uppercase (no mixed case)?
 **Fallback:** N/A. Always validate.
 
 **Error state:**
-- Invalid checksum: "This address has an invalid checksum. Please verify you copied the correct address." Show a "Use anyway" option for advanced users (some older systems produce non-checksummed addresses).
+- Invalid checksum: "This address has an invalid checksum. Please verify you copied the correct address." Show a "Use anyway" option for advanced users.
 - Invalid format: "This is not a valid Ethereum address."
 
 ---
@@ -205,8 +155,7 @@ Is the token on the curated allowlist?
         NO  -> Classify as "Unverified", show in hidden tab
 ```
 
-**Empty state:** If the hidden/unverified tab has no tokens: "No hidden tokens. Unverified or suspicious tokens will appear here." (See [_shared.md](./_shared.md) Empty States.)
-
+**Empty state:** If the hidden/unverified tab has no tokens: "No hidden tokens. Unverified or suspicious tokens will appear here." 
 **Fallback:** If you cannot determine whether a token is spam (no liquidity data available), classify it as "Unverified" and show it with a label, but do not count it in the total balance.
 
 **Error state:**
@@ -228,7 +177,7 @@ Is the token on the curated allowlist?
 6. Calculate send amount: `balance - maxGasCost - safetyBuffer`.
 7. If the result is negative or near zero, show: "Your balance is too low to cover the network fee."
 8. Display to the user: "Max: [amount] [TOKEN] (keeping ~$X.XX for the network fee)." NEVER allow a user to submit a transaction that would leave them with exactly 0 balance, as gas price increases between estimation and mining can cause failure.
-9. After the send transaction completes, show post-action confirmation (see [_shared.md](./_shared.md) Post-Action Confirmation).
+9. After the send transaction completes, show post-action confirmation (see [shared](../../SKILL.md) Post-Action Confirmation).
 
 **Calculation:**
 ```

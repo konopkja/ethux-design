@@ -2343,9 +2343,8 @@ html:not(.dark) .agents-hero-box code { background: rgba(0,0,0,0.06); }
   color: var(--text);
   flex: 1;
   line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 .builders-hero-copy {
   font-family: var(--font-body);
