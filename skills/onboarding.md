@@ -1,15 +1,15 @@
 ---
 title: "Onboarding"
-description: "Progressive backup disclosure, jargon-free UI, simple/advanced modes, WCAG accessibility, localization, and progressive disclosure."
-standards: ["BIP-39", "WCAG 2.2 AA"]
-patterns: 6
+description: "Progressive backup disclosure, jargon-free UI, simple/advanced modes, crypto-specific i18n, and progressive disclosure."
+standards: ["BIP-39"]
+patterns: 5
 ---
 
 # Onboarding
 
-**Scope:** First-run user experience: wallet creation, recovery phrase backup, jargon-free UI, simple/advanced modes, accessibility (WCAG 2.2 AA), internationalization, and progressive disclosure.
+**Scope:** First-run user experience: wallet creation, recovery phrase backup, jargon-free UI, simple/advanced modes, crypto-specific i18n, and progressive disclosure.
 **Does NOT cover:** Wallet connection for users with existing wallets (see [wallets.md](./wallets.md)), gas/fee handling (see [gas.md](./gas.md)), transaction signing flows (see [signing.md](./signing.md)).
-**Cross-references:** [wallets.md](./wallets.md) (embedded wallet patterns), [_shared.md](./_shared.md) (loading states, error formatting, empty states).
+**Cross-references:** [wallets.md](./wallets.md) (embedded wallet patterns), [_shared.md](./_shared.md) (error formatting, loading labels).
 
 ## ALWAYS
 
@@ -136,68 +136,21 @@ const mode = useContext(UIModeContext)
 
 ---
 
-### 4. WCAG 2.2 AA Compliance
+### 4. Crypto-Specific Internationalization
 
-**When:** Designing and building every interactive element in the application.
-
-**How:**
-1. **Color contrast:** Minimum 4.5:1 for normal text, 3:1 for large text (18px+ or 14px+ bold). Use a contrast checker during development.
-2. **Keyboard navigation:**
-   - All interactive elements must be reachable via Tab.
-   - Focus order must follow visual order.
-   - Focus must be visible (never `outline: none` without a replacement).
-   - Modals must trap focus while open and restore focus when closed.
-3. **Screen readers:**
-   - All buttons have accessible labels (`aria-label` for icon-only buttons).
-   - Form inputs have associated `<label>` elements.
-   - Dynamic content updates use `aria-live` regions.
-   - Transaction status changes announce via `aria-live="polite"`.
-4. **Touch targets:** Minimum 24x24px for all tappable elements (WCAG 2.2 AA). Recommend 44x44px for optimal usability (WCAG AAA).
-5. **Motion:** Respect `prefers-reduced-motion`. Disable animations and transitions when this media query matches.
-6. **Error identification:** Form errors must be announced, associated with the input, and described in text (not just color).
-
-**Testing checklist:**
-- Navigate the entire app using only keyboard.
-- Test with a screen reader (VoiceOver on Mac/iOS, TalkBack on Android).
-- Run axe or Lighthouse accessibility audit. Fix all violations.
-- Verify at 200% browser zoom. Nothing should be cut off or overlapping.
-
-**Fallback:** N/A. Accessibility is not optional and has no fallback.
-
-**Error state:** N/A (these are design requirements, not runtime patterns).
-
----
-
-### 5. Internationalization (i18n)
-
-**When:** Building any user-facing text in the application. Plan for this from the start.
+**When:** Handling multilingual content in crypto contexts where standard i18n knowledge is insufficient.
 
 **How:**
-1. Use a standard i18n framework (e.g., `react-intl`, `next-intl`, `i18next`).
-2. Extract ALL user-facing strings into message files. No hardcoded text in components.
-3. Support at minimum: English, Spanish, Chinese (Simplified), Arabic, Portuguese. These cover the largest crypto user populations.
-4. Handle RTL (right-to-left) layout for Arabic: use CSS `direction: rtl` and logical properties (`margin-inline-start` instead of `margin-left`).
-5. For BIP-39 seed phrases: the BIP-39 standard includes wordlists in English, Japanese, Korean, Spanish, Chinese (Simplified and Traditional), French, Italian, and Czech. Display the phrase in the user's language if a wordlist is available.
-6. Format numbers, dates, and currencies per locale. Use `Intl.NumberFormat` and `Intl.DateTimeFormat`.
-7. Do not concatenate translated strings. Use interpolation:
-   ```
-   // Bad: t('you_will_receive') + ' ' + amount + ' ' + token
-   // Good: t('you_will_receive_amount', { amount, token })
-   ```
-8. Use ICU MessageFormat or your framework's equivalent for pluralization. NEVER use ternary logic for plurals (`count === 1 ? "token" : "tokens"`). This breaks for languages with complex plural rules (Arabic has 6 plural forms, Polish and Russian have 3+).
-   ```
-   // Correct: handles plural rules per locale
-   t('tokens_count', { count: 3 })
-   // en: "3 tokens" | ar: 6 plural forms | zh: "3 tokens" (no plural)
-   ```
-
-**Fallback:** If a string is not yet translated, fall back to English rather than showing a key name.
+1. For BIP-39 seed phrases: the BIP-39 standard includes wordlists in English, Japanese, Korean, Spanish, Chinese (Simplified and Traditional), French, Italian, and Czech. Display the recovery phrase in the user's language if a wordlist is available.
+2. Use ICU MessageFormat for pluralization. NEVER use ternary logic for plurals (`count === 1 ? "token" : "tokens"`). This breaks for languages with complex plural rules (Arabic has 6 plural forms, Polish and Russian have 3+).
+3. Token amounts, gas fees, and fiat conversions must be formatted per locale using `Intl.NumberFormat`. Do not hardcode comma/period separators.
+4. Support at minimum: English, Spanish, Chinese (Simplified), Arabic, Portuguese. These cover the largest crypto user populations.
 
 **Error state:** N/A (design pattern).
 
 ---
 
-### 6. Progressive Disclosure
+### 5. Progressive Disclosure
 
 **When:** Designing any screen with more than 3 pieces of information or actions.
 

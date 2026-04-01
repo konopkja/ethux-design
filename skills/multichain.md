@@ -37,7 +37,7 @@ patterns: 5
 **When:** App loads or wallet connects. User should see all their assets across supported chains.
 
 **How:**
-1. Show a skeleton loading state for the balance view immediately. Display chain icons/names with shimmer placeholders for amounts. As each chain's balance resolves, populate that chain's entry individually. Do not wait for all chains to load before showing any data. (See [_shared.md](./_shared.md) Loading States.)
+1. Show a skeleton loading state for the balance view immediately. Display chain icons/names with shimmer placeholders for amounts. As each chain's balance resolves, populate that chain's entry individually. Do not wait for all chains to load before showing any data. (See [_shared.md](./_shared.md) Loading Labels.)
 2. Define your supported chains list (e.g., mainnet, Arbitrum, Optimism, Base, Polygon).
 3. For each chain, create a public client: `createPublicClient({ chain, transport: http(rpcUrl) })`.
 4. For native balances: call `getBalance` on each chain's client in parallel using `Promise.all`.

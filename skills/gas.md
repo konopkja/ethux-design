@@ -38,7 +38,7 @@ patterns: 5
 **When:** User connects a wallet with zero native token balance, or has tokens but not enough for gas.
 
 **How:**
-1. On wallet connection, check native balance: `getBalance` (viem) or `useBalance` (wagmi). While checking, show a loading state on the fee area (see [_shared.md](./_shared.md) Loading States).
+1. On wallet connection, check native balance: `getBalance` (viem) or `useBalance` (wagmi). While checking, show a loading state on the fee area (see [_shared.md](./_shared.md) Loading Labels).
 2. If balance is zero or below a threshold (e.g., < estimated gas for a typical transaction):
    - Check if your app has a paymaster configured.
    - If yes, use ERC-7677 paymaster flow with `wallet_sendCalls` (see [_shared.md](./_shared.md) EIP-5792 Capability Detection).

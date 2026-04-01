@@ -74,7 +74,7 @@ window.dispatchEvent(new Event('eip6963:requestProvider'))
 The wallet connection modal should: open from a clearly labeled "Connect Wallet" or "Connect" button in the page header, use a backdrop that dims but does not fully obscure the page, close on backdrop click or Escape key, trap focus while open (for accessibility), and restore focus to the trigger button on close. NEVER open the connection modal automatically on page load. NEVER use a full-page takeover for connection.
 
 **Connection loading state:**
-The "connecting" state must show: the wallet name and icon, a spinner or pulsing animation, the text "Connecting to [wallet name]...", and a "Cancel" button. If connecting takes more than 5 seconds: "Taking longer than expected. Make sure [wallet name] is unlocked." If connecting takes more than 15 seconds: "Connection timed out. Try again or choose a different wallet." with a "Try again" button. (See [_shared.md](./_shared.md) Loading States.)
+The "connecting" state must show: the wallet name and icon, a spinner or pulsing animation, the text "Connecting to [wallet name]...", and a "Cancel" button. If connecting takes more than 5 seconds: "Taking longer than expected. Make sure [wallet name] is unlocked." If connecting takes more than 15 seconds: "Connection timed out. Try again or choose a different wallet." with a "Try again" button. (See [_shared.md](./_shared.md) Loading Labels.)
 
 **Fallback:** If no EIP-6963 wallets are detected (older wallets), check `window.ethereum` as legacy fallback. Show it as "Browser Wallet" if the wallet name cannot be determined. Additionally, always show WalletConnect as an option (Pattern 5).
 

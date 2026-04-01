@@ -108,7 +108,7 @@ Note: The $1000 threshold for "Caution" on new recipients may need to be configu
 4. **In address inputs:**
    - Accept both hex addresses and ENS names.
    - When user types a `.eth` name, resolve it and show the resolved address below the input.
-   - Show a loading state during resolution: display a subtle spinner next to the input with "Resolving..." text. NEVER leave the input in an ambiguous state while resolution is in progress. (See [_shared.md](./_shared.md) Loading States.)
+   - Show a loading state during resolution: display a subtle spinner next to the input with "Resolving..." text. NEVER leave the input in an ambiguous state while resolution is in progress. (See [_shared.md](./_shared.md) Loading Labels.)
    - After resolution, validate the address (Pattern 3).
 
 **Display pattern:**
@@ -205,7 +205,7 @@ Is the token on the curated allowlist?
         NO  -> Classify as "Unverified", show in hidden tab
 ```
 
-**Empty state:** If the hidden/unverified tab has no tokens: "No hidden tokens. Unverified or suspicious tokens will appear here." (See [_shared.md](./_shared.md) Empty States.)
+**Empty state:** If the hidden/unverified tab has no tokens: "No hidden tokens. Unverified or suspicious tokens will appear here."
 
 **Fallback:** If you cannot determine whether a token is spam (no liquidity data available), classify it as "Unverified" and show it with a label, but do not count it in the total balance.
 

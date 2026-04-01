@@ -1,39 +1,24 @@
 ---
 title: "Shared UX Patterns"
-description: "Cross-cutting patterns referenced by all skill files: loading states, confirmations, empty states, error formatting, address display, stuck transactions, and EIP-5792 capability detection."
+description: "Cross-cutting patterns referenced by all skill files: button loading labels, error jargon translation, address display, stuck transaction thresholds, and EIP-5792 capability detection."
 ---
 
 # Shared UX Patterns
 
-These patterns apply across all skill files. Individual skills reference this file for consistent handling of common UX scenarios. Every async operation, every post-action state, and every error message should follow these standards.
+These patterns apply across all skill files. Only non-obvious, Ethereum-specific patterns are included here. Standard UX practices (skeleton loading, empty states, accessibility, responsive design) are assumed knowledge.
 
 ---
 
-## Loading States
+## Loading Labels
 
-Every async operation must have a defined loading state. NEVER show blank space, "$0.00", "undefined", or flash content while data loads.
-
-### Data Loading (read operations)
-Show a skeleton/shimmer placeholder in the exact layout the data will occupy. As individual pieces resolve, populate them incrementally. Do not wait for all data before showing any data.
-
-Examples:
-- Balance fetching: shimmer placeholder where the balance number will appear
-- Allowance checking: disable the action button with text "Checking permissions..."
-- ENS resolution: show the hex address immediately, replace with ENS name when resolved. Show a subtle spinner next to the address during resolution.
-- Cross-chain balances: show chain icons/names with shimmer placeholders for amounts. Populate each chain as it resolves.
-
-### Button/Action Loading (write operations)
-Disable the button and replace its label with a spinner + context text:
+Disable buttons and replace labels with context text during async operations:
+- "Checking permissions..." (allowance check in progress)
 - "Estimating fee..." (gas estimation in progress)
 - "Waiting for signature..." (wallet popup is open)
 - "Confirming..." (transaction submitted, waiting for block inclusion)
 
 NEVER show a submit/confirm button with no fee estimate displayed. The button should remain disabled until the fee is known.
-
-### Calculation Loading
-For derived values (fiat conversion, swap output estimates, gas estimates):
-- Show "Estimating..." or a shimmer in the value area
-- NEVER show "$0.00" or "0" while calculating
+NEVER show "$0.00" or "0" while calculating derived values (fiat conversion, swap output, gas estimates). Show "Estimating..." instead.
 
 ---
 
@@ -60,20 +45,6 @@ Show the actual fee paid alongside the estimate: "Fee: $0.08 (estimated $0.12)."
 - NEVER show a "success" state for a submitted-but-unconfirmed transaction. "Submitted" and "confirmed" are different states. Show "Processing..." until the transaction is included in a block.
 - NEVER auto-redirect the user away from a confirmation screen. Let them stay until they choose to navigate away.
 - NEVER describe a signature as "free" without qualification. Off-chain signatures are gasless but they DO authorize actions. Say "No network fee" instead of "Free."
-
----
-
-## Empty States
-
-Every list, data view, or balance display must define what appears when there is no data. NEVER render a blank area.
-
-| Context | Empty state message |
-|---------|-------------------|
-| Zero token balance | "You don't have any tokens yet. [Buy/bridge tokens] to get started." |
-| No transaction history | "No transactions yet. Your activity will appear here." |
-| No active approvals | "You haven't given any permissions yet." |
-| No wallets detected | Show embedded wallet option and WalletConnect. Add "What is a wallet?" link. |
-| No search results | "No results found. Try a different search term." |
 
 ---
 
@@ -110,28 +81,9 @@ Apply this translation to every RPC or contract error before displaying to users
 
 ## Address Display Standards
 
-Every displayed address must follow these rules:
-
-### Truncation
-Default format: `0x1234...5678` (first 6 + last 4 characters after 0x). Use this in headers, lists, and non-critical contexts.
-
-### Full address
-Show the full address in critical contexts: send confirmation screens, approval targets, and anywhere the user must verify an exact address.
-
-### ENS resolution
-When available, show ENS name as primary with truncated address as secondary:
-```
-vitalik.eth (0xd8dA...6045)
-```
-Use `useEnsName` (wagmi) or `getEnsName` (viem) for reverse resolution. Also resolve ENS avatar if available.
-
-### Interactive elements
-- **Copy button:** Every displayed address must be copyable with a click/tap. Show brief "Copied!" feedback.
-- **Explorer link:** Link the address to the relevant block explorer for the current chain.
-- **QR code:** For receive flows and mobile-to-mobile scenarios, provide QR code access.
-
-### Input validation
-After pasting an address into an input field, immediately validate format and checksum. Trim whitespace from pasted content.
+- **Truncation:** `0x1234...5678` (first 6 + last 4 after 0x) for non-critical contexts. Show full address on send confirmations and approval targets.
+- **ENS:** Show ENS name as primary, truncated address as secondary: `vitalik.eth (0xd8dA...6045)`. Use `useEnsName` (wagmi) or `getEnsName` (viem). Also resolve avatar.
+- **Interactive:** Every displayed address must be copyable (click/tap) with "Copied!" feedback, and linked to the relevant block explorer.
 
 ---
 
@@ -202,48 +154,3 @@ If EIP-5792 is not supported, degrade gracefully:
 Before every value-transferring transaction, include a clear but non-alarming note: "This action cannot be undone once confirmed." Do NOT use red warning colors for this. Use muted text below the confirm button.
 
 For approvals (which CAN be revoked): "You can remove this permission later from your approvals page."
-
----
-
-## Network Failure and Offline States
-
-Detect network connectivity. If the connection drops:
-- Immediately disable all submit/confirm buttons.
-- Show an inline banner: "You're offline. Reconnect to continue."
-- Preserve all input state so the user does not lose their work.
-
-On reconnection:
-- Re-enable buttons.
-- Refresh stale data (balances, gas estimates, nonce).
-- Show "Back online" briefly.
-
-NEVER submit a transaction while offline.
-
----
-
-## Accessibility Baseline
-
-These requirements apply to every component and screen across all skills.
-
-- **Status changes:** Use `aria-live="polite"` for all status transitions (loading to loaded, submitted to confirmed). Screen readers will announce the new state without interrupting the user.
-- **Error messages:** Use `role="alert"` on error message containers so they are announced immediately by assistive technology.
-- **Loading placeholders:** Set `aria-busy="true"` on skeleton/shimmer containers while data is loading. Remove the attribute when content populates.
-- **Icon-only buttons:** Every icon-only button must have screen reader text via `aria-label` or a visually hidden `<span>`. Examples: copy button (`aria-label="Copy address"`), explorer link (`aria-label="View on block explorer"`), close button (`aria-label="Close"`).
-- **Focus management:** After async operations complete (transaction confirmed, data loaded, modal opened), move focus to the new content or confirmation message. Do not leave focus on a disabled or removed element.
-- **Non-color indicators:** Warnings and errors must use icon + text label + color together. Never rely on color alone to convey severity or state.
-- **Keyboard navigation:** All interactive elements must be reachable via Tab. All modals, dropdowns, and bottom sheets must be dismissible via Escape. Focus must be trapped inside open modals.
-- **Skip links:** For long repeated content (solution tables, checklist items, approval lists), provide a "Skip to [section]" link at the top of the repeated block.
-
----
-
-## Mobile & Touch
-
-These requirements apply to every component and screen when rendered on touch devices.
-
-- **Touch targets:** Minimum 24x24px for all tappable elements (WCAG AA). Recommend 44x44px for primary actions and frequently used controls.
-- **Thumb zone:** Place primary actions (confirm, submit, next) in the bottom 40% of the screen on mobile layouts. Secondary actions and navigation can be higher.
-- **Bottom sheets over modals:** On mobile, prefer bottom sheets over centered modals for confirmations, wallet selection, and option menus. Bottom sheets are easier to dismiss and stay within thumb reach.
-- **No hover-dependent interactions:** Tooltips, info popovers, and contextual help must be tap-to-toggle on touch devices. Never require hover to reveal critical information.
-- **Swipe gestures:** Support swipe-to-dismiss for bottom sheets and notifications. Ensure swipe targets do not conflict with horizontal scroll areas.
-- **Viewport:** All content must be usable without horizontal scroll at 320px viewport width. Test all layouts at this minimum.
-- **Input zoom prevention:** Set font-size to minimum 16px on all input fields. iOS auto-zooms the viewport when focusing inputs with font-size below 16px, which disorients users.

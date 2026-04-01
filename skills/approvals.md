@@ -35,7 +35,7 @@ patterns: 5
 **When:** User needs to grant spending permission for a specific action (swap, deposit, stake).
 
 **How:**
-1. While checking current allowance, show the action button in a disabled/loading state with text "Checking permissions..." Do not show the approval step and then remove it. Determine the flow before showing UI. (See [_shared.md](./_shared.md) Loading States.)
+1. While checking current allowance, show the action button in a disabled/loading state with text "Checking permissions..." Do not show the approval step and then remove it. Determine the flow before showing UI. (See [_shared.md](./_shared.md) Loading Labels.)
 2. Read current allowance: `useReadContract` with the token's `allowance(owner, spender)` function.
 3. If allowance >= required amount, skip to the action transaction.
 4. If allowance < required, call `useWriteContract` with `approve(spender, exactAmount)`.
