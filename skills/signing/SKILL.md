@@ -1,15 +1,13 @@
 ---
-title: "Transaction Signing"
-description: "EIP-712 typed data, human-readable summaries, transaction simulation, multi-step progress, and batch signing."
-standards: ["EIP-712", "EIP-191", "EIP-4361", "EIP-7702", "ERC-7730"]
-patterns: 6
+name: signing
+description: "Transaction signing UX patterns for Ethereum dApps: EIP-712 typed structured data, human-readable transaction summaries, transaction simulation/preview, multi-step signing progress, EIP-7702 batch signing, and Sign-In with Ethereum (SIWE/EIP-4361). Use this skill whenever building or reviewing ANY signature request, transaction confirmation UI, signing flow, SIWE implementation, transaction preview, or multi-step transaction progress — even if the user just mentions 'signing', 'signature', 'confirm transaction', 'SIWE', 'sign in with ethereum', or 'transaction preview'."
 ---
 
 # Transaction Signing
 
 **Scope:** Signature requests (EIP-712 typed data, personal_sign, SIWE), transaction simulation, multi-step progress, and batch signing.
-**Does NOT cover:** Token approval logic (see [approvals.md](./approvals.md)), gas estimation and fee display (see [gas.md](./gas.md)).
-**Cross-references:** [approvals.md](./approvals.md) (Permit2 signatures), [_shared.md](./_shared.md) (loading states, post-action confirmation, error formatting, stuck transaction handling).
+**Does NOT cover:** Token approval logic (see [approvals](../approvals/SKILL.md)), gas estimation and fee display (see [gas](../gas/SKILL.md)).
+**Cross-references:** [approvals](../approvals/SKILL.md) (Permit2 signatures), [shared](../../SKILL.md) (loading labels, post-action confirmation, error formatting), [stuck transactions](../shared/references/stuck-transactions.md) (pending transaction UX), [irreversibility](../shared/references/irreversibility.md) (framing for value-transfer confirmations).
 
 ## ALWAYS
 
@@ -18,7 +16,7 @@ patterns: 6
 - ALWAYS display multi-step progress when a flow requires more than one signature or transaction.
 - ALWAYS show estimated outcome (token amounts in/out) alongside the transaction summary.
 - ALWAYS set a reasonable deadline/expiry on signed messages (minutes to hours, not years).
-- ALWAYS show a confirmation state after each signature or transaction is submitted (see [_shared.md](./_shared.md) Post-Action Confirmation).
+- ALWAYS show a confirmation state after each signature or transaction is submitted (see [shared](../../SKILL.md) Post-Action Confirmation).
 - ALWAYS provide ERC-7730 metadata for EIP-712 signatures when possible, so hardware wallets can display clear signing information instead of raw hex data.
 
 ## NEVER
@@ -38,28 +36,7 @@ patterns: 6
 **When:** Any off-chain signature: permits, gasless approvals, order placement, governance votes, meta-transactions.
 
 **How:**
-1. Define your domain separator:
-   ```
-   domain: {
-     name: "YourAppName",
-     version: "1",
-     chainId: currentChainId,
-     verifyingContract: contractAddress
-   }
-   ```
-2. Define your message types matching your contract's `TYPEHASH`. Every field the contract verifies must appear in the types.
-3. Request signature via `useSignTypedData` (wagmi) or `signTypedData` (viem wallet client action).
-4. Pass `domain`, `types`, `primaryType`, and `message` as parameters.
-5. Verify the returned signature on-chain using `ecrecover` or EIP-1271 for smart contract wallets.
-
-**Decision tree:**
-```
-Is the signer an EOA or Smart Contract Wallet?
-  EOA -> Standard ecrecover verification
-  Smart Contract Wallet (EIP-1271) -> Call isValidSignature(hash, signature) on the wallet contract
-```
-
-**EIP-191 / `personal_sign`:** This method signs plaintext messages with the `\x19Ethereum Signed Message:\n` prefix (EIP-191), making it safe against transaction-hash spoofing. It is the correct method for Sign-In with Ethereum (EIP-4361/SIWE) and simple message signing. See Pattern 6 below.
+Use `useSignTypedData` (wagmi) or `signTypedData` (viem) with `domain`, `types`, `primaryType`, and `message`. Verify on-chain with `ecrecover` for EOAs or EIP-1271 `isValidSignature(hash, signature)` for smart contract wallets.
 
 **Fallback:** If the wallet does not support `eth_signTypedData_v4`, fall back to `personal_sign` with a clearly formatted plaintext version of the message. Note: virtually all modern wallets support `eth_signTypedData_v4`, so this fallback is rare in 2026.
 
@@ -105,26 +82,7 @@ To: [CONTRACT_NAME] ([0x...abcd])
 **When:** Before any transaction that moves value. Especially important for swaps, approvals, and contract interactions.
 
 **How:**
-1. Use `simulateContract` (viem) or `useSimulateContract` (wagmi) to dry-run the transaction against current chain state.
-2. Parse the simulation result to extract:
-   - Expected return values
-   - Whether the call would revert (and the revert reason)
-   - Gas estimate
-3. For balance change preview: compare user's token balances before and after by simulating the full call via `eth_call` with state overrides.
-4. Display the preview: "If confirmed, your balance changes: -1 ETH, +1,420 USDC."
-5. If simulation shows a revert, block submission and show the revert reason.
-
-**Implementation with viem:**
-```
-// simulateContract returns the result without sending
-const { result } = await publicClient.simulateContract({
-  address: contractAddress,
-  abi: contractABI,
-  functionName: 'swap',
-  args: [tokenIn, tokenOut, amountIn, minAmountOut],
-  account: userAddress
-})
-```
+Use `simulateContract` (viem) or `useSimulateContract` (wagmi) to dry-run the transaction. If simulation shows a revert, block submission and show the revert reason. For balance change preview: compare token balances before and after via `eth_call` with state overrides. Display: "If confirmed, your balance changes: -1 ETH, +1,420 USDC."
 
 **Fallback:** If simulation fails (some contract patterns are not simulatable):
 - For transactions under $100 equivalent: "We couldn't verify this transaction will succeed. You can proceed, but there's a chance it may fail and you'll still pay the network fee (~$X.XX)."
@@ -147,7 +105,7 @@ const { result } = await publicClient.simulateContract({
    - What this step does: "Approving USDC spending"
    - Status: pending / waiting for signature / confirming / confirmed / failed
 3. If the wallet prompt has been pending for more than 30 seconds, show a helper: "Waiting for your wallet. If you don't see a popup, check your wallet app or browser extension." On mobile: "Open [wallet name] to confirm." Include a "Cancel" button that resets the current step to pending.
-4. After each step completes, show a brief confirmation (see [_shared.md](./_shared.md) Post-Action Confirmation), then auto-advance to the next. The user should not need to click "Next" between wallet prompts.
+4. After each step completes, show a brief confirmation (see [shared](../../SKILL.md) Post-Action Confirmation), then auto-advance to the next. The user should not need to click "Next" between wallet prompts.
 4. If a step fails, stop and show recovery options:
    - "Retry this step"
    - "Cancel" (and explain what has already been committed)
@@ -199,28 +157,16 @@ Check atomic.status on the current chain:
 
 ### 6. Personal Sign and Sign-In with Ethereum (EIP-4361)
 
-**When:** Authenticating a user (Sign-In with Ethereum / SIWE), accepting terms of service, or any scenario where a simple plaintext message is sufficient.
+**When:** Authenticating a user (SIWE), accepting terms of service, or simple plaintext message signing. Use `personal_sign` via `useSignMessage` (wagmi).
 
 **How:**
-1. Construct the SIWE message per EIP-4361 format, including: domain, address, statement (human-readable), URI, version, chain ID, nonce (from your server), and issued-at timestamp.
-2. Display the message to the user in your app UI before triggering the wallet popup: "Sign in to [app name] to verify your identity. No transaction will be sent."
-3. Request signature via `personal_sign` (JSON-RPC) or `signMessage` (viem) / wagmi's `useSignMessage`.
-4. Send the signature to your backend. Verify the signature server-side by recovering the signer address and checking it matches the claimed address.
-5. Issue a session token (JWT, cookie, etc.) upon successful verification.
-
-**Summary template:**
-```
-Sign in to [APP_NAME]
-This signature verifies your identity. No network fee.
-Address: [0x...abcd]
-Chain: [chain name]
-```
-
-**Fallback:** If the wallet does not support `personal_sign` (extremely rare), this flow cannot proceed. Show: "Your wallet does not support message signing. Please try a different wallet."
+**Key rules (beyond standard SIWE tutorials):**
+- Display the message in your app UI BEFORE the wallet popup: "Sign in to [app name] to verify your identity. No transaction will be sent."
+- Always include nonce from your server and issued-at timestamp to prevent replay.
+- Verify server-side by recovering the signer address, not client-side.
 
 **Error state:**
 - User rejected: "Sign-in cancelled. You can try again anytime."
-- Signature verification failed server-side: "Verification failed. Please try signing in again. If this persists, try disconnecting and reconnecting your wallet."
 - Nonce expired: "This sign-in request has expired. Please try again."
 
 ---

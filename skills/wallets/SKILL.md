@@ -1,15 +1,13 @@
 ---
-title: "Wallet Connection"
-description: "EIP-6963 multi-wallet discovery, mobile deep linking, session persistence, embedded wallets, and WalletConnect fallback."
-standards: ["EIP-6963", "EIP-7702", "WalletConnect v2"]
-patterns: 5
+name: wallets
+description: "Wallet connection UX patterns for Ethereum dApps: EIP-6963 multi-wallet discovery, mobile deep linking, session persistence and auto-reconnect, embedded/smart wallets for new users, and WalletConnect v2 fallback. Use this skill whenever building or reviewing ANY wallet connection flow, connect button, wallet modal, session management, embedded wallet, WalletConnect integration, or mobile wallet linking — even if the user just mentions 'wallet', 'connect', 'disconnect', 'WalletConnect', 'embedded wallet', or 'wallet discovery'."
 ---
 
 # Wallet Connection
 
 **Scope:** Wallet discovery (EIP-6963), connection flows, mobile deep linking, session persistence, embedded/smart wallets, and WalletConnect fallback.
-**Does NOT cover:** Transaction signing (see [signing.md](./signing.md)), gas handling (see [gas.md](./gas.md)), multi-chain network switching (see [multichain.md](./multichain.md)).
-**Cross-references:** [onboarding.md](./onboarding.md) (new user flows), [safety.md](./safety.md) (ENS resolution, address display), [_shared.md](./_shared.md) (loading states, address display standards, error formatting).
+**Does NOT cover:** Transaction signing (see [signing](../signing/SKILL.md)), gas handling (see [gas](../gas/SKILL.md)), multi-chain network switching (see [multichain](../multichain/SKILL.md)).
+**Cross-references:** [onboarding](../onboarding/SKILL.md) (new user flows), [safety](../safety/SKILL.md) (ENS resolution, address display), [shared](../../SKILL.md) (loading labels, address display standards, error formatting).
 
 ## ALWAYS
 
@@ -18,7 +16,7 @@ patterns: 5
 - ALWAYS persist the last connected wallet and auto-reconnect on return visits.
 - ALWAYS show connection state clearly: connected (with address), connecting (with spinner), disconnected.
 - ALWAYS provide a disconnect option in the UI.
-- ALWAYS resolve ENS names for the connected account. Display the ENS name as primary (e.g., "vitalik.eth") with the truncated address as secondary (e.g., "0xd8dA...6045"). Use `useEnsName` (wagmi) or `getEnsName` (viem). Also resolve the ENS avatar if available. See [safety.md](./safety.md) Pattern 2 for full ENS resolution details and [_shared.md](./_shared.md) Address Display Standards.
+- ALWAYS resolve ENS names for the connected account. Display the ENS name as primary (e.g., "vitalik.eth") with the truncated address as secondary (e.g., "0xd8dA...6045"). Use `useEnsName` (wagmi) or `getEnsName` (viem). Also resolve the ENS avatar if available. See [safety](../safety/SKILL.md) Pattern 2 for full ENS resolution details and [shared](../../SKILL.md) Address Display Standards.
 
 ## NEVER
 
@@ -28,7 +26,7 @@ patterns: 5
 - NEVER store private keys, seed phrases, or signing capabilities in localStorage, cookies, or any client-side storage (embedded wallet keys must use secure enclaves or encrypted backend storage).
 - NEVER keep a stale connection. If the wallet is disconnected externally, detect it and update UI immediately.
 - NEVER auto-connect to the first wallet detected. Always let the user choose, even if only one wallet is available.
-- NEVER show wallet addresses without truncation in primary UI. Use format: "0xd8dA...6045" (first 6 + last 4 characters). See [_shared.md](./_shared.md) Address Display Standards.
+- NEVER show wallet addresses without truncation in primary UI. Use format: "0xd8dA...6045" (first 6 + last 4 characters). See [shared](../../SKILL.md) Address Display Standards.
 - NEVER clear the user's application state (favorites, settings, preferences) on wallet disconnect. Only clear wallet-specific data (balances, transaction history, connection info).
 
 ## Patterns
@@ -38,24 +36,8 @@ patterns: 5
 **When:** Displaying the wallet connection modal. This replaces the old `window.ethereum` detection pattern.
 
 **How:**
-1. EIP-6963 uses a browser event-based discovery system. Wallets announce themselves via `eip6963:announceProvider` events.
-2. With wagmi v2+, this is built in. Use connectors that support EIP-6963:
-   ```
-   import { createConfig, http } from 'wagmi'
-   import { injected } from 'wagmi/connectors'
-
-   // wagmi automatically discovers EIP-6963 providers
-   const config = createConfig({
-     chains: [mainnet, base, arbitrum],
-     connectors: [
-       injected()  // Discovers all EIP-6963 wallets
-     ],
-     transports: { ... }
-   })
-   ```
-3. Use `useConnectors` (wagmi) to get the list of available connectors. Each EIP-6963-compatible wallet appears with its name and icon.
-4. Display all discovered wallets in the connection modal with their icons and names. Sort by: recently used first, then alphabetically.
-5. Each wallet entry gets a click handler calling `useConnect` with the specific connector.
+1. EIP-6963 uses a browser event-based discovery system. Wallets announce themselves via `eip6963:announceProvider` events. With wagmi v2+, use `injected()` connector and `useConnectors` to get discovered wallets with their names and icons.
+2. Display all discovered wallets sorted by: recently used first, then alphabetically. Each entry gets a click handler calling `useConnect` with the specific connector.
 
 **Without wagmi (manual implementation):**
 ```
@@ -74,7 +56,7 @@ window.dispatchEvent(new Event('eip6963:requestProvider'))
 The wallet connection modal should: open from a clearly labeled "Connect Wallet" or "Connect" button in the page header, use a backdrop that dims but does not fully obscure the page, close on backdrop click or Escape key, trap focus while open (for accessibility), and restore focus to the trigger button on close. NEVER open the connection modal automatically on page load. NEVER use a full-page takeover for connection.
 
 **Connection loading state:**
-The "connecting" state must show: the wallet name and icon, a spinner or pulsing animation, the text "Connecting to [wallet name]...", and a "Cancel" button. If connecting takes more than 5 seconds: "Taking longer than expected. Make sure [wallet name] is unlocked." If connecting takes more than 15 seconds: "Connection timed out. Try again or choose a different wallet." with a "Try again" button. (See [_shared.md](./_shared.md) Loading States.)
+The "connecting" state must show: the wallet name and icon, a spinner or pulsing animation, the text "Connecting to [wallet name]...", and a "Cancel" button. If connecting takes more than 5 seconds: "Taking longer than expected. Make sure [wallet name] is unlocked." If connecting takes more than 15 seconds: "Connection timed out. Try again or choose a different wallet." with a "Try again" button. (See [shared](../../SKILL.md) Loading Labels.)
 
 **Fallback:** If no EIP-6963 wallets are detected (older wallets), check `window.ethereum` as legacy fallback. Show it as "Browser Wallet" if the wallet name cannot be determined. Additionally, always show WalletConnect as an option (Pattern 5).
 
@@ -123,34 +105,12 @@ On mobile:
 **When:** User returns to the dapp after previously connecting.
 
 **How:**
-1. Wagmi handles session persistence and auto-reconnection automatically via its built-in storage. No manual localStorage management is needed.
-2. If building without wagmi: persist the connector ID (not the account address) in localStorage. On page load, attempt silent reconnection using the stored connector.
-3. On page load:
-   - Check if a previous session exists.
-   - Attempt silent reconnection using the stored connector.
-   - If successful, update UI to connected state immediately.
-   - If failed (e.g., user revoked permission in wallet), clear stored data and show disconnected state.
-4. Listen for account and chain changes:
+1. Wagmi handles session persistence automatically. If building without wagmi: persist the connector ID (not the account address) in localStorage and attempt silent reconnection on page load.
+2. Listen for account and chain changes:
    - `accountsChanged`: immediately update the displayed address and ENS name in the header, clear all cached balance data and re-fetch, clear any pending transaction state (unsigned transactions from the old account are invalid), and show a brief notification: "Switched to [truncated address or ENS name]." If the user was mid-flow (e.g., halfway through a multi-step transaction), warn: "Your account changed. The current operation has been cancelled because it was started with a different account."
    - `chainChanged`: update chain indicator, re-fetch chain-specific data.
    - `disconnect`: clear session, show disconnected state.
 5. When the user returns to a tab that has been inactive for more than 5 minutes: re-check wallet connection state, refresh balances, refresh gas estimates, and invalidate any pending transaction simulations. Do this silently if everything is fine.
-
-**wagmi example:**
-```
-// wagmi automatically persists and reconnects
-const config = createConfig({
-  chains: [mainnet, base, arbitrum],
-  connectors: [injected(), walletConnect({ projectId: 'YOUR_WC_PROJECT_ID' })],
-  transports: { ... }
-})
-
-// Listen for changes in components:
-useAccount({
-  onConnect({ address, connector }) { /* update UI */ },
-  onDisconnect() { /* clear state */ }
-})
-```
 
 **Disconnect UX:**
 When the user clicks "Disconnect": if they have no pending operations, disconnect immediately and show "Wallet disconnected." If they have pending transactions or are mid-flow, show: "You have a pending transaction. Disconnecting will cancel it. Disconnect anyway?" Buttons: "Disconnect" / "Stay connected".
@@ -202,18 +162,7 @@ Does the user have a wallet?
 **When:** User's wallet is not detected via EIP-6963, or user is on a different device than their wallet.
 
 **How:**
-1. Include WalletConnect v2 as a connector in your config:
-   ```
-   import { walletConnect } from 'wagmi/connectors'
-
-   const config = createConfig({
-     connectors: [
-       injected(),
-       walletConnect({ projectId: 'YOUR_WC_PROJECT_ID' })
-     ],
-     // ...
-   })
-   ```
+1. Include `walletConnect({ projectId })` as a connector in your wagmi config alongside `injected()`.
 2. When selected, display a QR code that the user scans with their mobile wallet.
 3. On mobile: instead of QR, use deep linking (Pattern 2) to open the wallet app directly.
 4. Show connection status: "Waiting for wallet connection..." with a timeout.

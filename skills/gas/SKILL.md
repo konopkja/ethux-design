@@ -1,15 +1,13 @@
 ---
-title: "Gas & Fees"
-description: "Gas sponsorship via paymasters, fiat fee display, ERC-20 gas payment, fee breakdowns, and high-gas warnings."
-standards: ["ERC-7677", "EIP-7702", "EIP-1559"]
-patterns: 5
+name: gas
+description: "Gas and fee UX patterns for Ethereum dApps: paymaster sponsorship (ERC-7677), fiat fee display, ERC-20 gas payment, L1/L2 fee breakdowns, and high-gas warnings. Use this skill whenever building or reviewing ANY fee display, gas estimation, transaction cost UI, paymaster integration, or fee-related warning — even if the user just mentions 'gas', 'fees', 'transaction cost', 'paymaster', or 'sponsored transactions'."
 ---
 
 # Gas & Fees
 
 **Scope:** Gas estimation, fiat fee display, paymaster sponsorship, ERC-20 gas payment, L1/L2 fee breakdowns, and high-gas warnings.
-**Does NOT cover:** Transaction signing flows (see [signing.md](./signing.md)), token approval logic (see [approvals.md](./approvals.md)).
-**Cross-references:** [_shared.md](./_shared.md) (loading states, post-action confirmation, error formatting, stuck transaction handling).
+**Does NOT cover:** Transaction signing flows (see [signing](../signing/SKILL.md)), token approval logic (see [approvals](../approvals/SKILL.md)).
+**Cross-references:** [shared](../../SKILL.md) (loading labels, post-action confirmation, error formatting), [EIP-5792](../shared/references/eip5792.md) (capability detection for paymaster flows), [stuck transactions](../shared/references/stuck-transactions.md) (pending transaction UX).
 
 ## ALWAYS
 
@@ -28,7 +26,7 @@ patterns: 5
 - NEVER hide fee information. Even sponsored (zero-cost) transactions should show "Fee: $0.00 (sponsored)".
 - NEVER hardcode gas prices or gas limits. Always estimate dynamically.
 - NEVER assume the user has ETH. On L2s especially, users may onboard directly with stablecoins.
-- NEVER show gas cost in scientific notation or with more than 6 decimal places. Format for readability: "$0.12" or "0.00004 ETH", never "4.2e-5 ETH" (see [_shared.md](./_shared.md) Error Message Formatting).
+- NEVER show gas cost in scientific notation or with more than 6 decimal places. Format for readability: "$0.12" or "0.00004 ETH", never "4.2e-5 ETH" (see [shared](../../SKILL.md) Error Message Formatting).
 - NEVER show "Fee: $0.00" for sponsored transactions without the "(sponsored)" label.
 
 ## Patterns
@@ -38,10 +36,10 @@ patterns: 5
 **When:** User connects a wallet with zero native token balance, or has tokens but not enough for gas.
 
 **How:**
-1. On wallet connection, check native balance: `getBalance` (viem) or `useBalance` (wagmi). While checking, show a loading state on the fee area (see [_shared.md](./_shared.md) Loading States).
+1. On wallet connection, check native balance: `getBalance` (viem) or `useBalance` (wagmi). While checking, show a loading state on the fee area (see [shared](../../SKILL.md) Loading Labels).
 2. If balance is zero or below a threshold (e.g., < estimated gas for a typical transaction):
    - Check if your app has a paymaster configured.
-   - If yes, use ERC-7677 paymaster flow with `wallet_sendCalls` (see [_shared.md](./_shared.md) EIP-5792 Capability Detection).
+   - If yes, use ERC-7677 paymaster flow with `wallet_sendCalls` (see [EIP-5792](../shared/references/eip5792.md)).
 3. To use a paymaster with `wallet_sendCalls`:
    - Include a `capabilities` object with `paymasterService` containing your paymaster URL.
    - The wallet calls your paymaster endpoint to get sponsorship data.
@@ -53,7 +51,7 @@ patterns: 5
 Does user have enough native token for gas?
   YES -> Standard flow (Pattern 2)
   NO  -> Does app have a paymaster?
-    YES -> Does wallet support wallet_sendCalls? (see _shared.md EIP-5792)
+    YES -> Does wallet support wallet_sendCalls? (see [EIP-5792](../shared/references/eip5792.md))
       YES -> Use ERC-7677 paymaster
       NO  -> Show "need [native token]" message + onramp link
     NO  -> Show "need [native token]" message + onramp link
@@ -87,20 +85,9 @@ Does user have enough native token for gas?
 **When:** Every time a fee or cost is shown to the user.
 
 **How:**
-1. While gas is being estimated, show a skeleton/placeholder in the fee area: "Estimating fee..." or a shimmer animation in the fee line. NEVER show "$0.00" or an empty space while loading. NEVER show a "Submit" button with no fee displayed. (See [_shared.md](./_shared.md) Loading States.)
-2. Estimate gas: `estimateGas` (viem) or `useEstimateGas` (wagmi) for the specific transaction.
-2. Get current gas price: `getGasPrice` or for EIP-1559 chains, `estimateFeesPerGas` which returns `maxFeePerGas` and `maxPriorityFeePerGas`.
-3. Calculate cost in native token: `gasEstimate * gasPrice`.
-4. Convert to fiat using an on-chain oracle (e.g., Chainlink price feed) or a cached price. Read the ETH/USD price feed: call `latestRoundData()` on the Chainlink aggregator contract for the relevant chain.
-5. Format: "$0.12" as primary, "0.00004 ETH" as secondary/tooltip.
-
-**Fiat conversion pattern:**
-```
-nativeCostWei = estimatedGas * effectiveGasPrice
-nativeCostEth = formatEther(nativeCostWei)
-fiatCost = nativeCostEth * ethUsdPrice
-display = `$${fiatCost.toFixed(2)}`
-```
+1. Show "Estimating fee..." placeholder while loading. NEVER show "$0.00" or empty space. NEVER show a "Submit" button with no fee displayed.
+2. Estimate gas with `estimateGas`/`estimateFeesPerGas` (viem). Convert to fiat using a Chainlink price feed (`latestRoundData()`) or cached price.
+3. Format: "$0.12" as primary, "0.00004 ETH" as secondary/tooltip.
 
 **Fallback:** If price feed is unavailable, show the native token amount only: "Fee: ~0.00004 ETH" with a note "(USD estimate unavailable)".
 

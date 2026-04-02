@@ -668,6 +668,7 @@ function renderParadigms() {
 
 function renderAgents() {
   const REPO_BASE = 'https://raw.githubusercontent.com/konopkja/ethux-design/main/skills';
+  const REPO_ROOT = 'https://raw.githubusercontent.com/konopkja/ethux-design/main';
 
   let skillCards = '';
   DATA.checklists.forEach((cl, i) => {
@@ -675,9 +676,9 @@ function renderAgents() {
     const useCases = (info.useCases || []).map(u => `<div class="skill-card-what-item">${u}</div>`).join('');
     const tags = (cl.standards || []).map(s => `<span class="eip-tag">${s}</span>`).join('');
     const icon = SKILL_ICONS[cl.id] || '';
-    const rawUrl = `${REPO_BASE}/${cl.id}.md`;
+    const rawUrl = `${REPO_BASE}/${cl.id}/SKILL.md`;
 
-    skillCards += `<div class="skill-card fade-up stagger-${Math.min(i+1,7)}"><div class="skill-card-info"><div class="skill-card-head"><div class="skill-card-icon">${icon}</div><div><div class="skill-card-title">${cl.title}</div><div class="skill-card-path">skills/${cl.id}.md</div></div></div><div class="skill-card-desc">${info.humanDesc || cl.desc}</div><div class="skill-card-what"><div class="skill-card-what-title">When to use</div>${useCases}</div><div class="skill-card-tags" style="margin-top:12px;">${tags}</div></div><div class="skill-card-actions"><button class="cl-dl-btn skill-btn-primary" onclick="copyText('${rawUrl}',this)">Copy URL</button><button class="cl-dl-btn skill-btn-secondary" onclick="copySkillContent('${cl.id}',this)">Copy Content</button><button class="cl-dl-btn skill-btn-tertiary" onclick="downloadSkill('${cl.id}')">Download</button></div></div>`;
+    skillCards += `<div class="skill-card fade-up stagger-${Math.min(i+1,7)}"><div class="skill-card-info"><div class="skill-card-head"><div class="skill-card-icon">${icon}</div><div><div class="skill-card-title">${cl.title}</div><div class="skill-card-path">skills/${cl.id}/SKILL.md</div></div></div><div class="skill-card-desc">${info.humanDesc || cl.desc}</div><div class="skill-card-what"><div class="skill-card-what-title">When to use</div>${useCases}</div><div class="skill-card-tags" style="margin-top:12px;">${tags}</div></div><div class="skill-card-actions"><button class="cl-dl-btn skill-btn-primary" onclick="copyText('${rawUrl}',this)">Copy URL</button><button class="cl-dl-btn skill-btn-secondary" onclick="copySkillContent('${cl.id}',this)">Copy Content</button><button class="cl-dl-btn skill-btn-tertiary" onclick="downloadSkill('${cl.id}')">Download</button></div></div>`;
   });
 
   return `
@@ -690,17 +691,17 @@ function renderAgents() {
           <p class="builders-hero-desc">Structured Ethereum UX rules your AI agent can read directly. Built from real user pain data, updated as standards evolve. For implementation code and Solidity patterns, see <a href="https://ethskills.com/" target="_blank" rel="noopener noreferrer">ethskills.com</a>.</p>
 
           <div class="builders-hero-action">
-            <div class="builders-hero-tabs" role="tablist">
-              <button class="builders-hero-tab active" role="tab" onclick="switchQuickstart('claude',this)">Claude Code</button>
-              <button class="builders-hero-tab" role="tab" onclick="switchQuickstart('cursor',this)">Cursor / Copilot</button>
+            <div class="builders-hero-tabs" role="tablist" aria-label="Agent setup scope">
+              <button type="button" class="builders-hero-tab active" role="tab" aria-selected="true" id="tab-qs-global" onclick="switchQuickstart('global',this)">Install globally</button>
+              <button type="button" class="builders-hero-tab" role="tab" aria-selected="false" id="tab-qs-project" onclick="switchQuickstart('project',this)">Project only</button>
             </div>
-            <div class="builders-hero-code" id="qs-claude">
-              <span class="builders-hero-code-label">Add to project instructions</span>
-              <div class="builders-hero-code-block"><code>Fetch _shared.md and the relevant skill file from ethux-design/skills/ when building Ethereum app UX.</code><button class="builders-hero-copy" onclick="copyText('Fetch ${REPO_BASE}/_shared.md and the relevant skill file from ${REPO_BASE}/ when building Ethereum app UX. Follow all ALWAYS/NEVER rules.',this)">Copy</button></div>
+            <div class="builders-hero-code" id="qs-global" role="tabpanel" aria-labelledby="tab-qs-global">
+              <span class="builders-hero-code-label">Give this to your agent to use the skills on any relevant project</span>
+              <div class="builders-hero-code-block"><code>Set up all the skills from https://ethux.design/SKILL.md in your global settings so we can use them on any project.</code><button class="builders-hero-copy" onclick="copyText('Set up all the skills from https://raw.githubusercontent.com/konopkja/ethux-design/main/SKILL.md in your global settings so we can use them on any project.',this)">Copy</button></div>
             </div>
-            <div class="builders-hero-code" id="qs-cursor" style="display:none;">
-              <span class="builders-hero-code-label">Copy all skill content into .cursorrules</span>
-              <div class="builders-hero-code-block"><code>8 skill files. Approvals, signing, gas, multi-chain, onboarding, wallets, safety, shared patterns.</code><button class="builders-hero-copy" onclick="copyAllSkillContent(this)">Copy All Skills</button></div>
+            <div class="builders-hero-code" id="qs-project" role="tabpanel" aria-labelledby="tab-qs-project" style="display:none;">
+              <span class="builders-hero-code-label">Give this to your agent to use the skills only for your current project</span>
+              <div class="builders-hero-code-block"><code>Set up all the skills from https://ethux.design/SKILL.md for this project only, so we can use them while building here.</code><button class="builders-hero-copy" onclick="copyText('Set up all the skills from https://raw.githubusercontent.com/konopkja/ethux-design/main/SKILL.md for this project only, so we can use them while building here.',this)">Copy</button></div>
             </div>
           </div>
         </section>
@@ -726,7 +727,7 @@ function copyText(text, btn) {
 function copySkillContent(guideId, btn) {
   const orig = btn.textContent;
   btn.textContent = 'Loading...';
-  fetch(`skills/${guideId}.md`).then(r => r.text()).then(md => {
+  fetch(`skills/${guideId}/SKILL.md`).then(r => r.text()).then(md => {
     navigator.clipboard.writeText(md).then(() => {
       btn.textContent = 'Copied!';
       btn.classList.add('copied');
@@ -738,32 +739,16 @@ function copySkillContent(guideId, btn) {
     else { btn.textContent = orig; }
   });
 }
-function copyAllSkillContent(btn) {
-  const orig = btn.textContent;
-  btn.textContent = 'Loading...';
-  const files = ['_shared', ...DATA.checklists.map(cl => cl.id)];
-  Promise.all(files.map(f => fetch(`skills/${f}.md`).then(r => r.text())))
-    .then(contents => {
-      const all = contents.map((md, i) => `${'='.repeat(60)}\n# ${files[i]}.md\n${'='.repeat(60)}\n\n${md}`).join('\n\n');
-      navigator.clipboard.writeText(all).then(() => {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
-      });
-    }).catch(() => {
-      let all = '';
-      DATA.checklists.forEach(cl => {
-        all += `\n\n${'='.repeat(60)}\n# ${cl.title} (skills/${cl.id}.md)\n${'='.repeat(60)}\n\n`;
-        all += generateSkillMD(cl);
-      });
-      navigator.clipboard.writeText(all.trim()).then(() => { btn.textContent = orig; });
-    });
-}
-function switchQuickstart(tab, btn) {
-  document.querySelectorAll('.builders-hero-code').forEach(p => p.style.display = 'none');
-  document.querySelectorAll('.builders-hero-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('qs-' + tab).style.display = 'block';
+function switchQuickstart(scope, btn) {
+  document.querySelectorAll('.builders-hero-action .builders-hero-code').forEach(p => { p.style.display = 'none'; });
+  document.querySelectorAll('.builders-hero-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  const panel = document.getElementById('qs-' + scope);
+  if (panel) panel.style.display = 'block';
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
 }
 function rotateQuote(carouselId, dir) {
   const el = document.getElementById(carouselId);
@@ -859,12 +844,12 @@ function generateSkillMD(cl) {
   return md;
 }
 function downloadSkill(guideId) {
-  fetch(`skills/${guideId}.md`).then(r => r.text()).then(md => {
+  fetch(`skills/${guideId}/SKILL.md`).then(r => r.text()).then(md => {
     const blob = new Blob([md], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${guideId}.md`;
+    a.download = `${guideId}-SKILL.md`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -878,7 +863,7 @@ function downloadSkill(guideId) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${guideId}.md`;
+    a.download = `${guideId}-SKILL.md`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

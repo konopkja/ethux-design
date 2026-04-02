@@ -1,15 +1,13 @@
 ---
-title: "Multi-Chain"
-description: "Unified cross-chain balances, automatic network switching, chain-aware addresses, intent-based bridging, and consistent smart account addresses."
-standards: ["EIP-7811", "ERC-7828", "ERC-7930", "ERC-7683"]
-patterns: 5
+name: multichain
+description: "Multi-chain UX patterns for Ethereum dApps: unified cross-chain balances, automatic network switching, chain-aware address validation (ERC-7930), intent-based cross-chain transfers (ERC-7683), and consistent smart account addresses via CREATE2. Use this skill whenever building or reviewing ANY multi-chain feature, cross-chain transfer, bridge UI, network switching flow, or aggregated balance view — even if the user just mentions 'multi-chain', 'cross-chain', 'bridge', 'network switch', or 'L2'."
 ---
 
 # Multi-Chain
 
 **Scope:** Multi-chain UX: aggregated balances, network switching, chain-aware address validation, cross-chain transfers (ERC-7683), and consistent smart account addresses.
-**Does NOT cover:** Single-chain transaction signing (see [signing.md](./signing.md)), gas estimation per chain (see [gas.md](./gas.md)), wallet connection (see [wallets.md](./wallets.md)).
-**Cross-references:** [safety.md](./safety.md) (address validation, ENS resolution), [_shared.md](./_shared.md) (loading states, address display standards, error formatting).
+**Does NOT cover:** Single-chain transaction signing (see [signing](../signing/SKILL.md)), gas estimation per chain (see [gas](../gas/SKILL.md)), wallet connection (see [wallets](../wallets/SKILL.md)).
+**Cross-references:** [safety](../safety/SKILL.md) (address validation, ENS resolution), [shared](../../SKILL.md) (loading labels, address display standards, error formatting).
 
 ## ALWAYS
 
@@ -37,12 +35,9 @@ patterns: 5
 **When:** App loads or wallet connects. User should see all their assets across supported chains.
 
 **How:**
-1. Show a skeleton loading state for the balance view immediately. Display chain icons/names with shimmer placeholders for amounts. As each chain's balance resolves, populate that chain's entry individually. Do not wait for all chains to load before showing any data. (See [_shared.md](./_shared.md) Loading States.)
-2. Define your supported chains list (e.g., mainnet, Arbitrum, Optimism, Base, Polygon).
-3. For each chain, create a public client: `createPublicClient({ chain, transport: http(rpcUrl) })`.
-4. For native balances: call `getBalance` on each chain's client in parallel using `Promise.all`.
-5. For ERC-20 balances: use `multicall` on each chain to batch `balanceOf` calls for known token addresses. When the wallet supports `wallet_getAssets` (EIP-7811), prefer that as the primary approach and use manual multicall as fallback.
-6. Aggregate results into a unified view:
+1. Show shimmer placeholders per chain. Populate each chain's balance individually as it resolves. Do not wait for all chains before showing any data.
+2. Fetch native balances in parallel with `getBalance` per chain. For ERC-20 balances, use `multicall` to batch `balanceOf` calls. When the wallet supports `wallet_getAssets` (EIP-7811), prefer that as primary and use multicall as fallback.
+3. Aggregate results into a unified view:
    - Group by token (e.g., "USDC: $1,200 total" with breakdown by chain on expand)
    - Sort by total USD value descending
    - Show chain icons next to each sub-balance
@@ -72,16 +67,13 @@ const results = await publicClient.multicall({
 **When:** User clicks an action that targets a different chain than currently connected (e.g., clicking "Stake on Arbitrum" while connected to mainnet).
 
 **How:**
-1. Before submitting the transaction, check the wallet's current chain: `useChainId` (wagmi) or read from the provider.
-2. If the current chain does not match the target chain:
-   - Call `useSwitchChain` (wagmi) or `wallet_switchEthereumChain` on the provider.
-   - Pass the target chain's `chainId` as a hex string.
-3. If the chain is not yet added to the wallet:
+1. Before submitting, check current chain. If mismatched, call `useSwitchChain` (wagmi) or `wallet_switchEthereumChain`.
+2. If the chain is not yet added to the wallet:
    - Catch the `4902` error code ("Unrecognized chain ID").
    - Call `wallet_addEthereumChain` with the chain parameters (name, RPC URLs, block explorer, native currency).
    - After adding, retry the switch.
-4. Once the switch confirms, proceed with the transaction.
-5. Show a brief inline notification: "Switched to [chain name]" rather than a modal.
+3. Once the switch confirms, proceed with the transaction.
+4. Show a brief inline notification: "Switched to [chain name]" rather than a modal.
 
 **ERC-7828 chain-specific addressing:**
 If supported, use chain-specific address format in your UI so users see which chain an action targets:
@@ -155,7 +147,7 @@ Is the recipient a contract (getCode returns non-empty)?
    - L1 to L2: "Usually under 5 minutes"
    - L2 to L1 (standard withdrawal): "Takes approximately 7 days for standard withdrawal. Use a fast bridge for approximately 15 minutes."
    - Show a progress indicator: "Estimated: ~[X] minutes remaining"
-8. Show post-action confirmation after the transfer completes (see [_shared.md](./_shared.md) Post-Action Confirmation).
+8. Show post-action confirmation after the transfer completes (see [shared](../../SKILL.md) Post-Action Confirmation).
 
 **Fallback:** If no solver fills the order before the deadline:
 - The user's funds are returned (the order expires).
@@ -179,7 +171,7 @@ If ERC-7683 infrastructure is not available, fall back to a manual bridge recomm
 2. Use a salt derived from the user's identifier (e.g., their EOA address) so the same input always produces the same account address on every chain.
 3. Your factory contract must be at the same address on all supported chains (achieved via CREATE2 deployment, which is a backend/deployment concern outside this skill's scope).
 4. Pre-compute the smart account address using `getContractAddress` (viem) with `opcode: 'CREATE2'`.
-5. Show the user this address even before deploying on any chain: "Your account: 0x...1234 (same on all networks)." Display according to [_shared.md](./_shared.md) Address Display Standards.
+5. Show the user this address even before deploying on any chain: "Your account: 0x...1234 (same on all networks)." Display according to [shared](../../SKILL.md) Address Display Standards.
 6. Deploy lazily on the user's first transaction per chain. While deploying, show: "Setting up your account on [chain name]..." Do not require the user to manually trigger deployment.
 
 **Fallback:** If the factory is not yet deployed on a particular chain, deploy it first (or show "This network is not yet supported. Your address will be the same once we add support.").

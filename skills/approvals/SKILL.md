@@ -1,15 +1,13 @@
 ---
-title: "Token Approvals"
-description: "Exact-amount approvals, Permit2 gasless signatures, EIP-5792 batched calls, and approval management UI."
-standards: ["EIP-2612", "EIP-5792", "Permit2"]
-patterns: 5
+name: approvals
+description: "Token approval UX patterns for Ethereum dApps: exact-amount approvals, Permit2 gasless signatures, EIP-5792 batched approve+action, human-readable approval display, and in-app approval management/revocation. Use this skill whenever building or reviewing ANY ERC-20 token approval flow, permit signing, spending permission UI, allowance checking, or approval revocation feature — even if the user just mentions 'approve', 'allowance', 'permit', or 'spending permission'."
 ---
 
 # Token Approvals
 
 **Scope:** ERC-20 token approval flows (approve, Permit2, EIP-5792 batching), approval display, and revocation.
 **Does NOT cover:** Native token transfers (no approval needed), NFT approvals (ERC-721/1155 setApprovalForAll), or contract-level access control.
-**Cross-references:** [signing.md](./signing.md) (EIP-712 for Permit2 signatures), [gas.md](./gas.md) (fee display for approval transactions), [_shared.md](./_shared.md) (loading states, post-action confirmation, error formatting).
+**Cross-references:** [signing](../signing/SKILL.md) (EIP-712 for Permit2 signatures), [gas](../gas/SKILL.md) (fee display for approval transactions), [shared](../../SKILL.md) (loading labels, post-action confirmation, error formatting), [EIP-5792](../shared/references/eip5792.md) (capability detection for batched approve+action), [irreversibility](../shared/references/irreversibility.md) (framing for approval confirmations).
 
 ## ALWAYS
 
@@ -24,7 +22,7 @@ patterns: 5
 - NEVER request `MAX_UINT256` (unlimited) approval by default. If you offer it as an option, label it clearly as "Unlimited" with a risk disclaimer.
 - NEVER hide the approval step. Even when batching, show the user what permissions they are granting.
 - NEVER assume Permit2 or EIP-5792 is available. Always implement a standard `approve()` fallback.
-- NEVER silently fail if an approval transaction reverts. Surface the error with a specific message (see [_shared.md](./_shared.md) Error Message Formatting).
+- NEVER silently fail if an approval transaction reverts. Surface the error with a specific message (see [shared](../../SKILL.md) Error Message Formatting).
 - NEVER show an approval confirmation dialog that looks identical to the action confirmation dialog. Users must be able to tell at a glance whether they are approving permission or executing the action. Use distinct visual treatment (different header, icon, or color weight).
 - NEVER auto-revoke approvals without user initiation. Even if an approval is "old," the user may have a reason for it.
 
@@ -35,13 +33,12 @@ patterns: 5
 **When:** User needs to grant spending permission for a specific action (swap, deposit, stake).
 
 **How:**
-1. While checking current allowance, show the action button in a disabled/loading state with text "Checking permissions..." Do not show the approval step and then remove it. Determine the flow before showing UI. (See [_shared.md](./_shared.md) Loading States.)
-2. Read current allowance: `useReadContract` with the token's `allowance(owner, spender)` function.
-3. If allowance >= required amount, skip to the action transaction.
-4. If allowance < required, call `useWriteContract` with `approve(spender, exactAmount)`.
-5. For tokens that require zero-first reset (USDT pattern): check if current allowance is non-zero and the token is on a known list. If so, send `approve(spender, 0)` first, wait for confirmation, then send `approve(spender, exactAmount)`.
-6. After approval confirms, re-simulate the action transaction before submitting it. If conditions have changed (e.g., swap output dropped below minimum), show: "Prices have changed since you approved. New estimate: [amount]. Continue?" This prevents the frustrating experience of paying gas for an approval and then having the action revert.
-7. After the action transaction is submitted, show a post-action confirmation (see [_shared.md](./_shared.md) Post-Action Confirmation).
+1. While checking allowance, show button as disabled with "Checking permissions..." Determine the flow before showing UI.
+2. Read current allowance with `allowance(owner, spender)`. If sufficient, skip to the action transaction.
+3. If insufficient, call `approve(spender, exactAmount)`.
+4. For tokens that require zero-first reset (USDT pattern): check if current allowance is non-zero and the token is on a known list. If so, send `approve(spender, 0)` first, wait for confirmation, then send `approve(spender, exactAmount)`.
+5. After approval confirms, re-simulate the action transaction before submitting it. If conditions have changed (e.g., swap output dropped below minimum), show: "Prices have changed since you approved. New estimate: [amount]. Continue?" This prevents the frustrating experience of paying gas for an approval and then having the action revert.
+6. After the action transaction is submitted, show a post-action confirmation (see [shared](../../SKILL.md) Post-Action Confirmation).
 
 **Fallback:** This is the baseline. No fallback needed.
 
@@ -65,7 +62,7 @@ Permit2 has two distinct paradigms. Choose based on your use case:
 
 **Sub-pattern A: AllowanceTransfer (recurring permissions)**
 3. Build a `PermitSingle` struct with exact amount, expiration timestamp, and your contract as spender.
-4. Request an EIP-712 signature using `useSignTypedData` with the Permit2 domain and PermitSingle types (see [signing.md](./signing.md) Pattern 1 for EIP-712 details).
+4. Request an EIP-712 signature using `useSignTypedData` with the Permit2 domain and PermitSingle types (see [signing](../signing/SKILL.md) Pattern 1 for EIP-712 details).
 5. Submit the signature to your contract. Your contract calls `permit2.permit(owner, permitSingle, signature)` to set the sub-approval, then calls `permit2.transferFrom(from, to, amount, token)` to pull the tokens.
 
 **AllowanceTransfer typed data structure:**
@@ -108,7 +105,7 @@ types: {
 }
 ```
 
-**Phishing risk note:** Permit2 signatures (and EIP-2612 permit signatures) are a common phishing vector. Malicious sites can trick users into signing a permit that grants the attacker spending rights. ALWAYS display the spender address prominently in the signing UI, and ALWAYS resolve the spender to a known contract name when possible. If the spender is unknown, show a Caution-level warning (see [safety.md](./safety.md) Pattern 1).
+**Phishing risk note:** Permit2 signatures (and EIP-2612 permit signatures) are a common phishing vector. Malicious sites can trick users into signing a permit that grants the attacker spending rights. ALWAYS display the spender address prominently in the signing UI, and ALWAYS resolve the spender to a known contract name when possible. If the spender is unknown, show a Caution-level warning (see [safety](../safety/SKILL.md) Pattern 1).
 
 **Fallback:** If the user has not approved Permit2 and does not want to, fall back to Pattern 1 (exact-amount direct approval).
 
@@ -166,7 +163,7 @@ Check atomic.status on the current chain (via wallet_getCapabilities):
 Approve [CONTRACT_NAME] to spend [AMOUNT] [TOKEN]
 Address: [0x...abcd]
 Network fee for this step: ~$X.XX
-[If unlimited: ⚠ This allows unlimited spending until revoked]
+[If unlimited: Warning - This allows unlimited spending until revoked]
 [If Permit2: Expires: [DATE]]
 ```
 
@@ -191,7 +188,7 @@ Below the approval display, include a one-sentence explainer in muted text: "Thi
    - Current allowance amount (or "Unlimited")
    - Date of last approval (from event block timestamp)
 4. Provide a "Revoke" button for each entry. Before revoking, show a confirmation: "Remove permission for [CONTRACT_NAME] to spend your [TOKEN]? If you have active orders or positions using this permission, they may stop working. You'll need to re-approve if you want to use this app again." Buttons: "Remove permission" / "Cancel".
-5. On confirm, call `approve(spender, 0)` via `useWriteContract`. Show post-action confirmation (see [_shared.md](./_shared.md) Post-Action Confirmation).
+5. On confirm, call `approve(spender, 0)` via `useWriteContract`. Show post-action confirmation (see [shared](../../SKILL.md) Post-Action Confirmation).
 6. For Permit2 approvals, call `permit2.lockdown()` or `permit2.approve(token, spender, 0, 0)` to revoke.
 
 **Fallback:** If event indexing is slow or unavailable, allow users to manually input a token address to check approvals against known spenders in your app.

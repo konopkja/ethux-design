@@ -1,15 +1,13 @@
 ---
-title: "Onboarding"
-description: "Progressive backup disclosure, jargon-free UI, simple/advanced modes, WCAG accessibility, localization, and progressive disclosure."
-standards: ["BIP-39", "WCAG 2.2 AA"]
-patterns: 6
+name: onboarding
+description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase backup, jargon-free UI text, simple/advanced mode toggle, internationalization (i18n), and progressive disclosure. Use this skill whenever building or reviewing ANY first-run experience, new user flow, wallet creation UI, seed phrase backup, jargon replacement, i18n setup, or progressive disclosure pattern — even if the user just mentions 'onboarding', 'new users', 'first time', 'beginner friendly', or 'localization'."
 ---
 
 # Onboarding
 
-**Scope:** First-run user experience: wallet creation, recovery phrase backup, jargon-free UI, simple/advanced modes, accessibility (WCAG 2.2 AA), internationalization, and progressive disclosure.
-**Does NOT cover:** Wallet connection for users with existing wallets (see [wallets.md](./wallets.md)), gas/fee handling (see [gas.md](./gas.md)), transaction signing flows (see [signing.md](./signing.md)).
-**Cross-references:** [wallets.md](./wallets.md) (embedded wallet patterns), [_shared.md](./_shared.md) (loading states, error formatting, empty states).
+**Scope:** First-run user experience: wallet creation, recovery phrase backup, jargon-free UI, simple/advanced modes, internationalization, and progressive disclosure.
+**Does NOT cover:** Wallet connection for users with existing wallets (see [wallets](../wallets/SKILL.md)), gas/fee handling (see [gas](../gas/SKILL.md)), transaction signing flows (see [signing](../signing/SKILL.md)).
+**Cross-references:** [wallets](../wallets/SKILL.md) (embedded wallet patterns), [shared](../../SKILL.md) (loading labels, error formatting).
 
 ## ALWAYS
 
@@ -30,7 +28,7 @@ patterns: 6
 - NEVER use urgency language in onboarding: "Limited time," "Act now," "Don't miss out." Crypto is already anxiety-inducing.
 - NEVER make the "Learn more" or "I need help" path feel like a detour. It should be a first-class experience, not a tooltip buried in a corner.
 - NEVER gate the simple mode behind an "Are you sure?" confirmation. Switching modes should be instant and judgment-free.
-- NEVER show a "success" state for a submitted-but-unconfirmed transaction. Show "Processing..." until the transaction is included in a block (see [_shared.md](./_shared.md) Post-Action Confirmation).
+- NEVER show a "success" state for a submitted-but-unconfirmed transaction. Show "Processing..." until the transaction is included in a block (see [shared](../../SKILL.md) Post-Action Confirmation).
 - NEVER auto-redirect the user away from a confirmation screen. Let them stay until they choose to navigate away.
 
 ## Patterns
@@ -40,7 +38,7 @@ patterns: 6
 **When:** User creates a new wallet (embedded or standalone) within your app.
 
 **How:**
-1. Create the wallet using your wallet SDK. Store the key material in a secure enclave, passkey-protected storage, or encrypted backend. NEVER store keys in localStorage, cookies, or any client-readable storage (see [wallets.md](./wallets.md) NEVER rules).
+1. Create the wallet using your wallet SDK. Store the key material in a secure enclave, passkey-protected storage, or encrypted backend. NEVER store keys in localStorage, cookies, or any client-readable storage (see [wallets](../wallets/SKILL.md) NEVER rules).
 2. Do NOT show the recovery phrase during creation. Let the user skip straight to using the app.
 3. Track the wallet's total value. Set a threshold (e.g., $10 USD equivalent) for triggering the backup prompt.
 4. When the threshold is met, show a non-blocking notification:
@@ -88,7 +86,7 @@ patterns: 6
 
 2. Apply this in code by abstracting all user-facing strings through a string constants file or i18n framework. Never hardcode crypto jargon in component JSX/HTML.
 3. In advanced mode, show the technical term in parentheses: "Network fee (gas)".
-4. Error messages MUST also go through jargon replacement. See [_shared.md](./_shared.md) Error Jargon Translation Table for the full mapping. Common examples: "Execution reverted" becomes "Transaction failed", "User rejected transaction" becomes "You cancelled the transaction."
+4. Error messages MUST also go through jargon replacement. See [shared](../../SKILL.md) Error Jargon Translation Table for the full mapping. Common examples: "Execution reverted" becomes "Transaction failed", "User rejected transaction" becomes "You cancelled the transaction."
 
 **Fallback:** If a term has no good plain equivalent, provide a tooltip: hover/tap shows a one-sentence explanation.
 
@@ -136,60 +134,15 @@ const mode = useContext(UIModeContext)
 
 ---
 
-### 4. WCAG 2.2 AA Compliance
+### 4. Crypto-Specific Internationalization
 
-**When:** Designing and building every interactive element in the application.
-
-**How:**
-1. **Color contrast:** Minimum 4.5:1 for normal text, 3:1 for large text (18px+ or 14px+ bold). Use a contrast checker during development.
-2. **Keyboard navigation:**
-   - All interactive elements must be reachable via Tab.
-   - Focus order must follow visual order.
-   - Focus must be visible (never `outline: none` without a replacement).
-   - Modals must trap focus while open and restore focus when closed.
-3. **Screen readers:**
-   - All buttons have accessible labels (`aria-label` for icon-only buttons).
-   - Form inputs have associated `<label>` elements.
-   - Dynamic content updates use `aria-live` regions.
-   - Transaction status changes announce via `aria-live="polite"`.
-4. **Touch targets:** Minimum 24x24px for all tappable elements (WCAG 2.2 AA). Recommend 44x44px for optimal usability (WCAG AAA).
-5. **Motion:** Respect `prefers-reduced-motion`. Disable animations and transitions when this media query matches.
-6. **Error identification:** Form errors must be announced, associated with the input, and described in text (not just color).
-
-**Testing checklist:**
-- Navigate the entire app using only keyboard.
-- Test with a screen reader (VoiceOver on Mac/iOS, TalkBack on Android).
-- Run axe or Lighthouse accessibility audit. Fix all violations.
-- Verify at 200% browser zoom. Nothing should be cut off or overlapping.
-
-**Fallback:** N/A. Accessibility is not optional and has no fallback.
-
-**Error state:** N/A (these are design requirements, not runtime patterns).
-
----
-
-### 5. Internationalization (i18n)
-
-**When:** Building any user-facing text in the application. Plan for this from the start.
+**When:** Handling multilingual content in crypto contexts where standard i18n knowledge is insufficient.
 
 **How:**
-1. Use a standard i18n framework (e.g., `react-intl`, `next-intl`, `i18next`).
-2. Extract ALL user-facing strings into message files. No hardcoded text in components.
-3. Support at minimum: English, Spanish, Chinese (Simplified), Arabic, Portuguese. These cover the largest crypto user populations.
-4. Handle RTL (right-to-left) layout for Arabic: use CSS `direction: rtl` and logical properties (`margin-inline-start` instead of `margin-left`).
-5. For BIP-39 seed phrases: the BIP-39 standard includes wordlists in English, Japanese, Korean, Spanish, Chinese (Simplified and Traditional), French, Italian, and Czech. Display the phrase in the user's language if a wordlist is available.
-6. Format numbers, dates, and currencies per locale. Use `Intl.NumberFormat` and `Intl.DateTimeFormat`.
-7. Do not concatenate translated strings. Use interpolation:
-   ```
-   // Bad: t('you_will_receive') + ' ' + amount + ' ' + token
-   // Good: t('you_will_receive_amount', { amount, token })
-   ```
-8. Use ICU MessageFormat or your framework's equivalent for pluralization. NEVER use ternary logic for plurals (`count === 1 ? "token" : "tokens"`). This breaks for languages with complex plural rules (Arabic has 6 plural forms, Polish and Russian have 3+).
-   ```
-   // Correct: handles plural rules per locale
-   t('tokens_count', { count: 3 })
-   // en: "3 tokens" | ar: 6 plural forms | zh: "3 tokens" (no plural)
-   ```
+1. For BIP-39 seed phrases: the BIP-39 standard includes wordlists in English, Japanese, Korean, Spanish, Chinese (Simplified and Traditional), French, Italian, and Czech. Display the phrase in the user's language if a wordlist is available.
+2. Use ICU MessageFormat for pluralization. NEVER use ternary logic for plurals (`count === 1 ? "token" : "tokens"`). This breaks for languages with complex plural rules (Arabic has 6 plural forms, Polish and Russian have 3+).
+3. Format numbers, dates, and currencies per locale using `Intl.NumberFormat` and `Intl.DateTimeFormat`.
+4. Support at minimum: English, Spanish, Chinese (Simplified), Arabic, Portuguese. These cover the largest crypto user populations.
 
 **Fallback:** If a string is not yet translated, fall back to English rather than showing a key name.
 
@@ -197,7 +150,7 @@ const mode = useContext(UIModeContext)
 
 ---
 
-### 6. Progressive Disclosure
+### 5. Progressive Disclosure
 
 **When:** Designing any screen with more than 3 pieces of information or actions.
 
