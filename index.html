@@ -14,6 +14,11 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://ethux.design/">
 
+  <!-- Agent-readable alternatives -->
+  <link rel="alternate" type="application/json" href="https://ethux.design/api/data.json" title="EthUX Dataset (JSON)">
+  <link rel="alternate" type="text/plain" href="https://ethux.design/llms-full.txt" title="EthUX Dataset (Markdown)">
+  <link rel="alternate" type="text/plain" href="https://ethux.design/llms.txt" title="EthUX Agent Entry Point">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="EthUX | Ethereum UX Pain Points, Solutions & Research">
@@ -52,7 +57,17 @@
     },
     "keywords": "ethereum ux, wallet usability, web3 ux research, dapp design, blockchain user experience, account abstraction ux, cross-chain ux, blind signing",
     "isAccessibleForFree": true,
-    "inLanguage": "en"
+    "inLanguage": "en",
+    "hasPart": [
+      {"@type": "CreativeWork", "name": "User Onboarding", "description": "Make the first 5 minutes effortless. 5 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/getting-started"},
+      {"@type": "CreativeWork", "name": "Transaction Clarity", "description": "Help users understand every transaction. 7 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/transaction-clarity"},
+      {"@type": "CreativeWork", "name": "Cross-chain Flow", "description": "Make moving between chains invisible. 4 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/cross-chain"},
+      {"@type": "CreativeWork", "name": "Safety & Security", "description": "Build trust through transparency and user control. 3 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/safety"},
+      {"@type": "CreativeWork", "name": "Mobile & Connectivity", "description": "Bring wallet connection up to mobile standards. 3 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/mobile"},
+      {"@type": "CreativeWork", "name": "Accessibility", "description": "Open the door for 75% of non-English speakers. 3 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/language"},
+      {"@type": "CreativeWork", "name": "Protocol Design", "description": "Unlock better UX at the protocol layer. 2 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/protocol"},
+      {"@type": "CreativeWork", "name": "Daily Operations", "description": "Polish the flows people use every day. 5 UX problems mapped with solutions.", "url": "https://ethux.design/#/category/daily-ops"}
+    ]
   }
   </script>
 
@@ -66,6 +81,58 @@
   <div id="grain"></div>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div id="app" class="app"></div>
+
+  <noscript>
+    <style>
+      .noscript-content { max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; font-family: system-ui, sans-serif; color: #e0e0e6; background: #0a0a0f; line-height: 1.7; }
+      .noscript-content h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #f0f0f5; }
+      .noscript-content h2 { font-size: 1.3rem; margin-top: 2rem; color: #f0f0f5; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
+      .noscript-content ul { padding-left: 1.2rem; }
+      .noscript-content li { margin-bottom: 0.5rem; }
+      .noscript-content a { color: #8ab4f8; }
+      .noscript-content strong { color: #f0f0f5; }
+      .noscript-content .note { margin-top: 2rem; padding: 1rem; background: #151520; border-radius: 8px; font-size: 0.9rem; color: #a0a0aa; }
+    </style>
+    <div class="noscript-content">
+      <h1>EthUX — Ethereum UX Pain Points, Solutions & Research</h1>
+      <p>A community-sourced map of 38 Ethereum UX pain points with real user evidence, solution checklists, and adoption tracking. Built from 32,000+ community reports.</p>
+
+      <h2>UX Problem Categories</h2>
+      <ul>
+        <li><strong>User Onboarding</strong> — Make the first 5 minutes effortless. 5 problems including the gas hurdle, recovery phrase friction, and jargon overload.</li>
+        <li><strong>Transaction Clarity</strong> — Help users understand every transaction. 7 problems including blind signing, signing fatigue, and redundant approvals.</li>
+        <li><strong>Cross-chain Flow</strong> — Make moving between chains invisible. 4 problems including bridging pain, asset fragmentation, and manual network switching.</li>
+        <li><strong>Safety & Security</strong> — Build trust through transparency and user control. 3 problems including scam prevalence, key management burden, and spam tokens.</li>
+        <li><strong>Mobile & Connectivity</strong> — Bring wallet connection up to mobile standards. 3 problems including the mobile connection dance and dropped sessions.</li>
+        <li><strong>Accessibility</strong> — Open the door for 75% of non-English speakers. 3 problems including jargon overload, assumed user knowledge, and poor localization.</li>
+        <li><strong>Protocol Design</strong> — Unlock better UX at the protocol layer. 2 problems including no default native account abstraction and public-by-default activity.</li>
+        <li><strong>Daily Operations</strong> — Polish the flows people use every day. 5 problems including unpredictable gas fees, missing fiat values, and NFT display failures.</li>
+      </ul>
+
+      <h2>Builder Checklists</h2>
+      <ul>
+        <li><strong>Token Approvals</strong> — Permit2, EIP-5792, exact-amount approvals (5 patterns)</li>
+        <li><strong>Transaction Signing</strong> — EIP-712, simulation, SIWE (5 patterns)</li>
+        <li><strong>Gas & Fees</strong> — Paymasters, fiat display, ERC-20 gas payment (5 patterns)</li>
+        <li><strong>Multi-Chain</strong> — Cross-chain intents, unified balances (5 patterns)</li>
+        <li><strong>Onboarding</strong> — Progressive disclosure, jargon replacement, i18n (6 patterns)</li>
+        <li><strong>Wallet Connection</strong> — EIP-6963 discovery, deep linking (5 patterns)</li>
+        <li><strong>Safety & Security</strong> — Risk-tiered warnings, ENS, spam filtering (5 patterns)</li>
+      </ul>
+
+      <h2>For AI Agents & Developers</h2>
+      <p>Machine-readable data available at:</p>
+      <ul>
+        <li><a href="/llms.txt">llms.txt</a> — Entry point for AI agents</li>
+        <li><a href="/llms-full.txt">llms-full.txt</a> — Complete dataset in markdown</li>
+        <li><a href="/api/data.json">api/data.json</a> — Complete dataset in JSON</li>
+        <li><a href="/SKILL.md">SKILL.md</a> — Implementation skill router for 7 UX domains</li>
+      </ul>
+
+      <div class="note">This site requires JavaScript for the full interactive experience. The data above is also available in machine-readable formats via the links above.</div>
+    </div>
+  </noscript>
+
   <script src="data.js"></script>
   <script src="app.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>

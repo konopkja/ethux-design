@@ -234,16 +234,105 @@ function generateJson() {
 }
 
 // ---------------------------------------------------------------------------
-// 4. Write files
+// 4. Generate sitemap.xml
+// ---------------------------------------------------------------------------
+function generateSitemap() {
+  const staticUrls = [
+    { loc: 'https://ethux.design/', changefreq: 'weekly', priority: '1.0' },
+    { loc: 'https://ethux.design/llms.txt', changefreq: 'weekly', priority: '0.8' },
+    { loc: 'https://ethux.design/llms-full.txt', changefreq: 'weekly', priority: '0.8' },
+    { loc: 'https://ethux.design/api/data.json', changefreq: 'weekly', priority: '0.7' },
+    { loc: 'https://ethux.design/SKILL.md', changefreq: 'monthly', priority: '0.6' },
+    { loc: 'https://ethux.design/AGENTS.md', changefreq: 'monthly', priority: '0.5' },
+  ];
+
+  // Add skill file URLs from data
+  Object.keys(SKILL_DESCRIPTIONS).forEach(id => {
+    staticUrls.push({
+      loc: `https://ethux.design/skills/${id}/SKILL.md`,
+      changefreq: 'monthly',
+      priority: '0.5'
+    });
+  });
+
+  const entries = staticUrls.map(u =>
+    `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${u.changefreq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`
+  ).join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Generate noscript HTML fragment
+// ---------------------------------------------------------------------------
+function generateNoscript() {
+  const catItems = DATA.categories.map(cat => {
+    const count = cat.problems.length;
+    const topProblems = cat.problems.slice(0, 3).map(p => p.title.toLowerCase()).join(', ');
+    return `        <li><strong>${cat.title}</strong> — ${cat.hook} ${count} problems including ${topProblems}.</li>`;
+  }).join('\n');
+
+  const clItems = DATA.checklists.map(cl => {
+    const stds = cl.standards.join(', ');
+    return `        <li><strong>${cl.title}</strong> — ${stds} (${cl.items.length} patterns)</li>`;
+  }).join('\n');
+
+  return `  <noscript>
+    <style>
+      .noscript-content { max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; font-family: system-ui, sans-serif; color: #e0e0e6; background: #0a0a0f; line-height: 1.7; }
+      .noscript-content h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #f0f0f5; }
+      .noscript-content h2 { font-size: 1.3rem; margin-top: 2rem; color: #f0f0f5; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
+      .noscript-content ul { padding-left: 1.2rem; }
+      .noscript-content li { margin-bottom: 0.5rem; }
+      .noscript-content a { color: #8ab4f8; }
+      .noscript-content strong { color: #f0f0f5; }
+      .noscript-content .note { margin-top: 2rem; padding: 1rem; background: #151520; border-radius: 8px; font-size: 0.9rem; color: #a0a0aa; }
+    </style>
+    <div class="noscript-content">
+      <h1>EthUX — Ethereum UX Pain Points, Solutions & Research</h1>
+      <p>A community-sourced map of ${DATA.categories.reduce((n, c) => n + c.problems.length, 0)} Ethereum UX pain points with real user evidence, solution checklists, and adoption tracking. Built from 32,000+ community reports.</p>
+
+      <h2>UX Problem Categories</h2>
+      <ul>
+${catItems}
+      </ul>
+
+      <h2>Builder Checklists</h2>
+      <ul>
+${clItems}
+      </ul>
+
+      <h2>For AI Agents & Developers</h2>
+      <p>Machine-readable data available at:</p>
+      <ul>
+        <li><a href="/llms.txt">llms.txt</a> — Entry point for AI agents</li>
+        <li><a href="/llms-full.txt">llms-full.txt</a> — Complete dataset in markdown</li>
+        <li><a href="/api/data.json">api/data.json</a> — Complete dataset in JSON</li>
+        <li><a href="/SKILL.md">SKILL.md</a> — Implementation skill router for ${Object.keys(SKILL_DESCRIPTIONS).length} UX domains</li>
+      </ul>
+
+      <div class="note">This site requires JavaScript for the full interactive experience. The data above is also available in machine-readable formats via the links above.</div>
+    </div>
+  </noscript>`;
+}
+
+// ---------------------------------------------------------------------------
+// 6. Write files
 // ---------------------------------------------------------------------------
 const markdown = generateMarkdown();
 const json = generateJson();
+const sitemap = generateSitemap();
+const noscript = generateNoscript();
 
 fs.mkdirSync(path.join(ROOT, 'api'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'llms-full.txt'), markdown, 'utf-8');
 fs.writeFileSync(path.join(ROOT, 'api', 'data.json'), json, 'utf-8');
+fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap, 'utf-8');
+fs.writeFileSync(path.join(ROOT, 'noscript-fragment.html'), noscript, 'utf-8');
 
 const mdLines = markdown.split('\n').length;
 const jsonBytes = Buffer.byteLength(json);
 console.log(`Generated llms-full.txt (${mdLines} lines)`);
 console.log(`Generated api/data.json (${(jsonBytes / 1024).toFixed(1)} KB)`);
+console.log(`Generated sitemap.xml (${sitemap.split('\n').length} lines)`);
+console.log(`Generated noscript-fragment.html (reference for index.html)`);

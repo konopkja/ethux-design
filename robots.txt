@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Agent-readable data files
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/data.json
+Allow: /SKILL.md
+Allow: /AGENTS.md
+
+Sitemap: https://ethux.design/sitemap.xml
