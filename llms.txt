@@ -1,0 +1,25 @@
+# EthUX Design
+
+> A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
+
+## Full data
+
+- [Complete dataset (markdown)](https://ethux.design/llms-full.txt): All 38 problems across 8 categories, with severity, status, solutions, adoption data, user evidence, and risk/opportunity analysis
+- [Complete dataset (JSON)](https://ethux.design/api/data.json): Structured data for programmatic access. Same content, machine-parseable.
+
+## Implementation skills
+
+Detailed implementation guidance with code examples, decision trees, and error states for each UX domain.
+
+- [Skill router](https://ethux.design/SKILL.md): Routes to the right skill by user action or EIP
+- [Token Approvals](https://ethux.design/skills/approvals/SKILL.md): ERC-20 approve flows, Permit2, EIP-5792 batching, revocation UI
+- [Transaction Signing](https://ethux.design/skills/signing/SKILL.md): EIP-712 typed data, simulation, multi-step progress, SIWE
+- [Gas & Fees](https://ethux.design/skills/gas/SKILL.md): Paymasters (ERC-7677), fiat display, ERC-20 gas payment
+- [Multi-Chain](https://ethux.design/skills/multichain/SKILL.md): Cross-chain balances, intents (ERC-7683), address formats
+- [Onboarding](https://ethux.design/skills/onboarding/SKILL.md): First-run UX, jargon replacement, accessibility, i18n
+- [Wallet Connection](https://ethux.design/skills/wallets/SKILL.md): EIP-6963 discovery, mobile deep linking, session persistence
+- [Safety & Security](https://ethux.design/skills/safety/SKILL.md): Risk-tiered warnings, ENS, checksum validation, spam filtering
+
+## Project documentation
+
+- [AGENTS.md](https://ethux.design/AGENTS.md): Architecture, content relationships, and editing conventions

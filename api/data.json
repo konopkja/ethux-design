@@ -1,0 +1,1393 @@
+{
+  "meta": {
+    "generatedAt": "2026-04-03",
+    "source": "https://ethux.design",
+    "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
+    "license": "MIT (code), CC-BY 4.0 (content)"
+  },
+  "categories": [
+    {
+      "id": "getting-started",
+      "title": "User Onboarding",
+      "hook": "Make the first 5 minutes effortless.",
+      "description": "The moment someone decides to try Ethereum, a clock starts. Within five minutes, they will either complete their first action or leave permanently. These are the walls between curiosity and that first transaction.",
+      "problems": [
+        {
+          "title": "The Gas Hurdle",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "Users must buy and transfer ETH to their wallet before they can do almost anything. This multi-step onramp process creates a massive barrier for newcomers who just want to try their first transaction. Sponsoring initial transactions through paymasters is the most promising path forward.",
+          "solutions": [
+            {
+              "name": "Paymasters (ERC-4337)",
+              "status": "Live",
+              "adoption": "54M+ smart accounts (bundlebear.com)"
+            },
+            {
+              "name": "EIP-7702 Delegation",
+              "status": "Live",
+              "adoption": "9 wallets on mainnet (7702beat)"
+            },
+            {
+              "name": "SmolRefuel",
+              "status": "Live",
+              "adoption": "80+ chains (DefiLlama founder)"
+            },
+            {
+              "name": "Embedded wallets with paymaster integration",
+              "status": "Live",
+              "adoption": "Primary delivery vehicle for sponsored onboarding"
+            }
+          ],
+          "eips": [
+            "ERC-4337",
+            "EIP-7702",
+            "ERC-3009"
+          ],
+          "checklist": "gas",
+          "userEvidence": [
+            "\"Built a productivity app with about 80k active users and wanted to add blockchain features for token rewards. When I added a feature that required users to download a wallet, write down a seed phrase, buy ETH for gas, sign transactions... yeah they just left.\" (App developer, community report)",
+            "\"I just wanna plug my card, convert then send it over to the seller without a bunch of hassle.\" (New user, community report)"
+          ],
+          "opportunity": "Eliminating the gas hurdle captures first-time users at their highest-intent moment.\n- Significant onramp volume lost to abandonment at the ETH acquisition step\n- Paymasters and gas sponsorship convert this drop-off into a revenue opportunity\n- First wallets to solve this own the onboarding funnel",
+          "risk": "The first transaction is the make-or-break moment for every new user.\n- 40% of users who complete wallet setup drop off at the gas acquisition step\n- Each additional onboarding step increases drop-off\n- Competing chains with simpler onboarding capture users Ethereum loses here\n- Users who fail their first transaction rarely return"
+        },
+        {
+          "title": "English-Only Recovery Phrases",
+          "severity": "high",
+          "status": "unsolved",
+          "description": "Account Abstraction offers the best long-term fix by removing seed phrases entirely, though adoption is just starting. For multichain and Bitcoin wallets that still rely on recovery phrases, language support is a real gap. BIP-39 defines wordlists in several languages, yet virtually no wallet implements them, leaving over 75% of crypto users to memorize words in a foreign language.",
+          "solutions": [
+            {
+              "name": "Account Abstraction (eliminate seed phrases)",
+              "status": "Live",
+              "adoption": "54M+ smart accounts (bundlebear.com)"
+            },
+            {
+              "name": "BIP-39 multilingual wordlists",
+              "status": "Standard exists",
+              "adoption": "No wallets implement this"
+            }
+          ],
+          "eips": [
+            "BIP-39",
+            "ERC-4337",
+            "EIP-7702"
+          ],
+          "checklist": "onboarding",
+          "opportunity": "Multilingual seed phrases open Ethereum to 4.5B+ non-English speakers.\n- Fastest-growing crypto markets are in Asia, Africa, and Latin America\n- Wallets that localize recovery gain first-mover access to these markets\n- BIP-39 already supports wordlists in 8 languages",
+          "risk": "English-only recovery excludes the majority of the world's population.\n- Users who don't fully understand their seed phrase are more likely to lose funds\n- Increased vulnerability to social engineering attacks\n- Entire continents effectively locked out of self-custody"
+        },
+        {
+          "title": "Forced Backup Friction",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "A new user installs a wallet app out of curiosity. They want to explore what it offers, see how it works, maybe send their first transaction. They have no funds, no tokens, nothing at stake. Yet many wallets immediately present a 12-word recovery phrase and block all access until it is written down. This kills the moment of curiosity and scares users away before they ever see the app.\n\nWorse, users who push through tend to screenshot the phrase or store it carelessly, because protecting an empty wallet feels meaningless. Delaying backup until the user actually holds value leads to both better retention and stronger security habits.",
+          "solutions": [
+            {
+              "name": "Account Abstraction (no seed phrase needed)",
+              "status": "Live",
+              "adoption": "54M+ smart accounts (bundlebear.com)"
+            },
+            {
+              "name": "Delayed or seedless onboarding",
+              "status": "Live",
+              "adoption": "~30-40% of wallets (ethereum.org research)"
+            },
+            {
+              "name": "Embedded wallets (seedless onboarding)",
+              "status": "Live",
+              "adoption": "No seed phrase shown to user"
+            }
+          ],
+          "eips": [
+            "ERC-4337",
+            "EIP-7702"
+          ],
+          "checklist": "onboarding",
+          "opportunity": "Deferring backup until users hold real value increases completion rates.\n- Smart account wallets skipping seed phrases report significantly higher onboarding conversion\n- Progressive security matches user commitment level\n- Reduces the #1 onboarding drop-off point",
+          "risk": "Forcing backup on empty wallets teaches users to dismiss security prompts.\n- Habit of skipping is already formed when real funds arrive\n- Users treat all future security prompts as annoyances\n- Creates false sense that backup is optional"
+        },
+        {
+          "title": "Geographic Onramp Restrictions",
+          "severity": "high",
+          "status": "unsolved",
+          "description": "Fiat onramps inside wallets rely on third-party providers that largely cater to Western banking systems. As a result, users in emerging markets or highly regulated jurisdictions frequently face KYC rejection and unsupported local currencies.",
+          "solutions": [
+            {
+              "name": "P2P onramps",
+              "status": "Live",
+              "adoption": "Paxful, Remitano — mostly Asia/Africa, 0.5-2% fees"
+            },
+            {
+              "name": "Local exchange partnerships",
+              "status": "Building",
+              "adoption": "Regional, no global standard"
+            }
+          ],
+          "eips": [],
+          "checklist": "onboarding",
+          "opportunity": "Regions with limited banking access are the largest potential crypto user base.\n- P2P onramps and local exchange integrations unlock entirely new markets\n- Underserved populations represent the highest growth potential\n- Alternative onramps bypass traditional banking gatekeepers",
+          "risk": "Users who cannot onramp within their wallet turn to unregulated channels.\n- Increased exposure to OTC scams and fraud\n- Users pay premiums to middlemen instead of using wallets\n- Regulatory gaps widen as activity moves underground"
+        },
+        {
+          "title": "Jargon Overload",
+          "severity": "critical",
+          "status": "unsolved",
+          "description": "The entire space is filled with unexplained technical terms: staking, smart contract, liquidity pool, private key, gas. On top of this, even fundamental concepts lack consistent naming across wallets. \"Seed phrase,\" \"mnemonic,\" \"secret key,\" \"recovery phrase,\" and \"secret recovery phrase\" all refer to the same thing. A user who learns one term encounters a different one in the next wallet, undermining the little confidence they built. This terminology confusion is part of a broader pattern where products assume familiarity that most users don't have.",
+          "solutions": [
+            {
+              "name": "Industry glossary standard",
+              "status": "None",
+              "adoption": "Glossaries exist (exchanges, educational sites) but no standard adopted in product UIs"
+            },
+            {
+              "name": "UX writing guidelines",
+              "status": "None",
+              "adoption": "Nobody is building this"
+            }
+          ],
+          "eips": [],
+          "checklist": "onboarding",
+          "userEvidence": [
+            "\"I'm 44, I know nothing about crypto. Like nothing. My daughter's boyfriend says I should buy some.\" (New user, community report)"
+          ],
+          "opportunity": "Plain language yields higher retention in onboarding flows.\n- Every term a user understands is one less support ticket\n- Clear terminology is a compounding competitive advantage\n- Each understood concept leads to one more completed transaction",
+          "risk": "Jargon creates a self-selecting user base of crypto insiders.\n- Without plain language, mainstream financial use cases remain out of reach\n- Ethereum stays a tool for technical enthusiasts, not a global settlement layer\n- Every unexplained term is a potential exit point for new users"
+        }
+      ]
+    },
+    {
+      "id": "transaction-clarity",
+      "title": "Transaction Clarity",
+      "hook": "Help users understand every transaction.",
+      "description": "Every wallet transaction is a trust decision. Users are asked to approve things they can't read, in formats that obscure risk. These are the gaps between what the user sees and what actually happens. While the protocol requires no trust, every interface still does.",
+      "problems": [
+        {
+          "title": "Blind Signing",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "Users are prompted to approve transactions without a clear, human-readable summary. This is a leading enabler of phishing attacks. Even hardware wallets, designed as the most secure signing method, often display raw hexadecimal data that users cannot interpret. The gap between what the user intends and what they actually authorize remains the primary attack surface for wallet drains.",
+          "solutions": [
+            {
+              "name": "Transaction simulation",
+              "status": "Live",
+              "adoption": "Standard in major wallets (walletbeat.eth)"
+            },
+            {
+              "name": "ERC-7730 clear signing",
+              "status": "Draft",
+              "adoption": "Limited end-to-end coverage"
+            },
+            {
+              "name": "EIP-712 typed data",
+              "status": "Live",
+              "adoption": "Widely supported"
+            }
+          ],
+          "eips": [
+            "EIP-712",
+            "ERC-7730"
+          ],
+          "checklist": "signing",
+          "userEvidence": [
+            "\"A protocol is winding down but the claim and withdrawal flow is gated behind a blind signature. They want me to sign arbitrary hex data which I'm unable to decode.\" (User, community report)",
+            "\"My worst blind signing moment happened last summer trying a new yield farming protocol. The website presented everything positively but the transaction drained my funds.\" (User, community report)",
+            "\"$1.77M in stablecoins drained via an EIP-2612 Permit phishing attack. The victim was socially engineered into signing an off-chain permit signature.\" (Security researcher, community report)"
+          ],
+          "opportunity": "Human-readable signing screens differentiate wallets on trust.\n- Transaction simulation builds user trust before committing\n- Clear signing could prevent wallet drainer losses ($84M in 2025, down from $494M in 2024)\n- Removes hesitation users feel before every signature, increasing app engagement\n- Trust-first wallets command premium loyalty and retention",
+          "risk": "Blind signing is a leading attack vector for wallet drains.\n- Each high-profile theft generates media coverage eroding public trust\n- Regulatory scrutiny increases with every major exploit\n- Users who cannot read what they sign are defenseless"
+        },
+        {
+          "title": "Signing Fatigue",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "Every wallet interaction triggers a signature prompt. Login to a app, sign. Approve a token, sign. Execute the swap, sign. Check a balance on another app, sign again. The volume of prompts trains users to approve without reading, which is exactly the behavior attackers exploit. The problem is not any single signature but the cumulative effect of dozens per session.",
+          "solutions": [
+            {
+              "name": "EIP-5792 batched calls",
+              "status": "Final",
+              "adoption": "Wallet support growing, app integration still lagging"
+            },
+            {
+              "name": "Session keys (ERC-7715)",
+              "status": "Draft",
+              "adoption": "MetaMask Delegation Toolkit, Viem support"
+            },
+            {
+              "name": "ERC-8019 auto-login for SIWE",
+              "status": "Draft",
+              "adoption": "In review, Ambire implementing"
+            }
+          ],
+          "eips": [
+            "EIP-5792",
+            "ERC-8019"
+          ],
+          "checklist": "signing",
+          "opportunity": "Batching signatures into a single approval reduces signing friction to one step.\n- Session keys enable \"one-click DeFi\" experiences\n- Fewer popups means higher task completion rates\n- Users spend time using apps instead of approving requests",
+          "risk": "Fatigued users rubber-stamp every signature request.\n- Learned behavior from constant prompts makes experienced users vulnerable to phishing\n- Attackers count on approval fatigue to slip malicious requests through\n- Even security-aware users eventually stop reading"
+        },
+        {
+          "title": "Missing Signing Context",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "When a app requires multiple signatures in sequence, wallets present each prompt in isolation with no indication of how many are coming or why. Users doing a swap might see three prompts (approve, permit, execute) with no explanation of the sequence. Without context, users either rubber-stamp everything to get through it or abandon mid-flow because they are unsure if the next prompt is legitimate.",
+          "solutions": [
+            {
+              "name": "EIP-5792 batched calls",
+              "status": "Final",
+              "adoption": "Eliminates multi-step flows by batching into one prompt"
+            },
+            {
+              "name": "ERC-7730 clear signing",
+              "status": "Draft",
+              "adoption": "Adds semantic context to what is being signed"
+            },
+            {
+              "name": "ERC-7715 session keys",
+              "status": "Draft",
+              "adoption": "Removes repeated prompts for pre-authorized actions"
+            }
+          ],
+          "eips": [
+            "EIP-5792",
+            "ERC-7730",
+            "ERC-7715"
+          ],
+          "checklist": "signing",
+          "opportunity": "Batching and clear signing turn confusing multi-step flows into single, understandable actions.\n- EIP-5792 collapses approve + action into a single prompt\n- ERC-7730 gives wallets semantic context to display what each signature does in human terms\n- Session keys (ERC-7715) remove repeated prompts entirely for pre-authorized actions",
+          "risk": "Users who cannot follow the signing sequence either abandon or approve blindly.\n- Mid-flow abandonment wastes gas on completed steps with no result\n- Users trained to click through prompts without reading become vulnerable to phishing\n- No standard exists for apps to communicate expected signing sequences to wallets"
+        },
+        {
+          "title": "Redundant Token Approvals",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "The ERC-20 standard requires a separate approval transaction before a app can move tokens on the user's behalf. A simple swap becomes two steps: approve, then swap. Users see two wallet popups, pay gas twice, and first-time users often don't understand why two transactions are needed for one action.",
+          "solutions": [
+            {
+              "name": "EIP-5792 batched calls",
+              "status": "Final",
+              "adoption": "Wallet support growing, app integration still lagging"
+            },
+            {
+              "name": "Permit2",
+              "status": "Live",
+              "adoption": "Uniswap, deployed same address on ETH/OP/ARB/BASE/POLY"
+            },
+            {
+              "name": "EIP-2612 permit",
+              "status": "Live",
+              "adoption": "USDC, DAI, UNI, aTokens — not all ERC-20s"
+            }
+          ],
+          "eips": [
+            "EIP-5792",
+            "EIP-2612"
+          ],
+          "checklist": "approvals",
+          "opportunity": "Batching removes the most confusing step in a new user's first DeFi interaction.\n- The separate approval transaction is where most first-time users abandon\n- Single-action swaps match the UX users expect from traditional finance\n- Permit2 adoption growing across major protocols",
+          "risk": "The separate approval step is a common point where users abandon their first DeFi interaction.\n- Creates permanent confusion about why two transactions are needed\n- First-time users assume the app is broken\n- Drop-off at this step is measurable and significant"
+        },
+        {
+          "title": "Token Approval Management",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "Most apps still request unlimited token approvals by default, giving the contract permission to spend any amount with no expiry. Users grant these once and forget they exist. If that contract is exploited months later, every token the user approved is at risk. On top of this, most wallets provide no way to see which approvals are active, how much is exposed, or revoke them without external tools.",
+          "solutions": [
+            {
+              "name": "Exact-amount approvals via batched txs (EIP-5792)",
+              "status": "Final",
+              "adoption": "Eliminates unlimited approvals entirely — approve + action in one tx"
+            },
+            {
+              "name": "Revoke.cash",
+              "status": "Live",
+              "adoption": "100+ networks, open-source"
+            },
+            {
+              "name": "In-wallet revocation",
+              "status": "Live",
+              "adoption": "Starting to appear in major wallets"
+            }
+          ],
+          "eips": [],
+          "checklist": "approvals",
+          "userEvidence": [
+            "\"Lost $300K in 10 minutes. Not a hack. A configuration error. A bot spotted a mistaken token approval on a corporate DEX wallet and drained it instantly.\" (Industry report, March 2026)"
+          ],
+          "opportunity": "In-wallet revocation turns security into a retention feature.\n- Users who manage permissions feel safer and transact more frequently\n- Revocation UX is a differentiator for security-conscious users\n- Proactive management reduces exposure surface",
+          "risk": "Stale unlimited approvals are ticking time bombs.\n- Exploited contracts months later drain funds from forgotten approvals\n- Users have no visibility into their current exposure\n- A single compromised protocol can cascade across all approvers"
+        },
+        {
+          "title": "Blanket Warnings",
+          "severity": "medium",
+          "status": "unsolved",
+          "description": "Wallets and app interfaces apply the same warning treatment to routine and catastrophic actions alike. A token approval for $50 gets the same alert as one for $50,000. A swap with 2% price impact shows the same confirmation dialog as one with 99% price impact. When warnings are dismissible checkboxes regardless of severity, users learn to click through them. The warning system trains the very behavior it was designed to prevent.",
+          "solutions": [
+            {
+              "name": "Contextual risk scoring",
+              "status": "Building",
+              "adoption": "Blockaid, Blowfish, TRM Labs — wallet integration growing"
+            }
+          ],
+          "eips": [],
+          "checklist": "safety",
+          "opportunity": "Risk-differentiated warnings direct attention to genuine threats.\n- Calibrated severity increases user trust in the warning system\n- Lower false-alarm dismissal rates\n- Users actually read warnings that are proportional to real risk",
+          "risk": "Uniform red alerts for every transaction create warning blindness.\n- Users stop reading alerts entirely after repeated false alarms\n- Truly dangerous approvals treated identically to routine ones\n- The warning system becomes invisible through overuse"
+        },
+        {
+          "title": "Sending to Wrong Address",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "Addresses are cryptic hexadecimal strings with no human-readable identification. A single wrong character means permanent loss with no recourse. ENS adoption is growing and improving the experience in wallets that support it, but many apps and protocols still do not resolve or display ENS names, leaving users to verify 42-character hex strings manually.",
+          "solutions": [
+            {
+              "name": "ENS support",
+              "status": "Live",
+              "adoption": "910K+ active domains, ENSv2 on mainnet — wallet support good, app support lagging"
+            },
+            {
+              "name": "Address book features",
+              "status": "Live",
+              "adoption": "Common but not universal"
+            },
+            {
+              "name": "Transaction preview",
+              "status": "Live",
+              "adoption": "Standard in major wallets"
+            }
+          ],
+          "eips": [
+            "ENS (EIP-137)"
+          ],
+          "checklist": "safety",
+          "userEvidence": [
+            "\"Got my brother into DeFi. Told him I'd handle everything. Time to withdraw... I sent the USDC straight to the contract. Not his wallet. Gone. I paid him back. That day I retired from onboarding family.\" (User, community report)",
+            "\"Accidentally sent USDT to the USDC contract address. Please help, it's a large amount. Is it lost forever?\" (User, community report)"
+          ],
+          "opportunity": "ENS and address verification could prevent millions in annual losses.\n- Human-readable addresses reduce support tickets\n- Address books and recent contacts prevent typos\n- Verification screens catch clipboard hijacks",
+          "risk": "Crypto transfers are irreversible. One typo means permanent loss.\n- Clipboard hijack malware swaps addresses silently\n- #1 fear preventing mainstream users from sending transactions\n- No recourse, no undo, no customer support"
+        }
+      ]
+    },
+    {
+      "id": "cross-chain",
+      "title": "Cross-chain Flow",
+      "hook": "Make moving between chains invisible.",
+      "description": "Ethereum now spans dozens of networks. Users see fragmented balances, manual chain switching, and bridges that feel like sending money into a void. The protocol solved scaling. The UX hasn't caught up.",
+      "problems": [
+        {
+          "title": "Single-Chain Balance Display",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "Users must manually switch networks to see their full balances. Portfolio tracking across chains requires cognitive overhead.",
+          "solutions": [
+            {
+              "name": "Unified balance display",
+              "status": "Live",
+              "adoption": "Common in major wallets"
+            },
+            {
+              "name": "EIP-7811 unified balances",
+              "status": "Draft",
+              "adoption": "No implementations yet"
+            },
+            {
+              "name": "Chain abstraction",
+              "status": "Building",
+              "adoption": "Particle Network, Arcana Wallet on testnet"
+            }
+          ],
+          "eips": [
+            "EIP-7811"
+          ],
+          "checklist": "multichain",
+          "userEvidence": [
+            "\"I find myself mostly sticking to 2-3 chains max. Every time I try to spread out more, tracking everything becomes a nightmare.\" (User, community report)"
+          ],
+          "opportunity": "Unified cross-chain balances eliminate the need for external portfolio trackers.\n- Retains user attention within the wallet instead of third-party tools\n- Creates natural upsell paths for swaps and bridging\n- A basic expectation as users spread across 10+ chains",
+          "risk": "Users who cannot see their full balance make poor financial decisions.\n- Hidden assets across chains mean missed DeFi opportunities\n- Underutilized capital fragmented across L2s\n- Pushes users toward centralized exchanges where \"everything is in one place\""
+        },
+        {
+          "title": "Manual Network Switching",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "When a wallet is connected to chain A and the user wants chain B, they must manually switch.",
+          "solutions": [
+            {
+              "name": "Auto-switching apps",
+              "status": "Building",
+              "adoption": "Few apps"
+            }
+          ],
+          "eips": [
+            "ERC-7828",
+            "EIP-3326"
+          ],
+          "checklist": "multichain",
+          "opportunity": "Auto-switching removes an entire interaction step from every cross-chain action.\n- Apps with transparent switching see higher task completion\n- Users never see a \"wrong network\" error again\n- Reduces the cognitive load of multi-chain usage",
+          "risk": "Manual switching causes wrong-network transactions and failed interactions.\n- Users don't understand why their transaction \"didn't work\"\n- Funds sent on wrong network require recovery steps\n- Confusion compounds with every new L2 added"
+        },
+        {
+          "title": "Bridging Pain",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "Moving assets between chains requires finding a bridge that supports the specific route, comparing fees and wait times across multiple providers, and then waiting minutes to days without knowing if funds are in transit or lost. For small amounts, bridge fees can exceed the value being transferred. Many chain pairs have no direct bridge at all, forcing users through intermediate chains.\n\nThe entire process feels like sending money into a void with no tracking, no estimated arrival, and no recourse if something goes wrong.",
+          "solutions": [
+            {
+              "name": "ERC-7683 cross-chain intents",
+              "status": "Live",
+              "adoption": "$35B+ lifetime via Across, EF + Hyperlane Open Intents Framework"
+            },
+            {
+              "name": "Native bridges",
+              "status": "Live",
+              "adoption": "Per-chain"
+            }
+          ],
+          "eips": [
+            "ERC-7683"
+          ],
+          "checklist": "multichain",
+          "userEvidence": [
+            "\"I run a small e-commerce operation that does a decent amount of cross-chain stablecoin payments. We're manually bridging and swapping. Waking up at 3am to check gas prices or move funds because a bridge is clogged is exhausting.\" (Business operator, community report)"
+          ],
+          "opportunity": "Single-click bridging captures fees in a large and growing cross-chain market.\n- Intent-based protocols already capturing significant volume by abstracting this pain\n- Seamless bridging is a revenue multiplier for every app\n- Protocols that remove bridging friction capture cross-chain volume by default",
+          "risk": "Bridge friction locks liquidity on single chains, reducing ecosystem efficiency.\n- 70% of onboarded wallet users never complete a bridge transaction\n- Users who bridge incorrectly can lose funds permanently with no recourse\n- Complex bridging concentrates risk in a few large bridge protocols\n- Friction discourages the multi-chain usage Ethereum needs"
+        },
+        {
+          "title": "Asset Fragmentation",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "Tokens scattered across chains create artificial friction.",
+          "solutions": [
+            {
+              "name": "Intent-based protocols",
+              "status": "Live",
+              "adoption": "Across ($35B+), Uniswap, CoW Swap — Open Intents Framework by EF"
+            },
+            {
+              "name": "Interop layer (EIL)",
+              "status": "Building",
+              "adoption": "Testnet live"
+            }
+          ],
+          "eips": [],
+          "checklist": "multichain",
+          "opportunity": "Intent-based auto-routing eliminates manual balance management.\n- Auto-route from any chain to the needed chain transparently\n- The path to \"it just works\" multi-chain\n- Users think in assets, not chains",
+          "risk": "Fragmented assets mean underutilized capital across chains.\n- $100 spread across 5 chains can't meet DeFi minimum amounts\n- Users can't participate in opportunities on the \"wrong\" chain\n- Capital efficiency drops with every new L2"
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Safety & Security",
+      "hook": "Build trust through transparency and user control.",
+      "description": "One bad experience, one lost transaction, and a user is gone for good. Solutions should empower user agency with transparent, controllable defenses rather than opaque restrictions users never opted into.",
+      "problems": [
+        {
+          "title": "Prevalence of Scams",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "Phishing attacks and address poisoning cause thousands of victims monthly. But scams don't only happen in transactions. They happen in support channels too.\n\nUsers who get stuck search for help and end up in Telegram groups or Discord servers run by impersonators posing as official support. Legitimate help exists for major wallets, but it is hard to find and easy to fake. Several protocols have stopped using Discord for support entirely because scam messages were reaching users faster than moderators could remove them.",
+          "solutions": [
+            {
+              "name": "Transaction simulation",
+              "status": "Live",
+              "adoption": "Standard in major wallets (walletbeat.eth)"
+            },
+            {
+              "name": "Address poisoning detection",
+              "status": "Building",
+              "adoption": "Emerging in some wallets, Blockaid integration"
+            },
+            {
+              "name": "Wallet warnings",
+              "status": "Live",
+              "adoption": "Standard in major wallets"
+            },
+            {
+              "name": "Official help centers",
+              "status": "Building",
+              "adoption": "Major wallets and protocols moving to dedicated portals"
+            }
+          ],
+          "eips": [
+            "ERC-7730"
+          ],
+          "checklist": "safety",
+          "userEvidence": [
+            "\"Is this frontend legit? When connecting my wallet it warns the domain has very low popularity. It actually got redirected to a spoofed domain.\" (User, community report)",
+            "\"I get 10 of these scam DMs on a daily basis.\" (User, community report)",
+            "\"Tried to swap my ETH for a gold-backed token, got zero-balance fake tokens. The contract was fake and didn't match the legitimate one. These tokens were listed in the wallet's swap interface.\" (User, community report)"
+          ],
+          "opportunity": "Security-first wallets command premium user loyalty and retention.\n- Proactive scam prevention saves users hundreds of millions annually\n- Simulation, warnings, and reputation scoring position wallets as trusted gatekeepers\n- Security features become the top differentiator in wallet selection",
+          "risk": "Each major scam event suppresses adoption across the entire ecosystem.\n- Media narratives after high-profile thefts erode public trust broadly\n- Regulatory responses triggered by cumulative phishing losses\n- Ecosystem credibility as a financial platform at stake"
+        },
+        {
+          "title": "Key Management Burden",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "Users are solely responsible for securing a private key or seed phrase that controls all their assets. Lose it and everything is gone. Get phished and everything is gone. There is no recovery, no reset password, no customer support. This single point of failure is the core security tradeoff of self-custody and one of the key reasons many users stay on centralized platforms.",
+          "solutions": [
+            {
+              "name": "Smart accounts (ERC-4337)",
+              "status": "Live",
+              "adoption": "54M+ accounts, 1B+ UserOps (bundlebear.com)"
+            },
+            {
+              "name": "EIP-7702 delegation",
+              "status": "Live",
+              "adoption": "9 wallets on mainnet (7702beat)"
+            },
+            {
+              "name": "Social recovery",
+              "status": "Live",
+              "adoption": "Growing, 44% YoY adoption"
+            },
+            {
+              "name": "Passkey-based signing",
+              "status": "Building",
+              "adoption": "Emerging"
+            }
+          ],
+          "eips": [
+            "ERC-4337",
+            "EIP-7702",
+            "EIP-8141"
+          ],
+          "checklist": null,
+          "opportunity": "Smart accounts and recovery mechanisms shift the model from preventing all key loss to limiting damage when keys are compromised.\n- Smart accounts (ERC-4337) enable social recovery, spending limits, and session keys without changing the user's address\n- EIP-7702 lets existing EOAs delegate to smart contract logic, bridging toward safer defaults without forced migration\n- Passkeys and hardware-backed signing remove the need for users to see or manage raw key material at all",
+          "risk": "Compromised keys and account takeovers remain a prominent factor in security incidents.\n- A leaked seed phrase can lead to total loss of assets with no recourse\n- Users must manage their own security without the institutional safety nets they are used to from traditional finance\n- The complexity of secure key management is one of the factors that keeps users on centralized platforms"
+        },
+        {
+          "title": "Spam & Junk Tokens",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "Users are airdropped random junk tokens and NFTs. Interacting with malicious tokens can trigger approval phishing.",
+          "solutions": [
+            {
+              "name": "Token list curation",
+              "status": "Live",
+              "adoption": "Standard practice"
+            },
+            {
+              "name": "Spam filtering",
+              "status": "Building",
+              "adoption": "Uneven across wallets"
+            }
+          ],
+          "eips": [],
+          "checklist": "safety",
+          "opportunity": "Clean token lists and smart filtering create a premium wallet experience.\n- Users not distracted by spam engage more with real assets\n- Filtering removes the primary phishing entry point\n- Premium, curated feel differentiates security-first wallets",
+          "risk": "Spam tokens with phishing URLs are the entry point for many wallet drains.\n- A single curious click on a fake airdrop can lead to full compromise\n- Token names containing URLs are social engineering at scale\n- Every spam token is an active attack vector"
+        }
+      ]
+    },
+    {
+      "id": "mobile",
+      "title": "Mobile & Connectivity",
+      "hook": "Bring wallet connection up to mobile standards.",
+      "description": "More than half of web traffic is mobile. Yet connecting a wallet from a phone browser remains one of the most broken flows in the ecosystem.",
+      "problems": [
+        {
+          "title": "Connection Failures",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "On desktop, EIP-6963 has largely solved the old problem of wallet extensions fighting over window.ethereum. Most major wallets now announce themselves properly. The remaining friction is on mobile, where EIP-6963 does not apply and users still face unreliable connection flows between browser and wallet apps.",
+          "solutions": [
+            {
+              "name": "EIP-6963 multi-wallet discovery",
+              "status": "Live",
+              "adoption": "37+ wallets (walletbeat.eth)"
+            },
+            {
+              "name": "WalletConnect v2",
+              "status": "Live",
+              "adoption": "Nearly universal"
+            }
+          ],
+          "eips": [
+            "EIP-6963"
+          ],
+          "checklist": "wallets",
+          "opportunity": "EIP-6963 multi-wallet discovery solves the \"Install MetaMask\" problem.\n- Apps detecting all wallets see higher connection success\n- Users choose their preferred wallet instead of being forced\n- Eliminates the most common first-interaction failure",
+          "risk": "Connection failures are the first impression of web3 for many users.\n- Failed connection on the first try often means the user never returns\n- Sets an immediate negative tone for the entire ecosystem\n- Users conclude the technology is unreliable"
+        },
+        {
+          "title": "Mobile Connection Dance",
+          "severity": "critical",
+          "status": "in-progress",
+          "description": "On mobile, tapping a app link opens the default browser, not the wallet. The user must then copy the URL, switch to the wallet app, paste it into the in-app browser, and reconnect. iOS 17+ made this worse by removing automatic redirect back to browser-based apps after a wallet interaction, forcing manual app switching.\n\nApp builders have spent years reporting these issues with no ecosystem-level coordination to fix them.",
+          "solutions": [
+            {
+              "name": "Mobile Wallet Protocol (MWP)",
+              "status": "Live",
+              "adoption": "Coinbase Wallet, Rainbow — native apps only, not web"
+            },
+            {
+              "name": "WalletConnect Link Mode",
+              "status": "Live",
+              "adoption": "Deep-link based, no relay server — needs wider wallet adoption"
+            },
+            {
+              "name": "In-wallet browsers",
+              "status": "Live",
+              "adoption": "Limited"
+            },
+            {
+              "name": "Embedded wallets",
+              "status": "Live",
+              "adoption": "Bypass the connection dance entirely"
+            }
+          ],
+          "eips": [],
+          "checklist": "wallets",
+          "userEvidence": [
+            "\"On mobile, wallet integration can destroy UX. Lost sessions, getting stuck when returning to the app, signatures staying pending forever.\" (Developer, community report)"
+          ],
+          "opportunity": "Mobile is 60%+ of web traffic, yet 65% of protocols are not optimized for mobile-first.\n- Wallets with smooth mobile flows capture the majority of new user interactions\n- Seamless mobile UX unlocks the largest computing platform on Earth\n- Wallets that solve mobile connection will be where most new users start",
+          "risk": "Failed mobile connections are a major reason users abandon app interactions on phones.\n- Every broken flow is a lost transaction and a lost fee\n- Users who fail once conclude \"crypto doesn't work on mobile\"\n- Users who fail on mobile do not come back to try again on desktop"
+        },
+        {
+          "title": "Mobile Apps Don't Respond",
+          "severity": "high",
+          "status": "in-progress",
+          "description": "Mobile wallets drop WalletConnect sessions silently. A Safari bug introduced in iOS 15 still causes socket connection failures after initially successful connections. A Chrome websocket change in May 2025 broke connection flows on Android. Wallets struggle with more than five concurrent sessions.\n\nThe root cause is that relay-based communication between apps is inherently fragile on mobile. The result: users tap \"confirm\" and nothing happens. No error, no feedback, just silence.",
+          "solutions": [
+            {
+              "name": "Mobile Wallet Protocol (MWP)",
+              "status": "Live",
+              "adoption": "Direct deep-link, no relay server — 99% reliability claimed"
+            },
+            {
+              "name": "WalletConnect Link Mode",
+              "status": "Live",
+              "adoption": "Deep-link transport replacing relay — needs wallet adoption"
+            },
+            {
+              "name": "Embedded wallets",
+              "status": "Live",
+              "adoption": "Remove the connection layer entirely"
+            }
+          ],
+          "eips": [],
+          "checklist": "wallets",
+          "opportunity": "Reliable mobile SDKs unlock 60%+ of web traffic for apps.\n- First-mover wallets with smooth mobile flows capture the majority of new users\n- Mobile-first markets represent the highest growth potential\n- Smooth mobile UX is the #1 competitive differentiator",
+          "risk": "Unresponsive wallets train users to avoid mobile apps entirely.\n- The market loses access to the largest computing platform on Earth\n- Users who fail on mobile don't switch to desktop, they leave\n- Mobile avoidance becomes a permanent habit"
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "title": "Accessibility",
+      "hook": "Open the door for 75% of non-English speakers.",
+      "description": "Over 75% of cryptocurrency users are non-native English speakers. Most apps are English-only, jargon-heavy, and fail basic accessibility standards. This is the largest unaddressed audience in the ecosystem.",
+      "problems": [
+        {
+          "title": "Jargon Overload",
+          "severity": "critical",
+          "status": "unsolved",
+          "description": "The entire space is filled with unexplained technical terms: staking, smart contract, liquidity pool, private key, gas. On top of this, even fundamental concepts lack consistent naming across wallets. \"Seed phrase,\" \"mnemonic,\" \"secret key,\" \"recovery phrase,\" and \"secret recovery phrase\" all refer to the same thing. A user who learns one term encounters a different one in the next wallet, undermining the little confidence they built.\n\nThis compounds in non-English markets where these terms have no established translations, get transliterated inconsistently, or are left in English surrounded by local-language UI, making the experience even more alienating. Jargon is one of the most visible forms of the broader assumed user knowledge problem across the ecosystem.",
+          "solutions": [
+            {
+              "name": "Industry glossary standard",
+              "status": "None",
+              "adoption": "Glossaries exist (exchanges, educational sites) but no standard adopted in product UIs"
+            },
+            {
+              "name": "UX writing guidelines",
+              "status": "None",
+              "adoption": "Nobody is building this"
+            }
+          ],
+          "eips": [],
+          "checklist": "onboarding",
+          "userEvidence": [
+            "\"I'm 44, I know nothing about crypto. Like nothing. My daughter's boyfriend says I should buy some.\" (New user, community report)"
+          ],
+          "opportunity": "Plain language yields higher retention in onboarding flows.\n- Every term a user understands is one less support ticket\n- Clear terminology is a compounding competitive advantage\n- Each understood concept leads to one more completed transaction",
+          "risk": "Jargon creates a self-selecting user base of crypto insiders.\n- Without plain language, mainstream financial use cases remain out of reach\n- Ethereum stays a tool for technical enthusiasts, not a global settlement layer\n- Every unexplained term is a potential exit point for new users"
+        },
+        {
+          "title": "Assumed User Knowledge",
+          "severity": "high",
+          "status": "unsolved",
+          "description": "Apps and wallets are built with the assumption that users already understand how blockchain works. Interfaces show gas fees without explaining what gas is, ask users to approve without explaining what approve is, and present liquidity pools as if everyone knows what impermanent loss means. The gap is not between tradfi and web3 mental models. It is between what the product assumes and what the user actually knows. Most users arrive knowing none of the underlying mechanics, yet every interface expects them to.\n\nJargon is one visible symptom of this, but the problem runs deeper than terminology. Even with plain language, interfaces still expect users to understand multi-step approval flows, chain switching, and token standards without explanation.",
+          "solutions": [
+            {
+              "name": "Progressive disclosure",
+              "status": "Building",
+              "adoption": "Emerging in newer wallets and apps"
+            },
+            {
+              "name": "Inline contextual explanations",
+              "status": "None",
+              "adoption": "Nobody is building this as a standard"
+            },
+            {
+              "name": "Simple/advanced mode toggles",
+              "status": "Live",
+              "adoption": "Some wallets offer this"
+            }
+          ],
+          "eips": [],
+          "checklist": "onboarding",
+          "opportunity": "Products that explain as they go retain users that expert-first products lose.\n- Inline explanations at the point of action turn confusion into learning\n- Simple/advanced mode lets beginners use the product without understanding everything upfront\n- Users who learn by doing become power users. Users who are expected to know everything upfront leave.",
+          "risk": "Products that assume knowledge filter out everyone except insiders.\n- Users who don't understand what a transaction does make expensive mistakes\n- Each confusing experience gets shared as \"crypto is too complicated\"\n- The ecosystem self-selects for technical users and never reaches mainstream adoption"
+        },
+        {
+          "title": "Poor Localization",
+          "severity": "medium",
+          "status": "unsolved",
+          "description": "Most apps remain English-only. Even when localization exists, there is no shared glossary for translating crypto-specific terms. Each project invents its own translations for concepts like staking, gas, or wallet, creating inconsistencies across languages that confuse non-English users just as much as the original jargon confuses English speakers.",
+          "solutions": [
+            {
+              "name": "i18n frameworks",
+              "status": "Live",
+              "adoption": "Tooling exists (react-intl, next-intl) — teams don't prioritize it"
+            },
+            {
+              "name": "Community translations",
+              "status": "Building",
+              "adoption": "Some projects use volunteer translators for 40+ languages"
+            }
+          ],
+          "eips": [],
+          "checklist": "onboarding",
+          "opportunity": "Localized interfaces tap into 75% of internet users who don't speak English.\n- Every language added opens a new market segment\n- Localized content ranks in local search results\n- Community translators already volunteer for open-source projects",
+          "risk": "English-only interfaces exclude entire continents.\n- The next billion crypto users will not come from English-speaking countries\n- Non-English users fall back on poorly translated guides\n- Misinformation spreads faster in underserved language markets"
+        }
+      ]
+    },
+    {
+      "id": "protocol",
+      "title": "Protocol Design",
+      "hook": "Unlock better UX at the protocol layer.",
+      "description": "Some UX problems can't be solved at the wallet layer. They originate in protocol design decisions that ripple outward as confusion, friction, and risk for end users.",
+      "problems": [
+        {
+          "title": "No Default Native Account Abstraction",
+          "severity": "high",
+          "status": "research",
+          "description": "On Ethereum, EOAs remain the default account type. Users must manage private keys, pay gas in ETH, and approve every action individually.\n\nStarknet launched with native AA where every account is a smart contract by default. EIP-7702 bridges EOAs toward smart account behavior but adoption is low, with MetaMask, Ambire, and Trust Wallet shipping end-user support. EIP-7701 (full native AA) has been superseded by EIP-8141 (Frame Transactions), now in active draft.",
+          "solutions": [
+            {
+              "name": "EIP-8141 native AA (Frame Txs)",
+              "status": "Draft",
+              "adoption": "Active draft"
+            },
+            {
+              "name": "EIP-7702 as bridge",
+              "status": "Live",
+              "adoption": "9 wallets, 12.9M accounts, 117M auths (7702beat, bundlebear)"
+            },
+            {
+              "name": "ERC-4337 (off-protocol AA)",
+              "status": "Live",
+              "adoption": "54M+ accounts, 1B+ UserOps"
+            }
+          ],
+          "eips": [
+            "EIP-8141",
+            "EIP-7702",
+            "ERC-4337"
+          ],
+          "checklist": null,
+          "userEvidence": [
+            "\"From our experience with ERC-4337, the biggest hurdle to AA adoption is that existing EOA users do not want to migrate to a new account, regardless of the UX benefits.\" (Builder, community report)"
+          ],
+          "opportunity": "Native AA would let every Ethereum user benefit from smart accounts without opting in.\n- Smart wallets retain 70% of users vs 60% for seed-phrase wallets. Social recovery adoption is growing 44% YoY.\n- Gas sponsorship, social recovery, and session keys become universal rather than opt-in\n- App developers can assume every user has a smart account, simplifying integration\n- Ethereum closes the gap with chains like Starknet where this is already the default",
+          "risk": "Without native AA, the ecosystem remains split between EOA and smart account users.\n- Apps must support two account models, increasing complexity and fragmentation\n- Users on EOAs miss out on safety features like transaction simulation and spending limits\n- The UX gap between Ethereum and native-AA chains becomes a competitive disadvantage"
+        },
+        {
+          "title": "On-chain Activity Is Public by Default",
+          "severity": "high",
+          "status": "research",
+          "description": "Every transaction on Ethereum and major L2s is permanently public and indexed by analytics providers. Users often do not realize their complete financial activity (salary, purchases, DeFi positions) is visible to anyone who knows their address.\n\nOpt-in privacy exists but requires active effort: Railgun ($4.5B+ shielded volume) and Privacy Pools (live since March 2025, ~1,500 users) serve different needs. Stealth addresses (ERC-5564) are an app-layer standard, not a protocol feature.",
+          "solutions": [
+            {
+              "name": "Railgun (shielded balances)",
+              "status": "Live",
+              "adoption": "$4.5B+ cumulative volume"
+            },
+            {
+              "name": "Privacy Pools (0xbow)",
+              "status": "Live",
+              "adoption": "~1,500 users, ~$6M volume"
+            },
+            {
+              "name": "Stealth addresses (ERC-5564)",
+              "status": "Live",
+              "adoption": "77k addresses via Umbra, few wallets"
+            },
+            {
+              "name": "Aztec L2 (private execution)",
+              "status": "Building",
+              "adoption": "Ignition mainnet live, user txs expected early 2026"
+            }
+          ],
+          "eips": [
+            "ERC-5564"
+          ],
+          "checklist": null,
+          "userEvidence": [
+            "\"Every time you text someone your wallet address, you give them your full balance and your entire transaction history.\" (User, community report)",
+            "\"I've tried every major privacy tool in crypto. The reason most people gave before using them: they required juggling a completely separate wallet.\" (User, community report)",
+            "\"My sharing of my holdings to tax auditors or law enforcement should not mean that I also have to expose that to the whole world on an explorer website.\" (User, community report)"
+          ],
+          "opportunity": "Privacy tools that maintain compliance would unlock mainstream financial use cases.\n- Users could receive salary, pay merchants, and use DeFi without exposing their full financial history\n- Privacy Pools' association set model demonstrates that privacy and compliance can coexist\n- Wallet-integrated privacy (via frameworks like Kohaku) would make protection seamless rather than requiring active effort",
+          "risk": "Public-by-default transactions make everyday financial use of Ethereum untenable.\n- Employers, merchants, and counterparties can see a user's complete balance and transaction history\n- Users who discover this after the fact feel deceived and leave permanently\n- The transparency that enables trustless verification also enables surveillance, a tradeoff most users never consented to"
+        }
+      ]
+    },
+    {
+      "id": "daily-ops",
+      "title": "Daily Operations",
+      "hook": "Polish the flows people use every day.",
+      "description": "The tasks people do every day: sending tokens, checking balances, managing gas. These should be the most polished flows in the ecosystem. They are often the most frustrating.",
+      "problems": [
+        {
+          "title": "Unpredictable Gas Fees",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "Gas costs have dropped dramatically. Mainnet averages around 3 gwei in 2026, and L2 transactions cost fractions of a cent.\n\nBut the UX problem persists in a different form: users still cannot predict what a transaction will cost before they commit, fee spikes during network congestion still catch people off guard, and the mental model of paying a variable fee for every action remains foreign to anyone coming from traditional apps.",
+          "solutions": [
+            {
+              "name": "EIP-1559 fee market",
+              "status": "Live",
+              "adoption": "Universal"
+            },
+            {
+              "name": "EIP-4844 L2 costs",
+              "status": "Live",
+              "adoption": "All major L2s"
+            },
+            {
+              "name": "Predictive fee UI with timing guidance",
+              "status": "Live",
+              "adoption": "External tools only (Blocknative, Gas Fee Predictor) — not in wallets"
+            }
+          ],
+          "eips": [
+            "EIP-1559",
+            "EIP-4844"
+          ],
+          "checklist": "gas"
+        },
+        {
+          "title": "Fiat-Based Values Missing",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "Some app interfaces still force users to enter transaction amounts denominated in the token (e.g. 0.0042 ETH) rather than in their local currency. Users think in their native fiat, not in token amounts. Having to mentally convert token prices before every send or swap adds friction and increases the chance of costly input errors.\n\nAdditionally, wallets and centralized exchanges increasingly support local currency display beyond just USD and EUR, including currencies like PLN, CZK, BRL, and others. But app interfaces have not kept up, often showing only token amounts or at best USD equivalents. Users outside the dollar economy are left doing double mental conversion: token to USD, then USD to their currency.",
+          "solutions": [
+            {
+              "name": "Fiat denomination toggle",
+              "status": "Live",
+              "adoption": "Common in major wallets"
+            },
+            {
+              "name": "Price oracle display",
+              "status": "Live",
+              "adoption": "Standard practice"
+            }
+          ],
+          "eips": [],
+          "checklist": "gas"
+        },
+        {
+          "title": "No Portfolio & Tax Tracking",
+          "severity": "medium",
+          "status": "unsolved",
+          "description": "Tracking a complete financial picture across multiple chains, wallets, DeFi positions, LP rewards, airdrops, and bridge transactions is still impossible in a single tool. External tax software exists but requires manual reconciliation, often miscategorizes DeFi activity, and cannot reliably track cost basis across cross-chain swaps. Users who actively use DeFi face hours of manual work each tax season.",
+          "solutions": [
+            {
+              "name": "Third-party tools (Koinly, CoinTracker)",
+              "status": "Live",
+              "adoption": "External, not integrated into wallets"
+            },
+            {
+              "name": "Wallet-native tax tracking",
+              "status": "None",
+              "adoption": "Nobody is building this"
+            }
+          ],
+          "eips": [],
+          "checklist": null
+        },
+        {
+          "title": "NFTs Don't Load",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "Wallets struggle to display NFTs across multiple chains. The underlying problem is indexing: each blockchain requires separate infrastructure to read ownership, metadata, and media. RPC endpoints go down, indexers return stale data, and IPFS-hosted media loads slowly or not at all.\n\nThe result is blank thumbnails, missing collections, and users who think their NFTs are gone when they are just on a chain the wallet does not index.",
+          "solutions": [
+            {
+              "name": "Multi-chain NFT indexing",
+              "status": "Building",
+              "adoption": "Uneven across wallets"
+            },
+            {
+              "name": "NFT metadata standards",
+              "status": "Live",
+              "adoption": "Widespread"
+            }
+          ],
+          "eips": [
+            "ERC-721",
+            "ERC-1155"
+          ],
+          "checklist": null
+        },
+        {
+          "title": "Token List Friction",
+          "severity": "medium",
+          "status": "in-progress",
+          "description": "There is no universal token registry. A token list standard exists and is widely used for curation, but inclusion is fragmented across multiple independent lists with different criteria. Users regularly encounter tokens that do not appear in their wallet or swap interface, forcing manual contract address imports that most newcomers will not attempt.",
+          "solutions": [
+            {
+              "name": "Token list standards",
+              "status": "Live",
+              "adoption": "Partial"
+            },
+            {
+              "name": "Community-curated lists",
+              "status": "Live",
+              "adoption": "Fragmented, no single registry"
+            }
+          ],
+          "eips": [],
+          "checklist": "safety"
+        }
+      ]
+    }
+  ],
+  "checklists": [
+    {
+      "id": "approvals",
+      "title": "Token Approvals",
+      "description": "Permit2, EIP-5792 batched calls, EIP-2612 permits, exact-amount approvals, and approval UI communication.",
+      "standards": [
+        "EIP-5792",
+        "Permit2",
+        "EIP-2612"
+      ],
+      "items": [
+        {
+          "text": "Use exact-amount approvals instead of unlimited (MAX_UINT256)",
+          "eip": "EIP-2612",
+          "priority": "critical",
+          "benefit": "Limits exposure if a contract is exploited. Users only risk the amount they intended to spend, not their entire token balance."
+        },
+        {
+          "text": "Implement Permit2 for gasless, single-signature token approvals",
+          "eip": "Permit2",
+          "priority": "high",
+          "benefit": "Removes the separate approval transaction, cutting steps in half. Users sign once instead of paying gas twice."
+        },
+        {
+          "text": "Batch approve + action in a single transaction using wallet_sendCalls",
+          "eip": "EIP-5792",
+          "priority": "high",
+          "benefit": "Turns a two-click flow into one click. Users complete swaps and deposits without waiting between transactions."
+        },
+        {
+          "text": "Show the spender contract name, approval amount, and token in plain language",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Users understand what they are authorizing. Reduces blind approvals and builds trust in the interface."
+        },
+        {
+          "text": "Provide in-app approval management with one-tap revocation",
+          "eip": null,
+          "priority": "medium",
+          "benefit": "Gives users control over outstanding permissions without needing third-party tools like Revoke.cash."
+        }
+      ]
+    },
+    {
+      "id": "signing",
+      "title": "Transaction Signing",
+      "description": "Blind signing prevention, EIP-712 typed data, transaction simulation, multi-step progress, and signing fatigue.",
+      "standards": [
+        "EIP-712",
+        "EIP-191",
+        "EIP-7702"
+      ],
+      "items": [
+        {
+          "text": "Use EIP-712 typed structured data for all signature requests",
+          "eip": "EIP-712",
+          "priority": "critical",
+          "benefit": "Wallets can display structured fields instead of raw hex. Users see what they are signing in human terms."
+        },
+        {
+          "text": "Show a human-readable transaction summary before every signature",
+          "eip": "ERC-7730",
+          "priority": "critical",
+          "benefit": "Eliminates blind signing, the #1 vector for wallet drains. Users can verify intent before committing."
+        },
+        {
+          "text": "Run transaction simulation to preview token balance changes",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Users see \"You will receive 1,420 USDC\" before confirming. Catches errors and scams before funds move."
+        },
+        {
+          "text": "Display multi-step signing progress (e.g. \"Step 2 of 3\")",
+          "eip": null,
+          "priority": "medium",
+          "benefit": "Reduces anxiety during complex flows. Users know how many signatures remain and won't abandon mid-process."
+        },
+        {
+          "text": "Batch related approvals into a single signing session where possible",
+          "eip": "EIP-7702",
+          "priority": "medium",
+          "benefit": "Reduces signature fatigue in multi-step flows. Users confirm once instead of signing three separate prompts for approve-permit-swap."
+        }
+      ]
+    },
+    {
+      "id": "gas",
+      "title": "Gas & Fees",
+      "description": "Gas sponsorship via paymasters, fee display in fiat, paying gas with stablecoins, and empty-wallet detection.",
+      "standards": [
+        "ERC-7677",
+        "EIP-7702",
+        "ERC-3009"
+      ],
+      "items": [
+        {
+          "text": "Detect empty wallets and offer gas sponsorship via paymasters",
+          "eip": "ERC-7677",
+          "priority": "critical",
+          "benefit": "New users can transact immediately without buying ETH first. Removes the biggest onboarding drop-off point."
+        },
+        {
+          "text": "Display all fees in the user's local fiat currency",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Users understand costs in familiar terms. \"$0.12\" means something, \"0.00004 ETH\" does not."
+        },
+        {
+          "text": "Allow paying gas with stablecoins or any ERC-20 token",
+          "eip": "EIP-7702",
+          "priority": "high",
+          "benefit": "Users spend the token they already hold. No need to maintain an ETH balance just for fees."
+        },
+        {
+          "text": "Show fee breakdown: base fee, priority fee, L1 data fee (on L2s)",
+          "eip": "EIP-1559",
+          "priority": "medium",
+          "benefit": "Power users can optimize timing and priority. Transparency builds trust when fees spike unexpectedly."
+        },
+        {
+          "text": "Warn before transactions with unusually high gas costs",
+          "eip": null,
+          "priority": "medium",
+          "benefit": "Prevents accidental overpayment during network congestion. Users avoid $50 fees on $10 transactions."
+        }
+      ]
+    },
+    {
+      "id": "multichain",
+      "title": "Multi-Chain",
+      "description": "Cross-chain balance aggregation, automatic network switching, bridging UX, and smart account address consistency.",
+      "standards": [
+        "ERC-7683",
+        "ERC-7930",
+        "ERC-7828"
+      ],
+      "items": [
+        {
+          "text": "Display unified balances across all connected chains",
+          "eip": "EIP-7811",
+          "priority": "critical",
+          "benefit": "Users see their true net worth in one view. No more switching networks to find hidden funds."
+        },
+        {
+          "text": "Auto-switch networks when user interacts with a different chain",
+          "eip": "ERC-7828",
+          "priority": "high",
+          "benefit": "Removes the manual \"switch network\" step. Users interact with apps without thinking about which chain they are on."
+        },
+        {
+          "text": "Use chain-specific address format to prevent wrong-chain sends",
+          "eip": "ERC-7930",
+          "priority": "high",
+          "benefit": "Catches cross-chain transfer mistakes before funds are sent to unreachable addresses."
+        },
+        {
+          "text": "Abstract bridging into single-click cross-chain transfers via intents",
+          "eip": "ERC-7683",
+          "priority": "high",
+          "benefit": "Users move assets between chains as easily as sending to a friend. No bridge UI, no waiting, no anxiety."
+        },
+        {
+          "text": "Ensure consistent smart account addresses across L2s with CREATE2",
+          "eip": null,
+          "priority": "medium",
+          "benefit": "Users have one address everywhere. Funds sent to any L2 arrive at the same account."
+        }
+      ]
+    },
+    {
+      "id": "onboarding",
+      "title": "Onboarding",
+      "description": "Progressive backup disclosure, jargon replacement, simple/advanced modes, accessibility, and localization.",
+      "standards": [
+        "BIP-39",
+        "WCAG 2.2 AA"
+      ],
+      "items": [
+        {
+          "text": "Delay recovery phrase backup until user has funds worth protecting",
+          "eip": null,
+          "priority": "critical",
+          "benefit": "New users start using the app in seconds. Backup prompt arrives when they have a reason to care about it."
+        },
+        {
+          "text": "Replace all jargon with plain-language equivalents throughout the UI",
+          "eip": null,
+          "priority": "critical",
+          "benefit": "Non-crypto users can understand every screen. \"Confirm payment\" beats \"Sign transaction\" for mainstream adoption."
+        },
+        {
+          "text": "Offer simple/advanced mode toggle for different user experience levels",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Beginners get a clean interface. Power users access nonce editing, gas tuning, and hex data when they need it."
+        },
+        {
+          "text": "Meet WCAG 2.2 AA accessibility standards for all interactive elements",
+          "eip": "WCAG 2.2",
+          "priority": "high",
+          "benefit": "Screen readers, keyboard navigation, and color contrast work for all users. Expands your addressable audience significantly."
+        },
+        {
+          "text": "Support at minimum 5 languages with proper i18n framework",
+          "eip": "BIP-39",
+          "priority": "medium",
+          "benefit": "Reaches non-English speakers who make up 75% of internet users. Seed phrases already support multiple languages via BIP-39."
+        },
+        {
+          "text": "Use progressive disclosure: reveal complexity only when the user needs it",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Keeps first screens simple and inviting. Advanced options appear contextually instead of overwhelming upfront."
+        }
+      ]
+    },
+    {
+      "id": "wallets",
+      "title": "Wallet Connection",
+      "description": "EIP-6963 multi-wallet discovery, mobile deep linking, session persistence, and embedded wallets.",
+      "standards": [
+        "EIP-6963",
+        "EIP-7702",
+        "WalletConnect v2"
+      ],
+      "items": [
+        {
+          "text": "Implement EIP-6963 for multi-wallet discovery (no more \"Install MetaMask\")",
+          "eip": "EIP-6963",
+          "priority": "critical",
+          "benefit": "All installed wallets appear automatically. Users choose their preferred wallet instead of being locked into one."
+        },
+        {
+          "text": "Support deep linking for seamless mobile wallet connections",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Tapping \"Connect\" on mobile opens the wallet app directly. No copy-pasting URLs or manual browser switching."
+        },
+        {
+          "text": "Remember the last connected wallet and auto-reconnect on return visits",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Returning users skip the connect flow entirely. Removes a friction point that makes apps feel stateless compared to traditional apps."
+        },
+        {
+          "text": "Support embedded/smart wallets as default for new users",
+          "eip": "EIP-7702",
+          "priority": "medium",
+          "benefit": "Users start with zero setup. The wallet is built into the app, upgradeable to a standalone wallet later."
+        },
+        {
+          "text": "Use WalletConnect v2 as fallback connection method",
+          "eip": "WalletConnect v2",
+          "priority": "medium",
+          "benefit": "Covers edge cases where direct injection fails. Users on unusual browsers or wallets can still connect."
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Safety & Security",
+      "description": "Risk-differentiated warnings, address verification, ENS support, spam token filtering, and max-send gas accounting.",
+      "standards": [
+        "ERC-55",
+        "ENS",
+        "ERC-7730"
+      ],
+      "items": [
+        {
+          "text": "Use risk-differentiated warnings, not blanket red alerts for every approval",
+          "eip": "ERC-7730",
+          "priority": "critical",
+          "benefit": "Users pay attention to real threats. Warning fatigue from constant red alerts causes people to ignore genuine danger."
+        },
+        {
+          "text": "Show ENS names alongside hex addresses for known contacts",
+          "eip": "ENS",
+          "priority": "high",
+          "benefit": "Users verify recipients by readable name (\"vitalik.eth\") instead of comparing 42-character hex strings."
+        },
+        {
+          "text": "Verify addresses with ERC-55 mixed-case checksum before sending",
+          "eip": "ERC-55",
+          "priority": "high",
+          "benefit": "Catches typos and clipboard hijacking before funds leave. A single wrong character is detected automatically."
+        },
+        {
+          "text": "Filter and quarantine spam tokens and suspicious airdrops automatically",
+          "eip": null,
+          "priority": "high",
+          "benefit": "Users see only legitimate assets. Malicious airdrop tokens with phishing URLs never appear in the main balance view."
+        },
+        {
+          "text": "Account for maximum gas when displaying \"send max\" amounts",
+          "eip": null,
+          "priority": "medium",
+          "benefit": "Prevents failed \"send all\" transactions. Users never accidentally underfund gas when moving their entire balance."
+        }
+      ]
+    }
+  ],
+  "skills": {
+    "approvals": {
+      "humanDesc": "ALWAYS/NEVER rules and decision trees for token approval flows. Covers exact-amount vs unlimited approvals, Permit2 AllowanceTransfer and SignatureTransfer patterns, EIP-5792 batching, and revocation UX.",
+      "useCases": [
+        "Building a swap or DEX interface",
+        "Any app that moves ERC-20 tokens on behalf of users",
+        "Implementing gasless approvals with Permit2"
+      ]
+    },
+    "signing": {
+      "humanDesc": "Rules for human-readable transaction signing. Covers EIP-712 typed data, transaction simulation, multi-step progress tracking, SIWE/EIP-4361 login, and EIP-7702 batch signing.",
+      "useCases": [
+        "Any app that requests wallet signatures",
+        "Login/authentication flows (SIWE)",
+        "DeFi interactions requiring multiple signatures"
+      ]
+    },
+    "gas": {
+      "humanDesc": "Gas abstraction and fee display patterns. Covers empty wallet detection with paymaster sponsorship (ERC-7677), fiat fee display, ERC-20 gas payment, L1/L2 fee breakdowns, and high-cost warnings.",
+      "useCases": [
+        "Onboarding flows for new users with no ETH",
+        "Any transaction-heavy application",
+        "L2 apps where fee display is confusing"
+      ]
+    },
+    "multichain": {
+      "humanDesc": "Cross-chain UX patterns. Covers unified balance aggregation, automatic network switching, chain-specific address validation (ERC-7828/7930), intent-based bridging (ERC-7683), and CREATE2 address consistency.",
+      "useCases": [
+        "Portfolio or dashboard interfaces",
+        "Apps deployed on multiple chains",
+        "Cross-chain transfer or bridge interfaces"
+      ]
+    },
+    "onboarding": {
+      "humanDesc": "Progressive onboarding patterns. Covers delayed recovery phrase backup, jargon replacement table, simple/advanced mode toggles, WCAG 2.2 AA accessibility, and i18n with RTL support.",
+      "useCases": [
+        "First-time user registration flows",
+        "Wallet setup wizards",
+        "Any consumer-facing Ethereum application"
+      ]
+    },
+    "wallets": {
+      "humanDesc": "Wallet connection patterns. Covers EIP-6963 multi-wallet discovery, mobile deep linking with MWP and WalletConnect Link Mode, session persistence, embedded wallets, and WalletConnect v2 fallback.",
+      "useCases": [
+        "Connect Wallet buttons and modals",
+        "Mobile app experiences",
+        "Apps supporting multiple wallet providers"
+      ]
+    },
+    "safety": {
+      "humanDesc": "Safety guardrail patterns. Covers three-tier risk-differentiated warnings, ENS forward/reverse resolution, ERC-55 checksum validation, spam token filtering with decision tree, and safe max-send calculations.",
+      "useCases": [
+        "Send/transfer interfaces",
+        "Displaying token balances and transaction history",
+        "Any flow where users approve or sign transactions"
+      ]
+    }
+  },
+  "eipDocs": {
+    "EIP-2612": "https://eips.ethereum.org/EIPS/eip-2612",
+    "Permit2": "https://docs.uniswap.org/contracts/permit2/overview",
+    "EIP-5792": "https://eips.ethereum.org/EIPS/eip-5792",
+    "EIP-712": "https://eips.ethereum.org/EIPS/eip-712",
+    "ERC-7730": "https://clear-signing.org/",
+    "EIP-4361": "https://login.xyz/",
+    "ERC-7677": "https://eips.ethereum.org/EIPS/eip-7677",
+    "EIP-7702": "https://eip7702.io/",
+    "EIP-1559": "https://eips.ethereum.org/EIPS/eip-1559",
+    "EIP-7811": "https://eips.ethereum.org/EIPS/eip-7811",
+    "ERC-7828": "https://interopaddress.com",
+    "ERC-7930": "https://eips.ethereum.org/EIPS/eip-7930",
+    "ERC-7683": "https://across.to/intents",
+    "BIP-39": "https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki",
+    "WCAG 2.2": "https://www.w3.org/TR/WCAG22/",
+    "EIP-6963": "https://eip6963.org/",
+    "WalletConnect v2": "https://docs.walletconnect.com/",
+    "ERC-55": "https://eips.ethereum.org/EIPS/eip-55",
+    "ENS": "https://docs.ens.domains/",
+    "EIP-191": "https://eips.ethereum.org/EIPS/eip-191",
+    "EIP-8141": "https://eips.ethereum.org/EIPS/eip-8141",
+    "ERC-4337": "https://www.erc4337.io/",
+    "EIP-4844": "https://eips.ethereum.org/EIPS/eip-4844",
+    "EIP-3326": "https://eips.ethereum.org/EIPS/eip-3326",
+    "EIP-7701": "https://eips.ethereum.org/EIPS/eip-7701",
+    "ENS (EIP-137)": "https://docs.ens.domains/",
+    "ERC-721": "https://eips.ethereum.org/EIPS/eip-721",
+    "ERC-1155": "https://eips.ethereum.org/EIPS/eip-1155",
+    "ERC-3009": "https://eips.ethereum.org/EIPS/eip-3009"
+  },
+  "resourceUrls": {
+    "ERC-7828": {
+      "url": "https://interopaddress.com",
+      "label": "interopaddress.com"
+    },
+    "ERC-4337": {
+      "url": "https://www.erc4337.io/",
+      "label": "erc4337.io"
+    },
+    "EIP-7702": {
+      "url": "https://eip7702.io/",
+      "label": "eip7702.io"
+    },
+    "Permit2": {
+      "url": "https://docs.uniswap.org/contracts/permit2/overview",
+      "label": "Uniswap Docs"
+    },
+    "EIP-6963": {
+      "url": "https://eip6963.org/",
+      "label": "eip6963.org"
+    },
+    "ERC-7683": {
+      "url": "https://across.to/intents",
+      "label": "Across Intents"
+    },
+    "EIP-4361": {
+      "url": "https://login.xyz/",
+      "label": "login.xyz"
+    },
+    "ERC-7730": {
+      "url": "https://clear-signing.org/",
+      "label": "clear-signing.org"
+    },
+    "ENS": {
+      "url": "https://docs.ens.domains/",
+      "label": "ENS Docs"
+    }
+  }
+}

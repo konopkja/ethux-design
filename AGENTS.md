@@ -9,9 +9,19 @@ This is [EthUX Design](https://ethux.design) — a data-driven site documenting 
 
 The skills are derived from the web content but go deeper — they contain implementation patterns, code examples, decision trees, and error states that the web checklists summarize.
 
-## Entry Point
+## Entry Points
 
-`SKILL.md` at the project root is the top-level router. It is accessible both locally and at `https://ethux.design/SKILL.md`. It routes agents to the right domain skill by user action, by EIP/standard, and lists all shared reference files. When adding a new skill or reference, update this file's routing tables.
+- **`llms.txt`** — the top-level entry point for AI agents. Links to the full dataset, all skills, and project docs. Accessible at `https://ethux.design/llms.txt`.
+- **`SKILL.md`** — the skill router. Routes agents to the right domain skill by user action or EIP/standard. Accessible at `https://ethux.design/SKILL.md`.
+
+## Generated Agent-Readable Files
+
+After editing `data.js`, run `node generate.js` to regenerate:
+
+- **`llms-full.txt`** — markdown rendering of all categories, problems, solutions, adoption data, user evidence, checklists, and EIP references
+- **`api/data.json`** — JSON export of the same data for programmatic access
+
+These files must be committed alongside `data.js` changes. The `llms.txt` file is hand-maintained and only needs updating when new resources are added.
 
 ## Content Architecture
 
