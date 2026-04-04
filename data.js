@@ -282,7 +282,7 @@ const DOC_URLS = {
   'Permit2': 'https://docs.uniswap.org/contracts/permit2/overview',
   'EIP-5792': 'https://eips.ethereum.org/EIPS/eip-5792',
   'EIP-712': 'https://eips.ethereum.org/EIPS/eip-712',
-  'ERC-7730': 'https://clear-signing.org/',
+  'ERC-7730': 'https://eips.ethereum.org/EIPS/eip-7730',
   'EIP-4361': 'https://login.xyz/',
   'ERC-7677': 'https://eips.ethereum.org/EIPS/eip-7677',
   'EIP-7702': 'https://eip7702.io/',
@@ -322,7 +322,6 @@ const RESOURCE_URLS = {
   'EIP-6963': { url: 'https://eip6963.org/', label: 'eip6963.org' },
   'ERC-7683': { url: 'https://across.to/intents', label: 'Across Intents' },
   'EIP-4361': { url: 'https://login.xyz/', label: 'login.xyz' },
-  'ERC-7730': { url: 'https://clear-signing.org/', label: 'clear-signing.org' },
   'ENS': { url: 'https://docs.ens.domains/', label: 'ENS Docs' }
 };
 
