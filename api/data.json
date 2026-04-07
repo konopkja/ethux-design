@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-03",
+    "generatedAt": "2026-04-07",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -364,7 +364,8 @@
           "checklist": "safety",
           "userEvidence": [
             "\"Got my brother into DeFi. Told him I'd handle everything. Time to withdraw... I sent the USDC straight to the contract. Not his wallet. Gone. I paid him back. That day I retired from onboarding family.\" (User, community report)",
-            "\"Accidentally sent USDT to the USDC contract address. Please help, it's a large amount. Is it lost forever?\" (User, community report)"
+            "\"Accidentally sent USDT to the USDC contract address. Please help, it's a large amount. Is it lost forever?\" (User, community report)",
+            "\"Why are we still copy-pasting 40-character wallet addresses in 2026?\" (User, community report)"
           ],
           "opportunity": "ENS and address verification could prevent millions in annual losses.\n- Human-readable addresses reduce support tickets\n- Address books and recent contacts prevent typos\n- Verification screens catch clipboard hijacks",
           "risk": "Crypto transfers are irreversible. One typo means permanent loss.\n- Clipboard hijack malware swaps addresses silently\n- #1 fear preventing mainstream users from sending transactions\n- No recourse, no undo, no customer support"
@@ -451,7 +452,8 @@
           ],
           "checklist": "multichain",
           "userEvidence": [
-            "\"I run a small e-commerce operation that does a decent amount of cross-chain stablecoin payments. We're manually bridging and swapping. Waking up at 3am to check gas prices or move funds because a bridge is clogged is exhausting.\" (Business operator, community report)"
+            "\"I run a small e-commerce operation that does a decent amount of cross-chain stablecoin payments. We're manually bridging and swapping. Waking up at 3am to check gas prices or move funds because a bridge is clogged is exhausting.\" (Business operator, community report)",
+            "\"Bridging has always been one of the quiet frustrations in crypto. Not just the fees but the constant switching between apps, networks and routes that breaks the flow. Most users end up managing steps instead of focusing on decisions.\" (User, community report)"
           ],
           "opportunity": "Single-click bridging captures fees in a large and growing cross-chain market.\n- Intent-based protocols already capturing significant volume by abstracting this pain\n- Seamless bridging is a revenue multiplier for every app\n- Protocols that remove bridging friction capture cross-chain volume by default",
           "risk": "Bridge friction locks liquidity on single chains, reducing ecosystem efficiency.\n- 70% of onboarded wallet users never complete a bridge transaction\n- Users who bridge incorrectly can lose funds permanently with no recourse\n- Complex bridging concentrates risk in a few large bridge protocols\n- Friction discourages the multi-chain usage Ethereum needs"
@@ -475,6 +477,9 @@
           ],
           "eips": [],
           "checklist": "multichain",
+          "userEvidence": [
+            "\"I've got funds spread across three protocols on three chains. Keeping track of everything is a headache. I'm starting to think diversification across chains might be riskier than picking one.\" (User, community report)"
+          ],
           "opportunity": "Intent-based auto-routing eliminates manual balance management.\n- Auto-route from any chain to the needed chain transparently\n- The path to \"it just works\" multi-chain\n- Users think in assets, not chains",
           "risk": "Fragmented assets mean underutilized capital across chains.\n- $100 spread across 5 chains can't meet DeFi minimum amounts\n- Users can't participate in opportunities on the \"wrong\" chain\n- Capital efficiency drops with every new L2"
         }
@@ -558,6 +563,9 @@
             "EIP-8141"
           ],
           "checklist": null,
+          "userEvidence": [
+            "\"Seed phrases are the worst UX decision crypto ever normalized. You're asking regular people to write down 12 words, never lose them, never get phished, or lose their money forever.\" (User, community report)"
+          ],
           "opportunity": "Smart accounts and recovery mechanisms shift the model from preventing all key loss to limiting damage when keys are compromised.\n- Smart accounts (ERC-4337) enable social recovery, spending limits, and session keys without changing the user's address\n- EIP-7702 lets existing EOAs delegate to smart contract logic, bridging toward safer defaults without forced migration\n- Passkeys and hardware-backed signing remove the need for users to see or manage raw key material at all",
           "risk": "Compromised keys and account takeovers remain a prominent factor in security incidents.\n- A leaked seed phrase can lead to total loss of assets with no recourse\n- Users must manage their own security without the institutional safety nets they are used to from traditional finance\n- The complexity of secure key management is one of the factors that keeps users on centralized platforms"
         },
@@ -612,6 +620,9 @@
             "EIP-6963"
           ],
           "checklist": "wallets",
+          "userEvidence": [
+            "\"I've been building apps for the past 5 years, and if there's one constant, it's connector headaches. Stale connections, stuck states, signature requests failing for no obvious reason. We've all been there.\" (Builder, community report)"
+          ],
           "opportunity": "EIP-6963 multi-wallet discovery solves the \"Install MetaMask\" problem.\n- Apps detecting all wallets see higher connection success\n- Users choose their preferred wallet instead of being forced\n- Eliminates the most common first-interaction failure",
           "risk": "Connection failures are the first impression of web3 for many users.\n- Failed connection on the first try often means the user never returns\n- Sets an immediate negative tone for the entire ecosystem\n- Users conclude the technology is unreliable"
         },
@@ -835,7 +846,8 @@
           "userEvidence": [
             "\"Every time you text someone your wallet address, you give them your full balance and your entire transaction history.\" (User, community report)",
             "\"I've tried every major privacy tool in crypto. The reason most people gave before using them: they required juggling a completely separate wallet.\" (User, community report)",
-            "\"My sharing of my holdings to tax auditors or law enforcement should not mean that I also have to expose that to the whole world on an explorer website.\" (User, community report)"
+            "\"My sharing of my holdings to tax auditors or law enforcement should not mean that I also have to expose that to the whole world on an explorer website.\" (User, community report)",
+            "\"Privacy isn't a feature. Lack of privacy is a bug.\" (User, community report)"
           ],
           "opportunity": "Privacy tools that maintain compliance would unlock mainstream financial use cases.\n- Users could receive salary, pay merchants, and use DeFi without exposing their full financial history\n- Privacy Pools' association set model demonstrates that privacy and compliance can coexist\n- Wallet-integrated privacy (via frameworks like Kohaku) would make protection seamless rather than requiring active effort",
           "risk": "Public-by-default transactions make everyday financial use of Ethereum untenable.\n- Employers, merchants, and counterparties can see a user's complete balance and transaction history\n- Users who discover this after the fact feel deceived and leave permanently\n- The transparency that enables trustless verification also enables surveillance, a tradeoff most users never consented to"

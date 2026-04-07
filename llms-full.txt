@@ -1,5 +1,5 @@
 # EthUX Design — Complete Dataset
-Generated: 2026-04-03 | Source: https://ethux.design
+Generated: 2026-04-07 | Source: https://ethux.design
 
 A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
 
@@ -358,6 +358,8 @@ Addresses are cryptic hexadecimal strings with no human-readable identification.
 
 > "Accidentally sent USDT to the USDC contract address. Please help, it's a large amount. Is it lost forever?" (User, community report)
 
+> "Why are we still copy-pasting 40-character wallet addresses in 2026?" (User, community report)
+
 **Opportunity:**
 ENS and address verification could prevent millions in annual losses.
 - Human-readable addresses reduce support tickets
@@ -452,6 +454,8 @@ The entire process feels like sending money into a void with no tracking, no est
 **User evidence:**
 > "I run a small e-commerce operation that does a decent amount of cross-chain stablecoin payments. We're manually bridging and swapping. Waking up at 3am to check gas prices or move funds because a bridge is clogged is exhausting." (Business operator, community report)
 
+> "Bridging has always been one of the quiet frustrations in crypto. Not just the fees but the constant switching between apps, networks and routes that breaks the flow. Most users end up managing steps instead of focusing on decisions." (User, community report)
+
 **Opportunity:**
 Single-click bridging captures fees in a large and growing cross-chain market.
 - Intent-based protocols already capturing significant volume by abstracting this pain
@@ -478,6 +482,9 @@ Tokens scattered across chains create artificial friction.
 |----------|--------|----------|
 | Intent-based protocols | Live | Across ($35B+), Uniswap, CoW Swap — Open Intents Framework by EF |
 | Interop layer (EIL) | Building | Testnet live |
+
+**User evidence:**
+> "I've got funds spread across three protocols on three chains. Keeping track of everything is a headache. I'm starting to think diversification across chains might be riskier than picking one." (User, community report)
 
 **Opportunity:**
 Intent-based auto-routing eliminates manual balance management.
@@ -550,6 +557,9 @@ Users are solely responsible for securing a private key or seed phrase that cont
 | Social recovery | Live | Growing, 44% YoY adoption |
 | Passkey-based signing | Building | Emerging |
 
+**User evidence:**
+> "Seed phrases are the worst UX decision crypto ever normalized. You're asking regular people to write down 12 words, never lose them, never get phished, or lose their money forever." (User, community report)
+
 **Opportunity:**
 Smart accounts and recovery mechanisms shift the model from preventing all key loss to limiting damage when keys are compromised.
 - Smart accounts (ERC-4337) enable social recovery, spending limits, and session keys without changing the user's address
@@ -607,6 +617,9 @@ On desktop, EIP-6963 has largely solved the old problem of wallet extensions fig
 |----------|--------|----------|
 | EIP-6963 multi-wallet discovery | Live | 37+ wallets (walletbeat.eth) |
 | WalletConnect v2 | Live | Nearly universal |
+
+**User evidence:**
+> "I've been building apps for the past 5 years, and if there's one constant, it's connector headaches. Stale connections, stuck states, signature requests failing for no obvious reason. We've all been there." (Builder, community report)
 
 **Opportunity:**
 EIP-6963 multi-wallet discovery solves the "Install MetaMask" problem.
@@ -835,6 +848,8 @@ Opt-in privacy exists but requires active effort: Railgun ($4.5B+ shielded volum
 > "I've tried every major privacy tool in crypto. The reason most people gave before using them: they required juggling a completely separate wallet." (User, community report)
 
 > "My sharing of my holdings to tax auditors or law enforcement should not mean that I also have to expose that to the whole world on an explorer website." (User, community report)
+
+> "Privacy isn't a feature. Lack of privacy is a bug." (User, community report)
 
 **Opportunity:**
 Privacy tools that maintain compliance would unlock mainstream financial use cases.
