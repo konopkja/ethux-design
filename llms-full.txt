@@ -145,6 +145,12 @@ The entire space is filled with unexplained technical terms: staking, smart cont
 **User evidence:**
 > "I'm 44, I know nothing about crypto. Like nothing. My daughter's boyfriend says I should buy some." (New user, community report)
 
+> "This is just way too complicated for a layman who has a busy life. I just want to post something onto the blockchain. I just want a streamlined path to submit my data." (User, ethereum.org feedback)
+
+> "When someone says they are new to a concept dont blind them with technical jargon." (New user, ethereum.org feedback)
+
+> "Fly over help for industry specific terms. Crypto has more than its share of jargon." (New user, ethereum.org feedback)
+
 **Opportunity:**
 Plain language yields higher retention in onboarding flows.
 - Every term a user understands is one less support ticket
@@ -360,6 +366,8 @@ Addresses are cryptic hexadecimal strings with no human-readable identification.
 
 > "Why are we still copy-pasting 40-character wallet addresses in 2026?" (User, community report)
 
+> "I sent my ethereum to the right address but wrong method. I should have sent with ERC20 network but I sent with BEP20 network. And I haven't found my ethereum. What do I do now?" (User, ethereum.org feedback)
+
 **Opportunity:**
 ENS and address verification could prevent millions in annual losses.
 - Human-readable addresses reduce support tickets
@@ -528,6 +536,12 @@ Users who get stuck search for help and end up in Telegram groups or Discord ser
 > "I get 10 of these scam DMs on a daily basis." (User, community report)
 
 > "Tried to swap my ETH for a gold-backed token, got zero-balance fake tokens. The contract was fake and didn't match the legitimate one. These tokens were listed in the wallet's swap interface." (User, community report)
+
+> "I was the victim of my address being poisoned. Someone sent a zero transaction following my previous one to a similar address, the first and last digits of which are the same. Where should I go?" (User, ethereum.org feedback)
+
+> "It would be real nice if I didn't have what I worked decades for stolen in seconds by forged proxy spend contracts." (User, ethereum.org feedback)
+
+> "There needs to be more done to protect the consumer from scams and fake blockchains, fake apps and so on." (User, ethereum.org feedback)
 
 **Opportunity:**
 Security-first wallets command premium user loyalty and retention.
@@ -718,6 +732,12 @@ This compounds in non-English markets where these terms have no established tran
 
 **User evidence:**
 > "I'm 44, I know nothing about crypto. Like nothing. My daughter's boyfriend says I should buy some." (New user, community report)
+
+> "This is just way too complicated for a layman who has a busy life. I just want to post something onto the blockchain. I just want a streamlined path to submit my data." (User, ethereum.org feedback)
+
+> "When someone says they are new to a concept dont blind them with technical jargon." (New user, ethereum.org feedback)
+
+> "Fly over help for industry specific terms. Crypto has more than its share of jargon." (New user, ethereum.org feedback)
 
 **Opportunity:**
 Plain language yields higher retention in onboarding flows.

@@ -150,7 +150,10 @@ const CRITICAL_DETAILS = {
     story: [
       '"Is this frontend legit? When connecting my wallet it warns the domain has very low popularity. It actually got redirected to a spoofed domain." <span class="quote-source">User, community report</span>',
       '"I get 10 of these scam DMs on a daily basis." <span class="quote-source">User, community report</span>',
-      '"Tried to swap my ETH for a gold-backed token, got zero-balance fake tokens. The contract was fake and didn\'t match the legitimate one. These tokens were listed in the wallet\'s swap interface." <span class="quote-source">User, community report</span>'
+      '"Tried to swap my ETH for a gold-backed token, got zero-balance fake tokens. The contract was fake and didn\'t match the legitimate one. These tokens were listed in the wallet\'s swap interface." <span class="quote-source">User, community report</span>',
+      '"I was the victim of my address being poisoned. Someone sent a zero transaction following my previous one to a similar address, the first and last digits of which are the same. Where should I go?" <span class="quote-source">User, ethereum.org feedback</span>',
+      '"It would be real nice if I didn\'t have what I worked decades for stolen in seconds by forged proxy spend contracts." <span class="quote-source">User, ethereum.org feedback</span>',
+      '"There needs to be more done to protect the consumer from scams and fake blockchains, fake apps and so on." <span class="quote-source">User, ethereum.org feedback</span>'
     ],
     opportunity: '<div class="lead">Security-first wallets command premium user loyalty and retention.</div><ul><li>Proactive scam prevention saves users hundreds of millions annually</li><li>Simulation, warnings, and reputation scoring position wallets as trusted gatekeepers</li><li>Security features become the top differentiator in wallet selection</li></ul>',
     risk: '<div class="lead">Each major scam event suppresses adoption across the entire ecosystem.</div><ul><li>Media narratives after high-profile thefts erode public trust broadly</li><li>Regulatory responses triggered by cumulative phishing losses</li><li>Ecosystem credibility as a financial platform at stake</li></ul>'
@@ -161,7 +164,12 @@ const CRITICAL_DETAILS = {
     risk: '<div class="lead">Failed mobile connections are a major reason users abandon app interactions on phones.</div><ul><li>Every broken flow is a lost transaction and a lost fee</li><li>Users who fail once conclude "crypto doesn\'t work on mobile"</li><li>Users who fail on mobile do not come back to try again on desktop</li></ul>'
   },
   'Jargon Overload': {
-    story: '"I\'m 44, I know nothing about crypto. Like nothing. My daughter\'s boyfriend says I should buy some." <span class="quote-source">New user, community report</span>',
+    story: [
+      '"I\'m 44, I know nothing about crypto. Like nothing. My daughter\'s boyfriend says I should buy some." <span class="quote-source">New user, community report</span>',
+      '"This is just way too complicated for a layman who has a busy life. I just want to post something onto the blockchain. I just want a streamlined path to submit my data." <span class="quote-source">User, ethereum.org feedback</span>',
+      '"When someone says they are new to a concept dont blind them with technical jargon." <span class="quote-source">New user, ethereum.org feedback</span>',
+      '"Fly over help for industry specific terms. Crypto has more than its share of jargon." <span class="quote-source">New user, ethereum.org feedback</span>'
+    ],
     opportunity: '<div class="lead">Plain language yields higher retention in onboarding flows.</div><ul><li>Every term a user understands is one less support ticket</li><li>Clear terminology is a compounding competitive advantage</li><li>Each understood concept leads to one more completed transaction</li></ul>',
     risk: '<div class="lead">Jargon creates a self-selecting user base of crypto insiders.</div><ul><li>Without plain language, mainstream financial use cases remain out of reach</li><li>Ethereum stays a tool for technical enthusiasts, not a global settlement layer</li><li>Every unexplained term is a potential exit point for new users</li></ul>'
   }
@@ -222,7 +230,8 @@ const PROBLEM_DETAILS = {
     story: [
       '"Got my brother into DeFi. Told him I\'d handle everything. Time to withdraw... I sent the USDC straight to the contract. Not his wallet. Gone. I paid him back. That day I retired from onboarding family." <span class="quote-source">User, community report</span>',
       '"Accidentally sent USDT to the USDC contract address. Please help, it\'s a large amount. Is it lost forever?" <span class="quote-source">User, community report</span>',
-      '"Why are we still copy-pasting 40-character wallet addresses in 2026?" <span class="quote-source">User, community report</span>'
+      '"Why are we still copy-pasting 40-character wallet addresses in 2026?" <span class="quote-source">User, community report</span>',
+      '"I sent my ethereum to the right address but wrong method. I should have sent with ERC20 network but I sent with BEP20 network. And I haven\'t found my ethereum. What do I do now?" <span class="quote-source">User, ethereum.org feedback</span>'
     ],
     opportunity: '<div class="lead">ENS and address verification could prevent millions in annual losses.</div><ul><li>Human-readable addresses reduce support tickets</li><li>Address books and recent contacts prevent typos</li><li>Verification screens catch clipboard hijacks</li></ul>',
     risk: '<div class="lead">Crypto transfers are irreversible. One typo means permanent loss.</div><ul><li>Clipboard hijack malware swaps addresses silently</li><li>#1 fear preventing mainstream users from sending transactions</li><li>No recourse, no undo, no customer support</li></ul>'
