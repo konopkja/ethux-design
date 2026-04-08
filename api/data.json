@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-07",
+    "generatedAt": "2026-04-08",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -216,8 +216,8 @@
             },
             {
               "name": "ERC-8019 auto-login for SIWE",
-              "status": "Draft",
-              "adoption": "In review, Ambire implementing"
+              "status": "Review",
+              "adoption": "Review status (Feb 2026). Ambire shipping first implementation (authored the ERC), Fileverse collaborating."
             }
           ],
           "eips": [
@@ -1362,7 +1362,8 @@
     "ENS (EIP-137)": "https://docs.ens.domains/",
     "ERC-721": "https://eips.ethereum.org/EIPS/eip-721",
     "ERC-1155": "https://eips.ethereum.org/EIPS/eip-1155",
-    "ERC-3009": "https://eips.ethereum.org/EIPS/eip-3009"
+    "ERC-3009": "https://eips.ethereum.org/EIPS/eip-3009",
+    "ERC-8019": "https://ercs.ethereum.org/ERCS/erc-8019"
   },
   "resourceUrls": {
     "ERC-7828": {
