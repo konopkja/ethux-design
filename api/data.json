@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-08",
+    "generatedAt": "2026-04-09",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -610,7 +610,7 @@
           "title": "Connection Failures",
           "severity": "medium",
           "status": "in-progress",
-          "description": "On desktop, EIP-6963 has largely solved the old problem of wallet extensions fighting over window.ethereum. Most major wallets now announce themselves properly. The remaining friction is on mobile, where EIP-6963 does not apply and users still face unreliable connection flows between browser and wallet apps.",
+          "description": "On desktop, EIP-6963 solved the wallet-side problem: 37+ wallets now announce themselves properly instead of fighting over window.ethereum. Major connection libraries (wagmi, RainbowKit, Web3Modal) support it by default, so most actively maintained apps detect all installed wallets automatically. Apps still using older connector libraries show the legacy behavior — users with Rabby, Frame, or other wallets see \"Install MetaMask\" instead of their wallet. The remaining friction is on mobile, where EIP-6963 does not apply and users still face unreliable connection flows between browser and wallet apps.",
           "solutions": [
             {
               "name": "EIP-6963 multi-wallet discovery",
