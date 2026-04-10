@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear Signing Registry Audit | EthUX</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c0c10">
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Geist';
+      src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Geist Mono';
+      src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0c0c10;
+      --bg-raised: #151519;
+      --surface: #1c1c22;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.04);
+      --text: #F0EEEB;
+      --text-dim: #A8A6A3;
+      --text-muted: #858481;
+      --accent: #0079FF;
+      --accent-hover: #339DFF;
+      --accent-dim: rgba(0, 121, 255, 0.18);
+      --accent-glow: rgba(0, 121, 255, 0.10);
+      --accent-secondary: #3DD4C6;
+      --red: #F87171;
+      --red-dim: rgba(248, 113, 113, 0.12);
+      --green: #4ADE80;
+      --green-dim: rgba(74, 222, 128, 0.12);
+      --blue: #7CA8F4;
+      --blue-dim: rgba(124, 168, 244, 0.12);
+      --purple: #A78BFA;
+      --purple-dim: rgba(167, 139, 250, 0.12);
+      --cyan: #5ED5D5;
+      --cyan-dim: rgba(94, 213, 213, 0.12);
+      --amber: #FBBF24;
+      --amber-dim: rgba(251, 191, 36, 0.12);
+      --font-display: 'Libre Baskerville', Georgia, serif;
+      --font-body: 'Geist', system-ui, sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, monospace;
+      --transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scrollbar-gutter: stable; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      color: var(--text);
+      background: var(--bg);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    #grain {
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+    }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      background: rgba(21, 21, 25, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-wordmark:hover { color: var(--accent); }
+    .nav-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding-top: calc(56px + 80px);
+      padding-bottom: 80px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--text-dim);
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* ---- STATS ROW ---- */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 80px;
+    }
+    .stat-card {
+      background: var(--bg-raised);
+      padding: 28px 24px;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.red { color: var(--red); }
+    .stat-value.amber { color: var(--amber); }
+    .stat-value.green { color: var(--green); }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ---- SECTIONS ---- */
+    .section {
+      margin-bottom: 96px;
+    }
+    .section-header {
+      margin-bottom: 40px;
+    }
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ---- CONCEPT GROUP CARDS ---- */
+    .concept-group {
+      border: 1px solid var(--border);
+      margin-bottom: 2px;
+    }
+    .concept-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: var(--bg-raised);
+      cursor: pointer;
+      transition: background var(--transition);
+      user-select: none;
+    }
+    .concept-header:hover {
+      background: var(--surface);
+    }
+    .concept-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+    .concept-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .concept-count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .concept-severity {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .severity-critical { color: var(--red); background: var(--red-dim); }
+    .severity-high { color: var(--amber); background: var(--amber-dim); }
+    .severity-medium { color: var(--blue); background: var(--blue-dim); }
+    .severity-low { color: var(--green); background: var(--green-dim); }
+
+    .concept-chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+    .concept-group.open .concept-chevron {
+      transform: rotate(180deg);
+    }
+
+    .concept-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .concept-group.open .concept-body {
+      max-height: none;
+    }
+    .concept-content {
+      padding: 0 24px 24px;
+      background: var(--bg-raised);
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* ---- VARIANT TABLE ---- */
+    .variant-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .variant-table th {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .variant-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+    .variant-table tr:last-child td {
+      border-bottom: none;
+    }
+    .variant-table .label-cell {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .variant-table .protocol-cell {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .variant-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* ---- PROTOCOL TABLE ---- */
+    .protocol-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .protocol-table th {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 10;
+    }
+    .protocol-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+    .protocol-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .protocol-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .file-count {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .label-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .label-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .label-tag.bad {
+      color: var(--red);
+      background: var(--red-dim);
+      border-color: rgba(248, 113, 113, 0.2);
+    }
+
+    /* ---- WORST OFFENDERS ---- */
+    .offender-card {
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      padding: 28px 24px;
+      margin-bottom: 2px;
+    }
+    .offender-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .offender-rank {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--red);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .offender-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .offender-issue {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .offender-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ---- FORMAT DISTRIBUTION ---- */
+    .format-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .format-name {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      width: 120px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .format-bar-track {
+      flex: 1;
+      height: 24px;
+      background: var(--surface);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .format-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .format-count {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      width: 40px;
+      flex-shrink: 0;
+    }
+
+    /* ---- WHAT WORKS ---- */
+    .good-card {
+      border: 1px solid rgba(74, 222, 128, 0.15);
+      background: rgba(74, 222, 128, 0.04);
+      padding: 24px;
+      margin-bottom: 2px;
+    }
+    .good-card .protocol-name {
+      color: var(--green);
+    }
+    .good-card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* ---- EXPLAINER ---- */
+    .explainer {
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      padding: 40px;
+      margin-bottom: 80px;
+    }
+    .explainer-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .explainer p {
+      color: var(--text-dim);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      max-width: 680px;
+    }
+    .explainer p:last-child { margin-bottom: 0; }
+    .explainer strong { color: var(--text); font-weight: 600; }
+    .explainer code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--accent);
+    }
+
+    /* ---- SCHEMA DIAGRAM ---- */
+    .schema-flow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .schema-box {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-dim);
+      border-radius: 4px;
+    }
+    .schema-box.highlight {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .schema-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    /* ---- TOC ---- */
+    .toc {
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      padding: 28px 32px;
+      margin-bottom: 80px;
+    }
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px;
+    }
+    .toc-list a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color var(--transition);
+    }
+    .toc-list a:hover { color: var(--accent); }
+    .toc-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      width: 20px;
+    }
+
+    /* ---- FOOTER ---- */
+    .site-footer {
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .footer-text a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-text a:hover { color: var(--accent); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .hero { padding-top: calc(56px + 40px); padding-bottom: 48px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .concept-header { flex-wrap: wrap; gap: 8px; }
+      .variant-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .protocol-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .explainer { padding: 24px; }
+      .schema-flow { gap: 8px; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+      .format-name { width: 80px; font-size: 0.7rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ---- ANIMATIONS ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div id="grain"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="https://ethux.design" class="nav-wordmark">EthUX</a>
+      <span class="nav-label">Clear Signing Registry Audit</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero container">
+    <div class="hero-eyebrow">ERC-7730 Registry Analysis</div>
+    <h1 class="hero-title">How consistent is the<br>clear signing experience?</h1>
+    <p class="hero-desc">An audit of every human-readable label in Ledger's ERC-7730 clear signing registry. 44 protocols, 355 descriptor files, 393 unique labels. The question: when users sign transactions across different dApps, are they seeing a unified language or a scattered mess?</p>
+  </header>
+
+  <main class="container">
+
+    <!-- STATS -->
+    <div class="stats-row reveal">
+      <div class="stat-card">
+        <div class="stat-value">44</div>
+        <div class="stat-label">Protocols</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">355</div>
+        <div class="stat-label">Descriptor files</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value red">393</div>
+        <div class="stat-label">Unique labels</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value amber">251</div>
+        <div class="stat-label">Unique intents</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">972</div>
+        <div class="stat-label">Total label occurrences</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value accent">~30</div>
+        <div class="stat-label">Underlying concepts</div>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc reveal">
+      <div class="toc-title">Contents</div>
+      <ol class="toc-list">
+        <li><a href="#explainer"><span class="toc-num">01</span> What is clear signing?</a></li>
+        <li><a href="#inconsistencies"><span class="toc-num">02</span> Semantic inconsistencies</a></li>
+        <li><a href="#offenders"><span class="toc-num">03</span> Worst quality offenders</a></li>
+        <li><a href="#formats"><span class="toc-num">04</span> Format distribution</a></li>
+        <li><a href="#good"><span class="toc-num">05</span> What works well</a></li>
+        <li><a href="#protocols"><span class="toc-num">06</span> Full protocol breakdown</a></li>
+      </ol>
+    </div>
+
+    <!-- EXPLAINER -->
+    <section id="explainer" class="explainer reveal">
+      <h2 class="explainer-title">What is clear signing?</h2>
+      <p>Without clear signing, hardware wallet users see raw hexadecimal data when approving transactions. A <code>uint256</code> named <code>_value</code> carries no hint that it should display as "100 USDT" instead of <code>100000000</code>. Users are effectively signing blind.</p>
+      <p><strong>ERC-7730</strong> is a JSON descriptor format that tells wallets how to present transaction data in human-readable form. Each descriptor defines an <strong>intent</strong> (the headline action like "Swap" or "Repay loan"), <strong>labels</strong> (field names like "Amount to Send"), and <strong>formats</strong> (how to render values with proper decimals, token symbols, dates).</p>
+      <p>The <strong>Ledger registry</strong> is where dApp teams submit these descriptors via pull request. They are imported into Ledger device firmware and used whenever a user signs a transaction for a registered contract.</p>
+
+      <div class="schema-flow">
+        <div class="schema-box">dApp submits JSON</div>
+        <span class="schema-arrow">&rarr;</span>
+        <div class="schema-box">Registry PR review</div>
+        <span class="schema-arrow">&rarr;</span>
+        <div class="schema-box">Ledger firmware</div>
+        <span class="schema-arrow">&rarr;</span>
+        <div class="schema-box highlight">User sees labels on device</div>
+      </div>
+
+      <p>The key fields that control what users see:</p>
+      <p><code>intent</code> is the headline. "Swap", "Supply", "Repay loan". <code>label</code> on each field is the name next to the value. "Amount to Send", "Beneficiary". <code>format</code> determines rendering: <code>tokenAmount</code> shows "100 USDT", <code>addressName</code> resolves ENS, <code>date</code> converts timestamps.</p>
+    </section>
+
+    <!-- SEMANTIC INCONSISTENCIES -->
+    <section id="inconsistencies" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Core finding</div>
+        <h2 class="section-title">393 labels for ~30 concepts</h2>
+        <p class="section-desc">The same underlying concept is expressed with wildly different labels across protocols. Each group below shows a single concept and every label variant used to describe it.</p>
+      </div>
+
+      <!-- GROUP 1: Amount sent -->
+      <div class="concept-group open" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Amount being sent/paid</span>
+            <span class="concept-count">17 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Amount</td><td class="protocol-cell">Circle, DeGate, Ethena, Flare, Hyperliquid, Swell, WalletConnect, WETH</td></tr>
+                <tr><td class="label-cell">Amount to Send</td><td class="protocol-cell">1inch, Lombard, QuickSwap, Uniswap</td></tr>
+                <tr><td class="label-cell">Amount to send</td><td class="protocol-cell">LiFi, Paraswap (capitalization mismatch)</td></tr>
+                <tr><td class="label-cell">Send</td><td class="protocol-cell">1inch (EIP-712)</td></tr>
+                <tr><td class="label-cell">You pay with</td><td class="protocol-cell">Midas</td></tr>
+                <tr><td class="label-cell">Swap</td><td class="protocol-cell">1inch (calldata)</td></tr>
+                <tr><td class="label-cell">Payment</td><td class="protocol-cell">Safe</td></tr>
+                <tr><td class="label-cell">Deposit</td><td class="protocol-cell">Celo</td></tr>
+                <tr><td class="label-cell">Wrap</td><td class="protocol-cell">Flare</td></tr>
+                <tr><td class="label-cell">CELO to Send</td><td class="protocol-cell">Celo</td></tr>
+                <tr><td class="label-cell">sAVAX amount</td><td class="protocol-cell">Benqi</td></tr>
+                <tr><td class="label-cell">stETH amount</td><td class="protocol-cell">Lido</td></tr>
+                <tr><td class="label-cell">wstETH amount</td><td class="protocol-cell">Lido</td></tr>
+                <tr><td class="label-cell">CHSB Amount</td><td class="protocol-cell">SwissBorg</td></tr>
+                <tr><td class="label-cell">CORE amount</td><td class="protocol-cell">CoreStake</td></tr>
+                <tr><td class="label-cell">Maker amount</td><td class="protocol-cell">Paraswap</td></tr>
+                <tr><td class="label-cell">Amount to sell</td><td class="protocol-cell">1inch (definitions)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 2: Recipient -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Who receives the output</span>
+            <span class="concept-count">11 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Recipient</td><td class="protocol-cell">Celo, Flare, Lido, LiFi, Lombard, OpenCover, StarkGate</td></tr>
+                <tr><td class="label-cell">Receiver</td><td class="protocol-cell">Ethena, LedgerQuest, LiFi, Midas, Morpho, POAP, Serenita</td></tr>
+                <tr><td class="label-cell">Beneficiary</td><td class="protocol-cell">1inch, Celo, Flare, Paraswap, QuickSwap, Uniswap</td></tr>
+                <tr><td class="label-cell">To</td><td class="protocol-cell">Circle, DeGate, Lido, Swell, WalletConnect, YieldXYZ</td></tr>
+                <tr><td class="label-cell">To recipient</td><td class="protocol-cell">Aave</td></tr>
+                <tr><td class="label-cell">You receive</td><td class="protocol-cell">Midas</td></tr>
+                <tr><td class="label-cell">You will receive</td><td class="protocol-cell">Midas (different file, same protocol)</td></tr>
+                <tr><td class="label-cell">ETH recipient</td><td class="protocol-cell">Lido</td></tr>
+                <tr><td class="label-cell">HyperEVM recipient</td><td class="protocol-cell">Hyperliquid</td></tr>
+                <tr><td class="label-cell">Mint recipient</td><td class="protocol-cell">Hyperliquid</td></tr>
+                <tr><td class="label-cell">Rewards receiver</td><td class="protocol-cell">Serenita</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 3: Minimum received -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Minimum received (slippage protection)</span>
+            <span class="concept-count">8 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Minimum to Receive</td><td class="protocol-cell">LiFi, OKX, Paraswap, QuickSwap, Uniswap</td></tr>
+                <tr><td class="label-cell">Minimum to receive</td><td class="protocol-cell">Paraswap (capitalization mismatch)</td></tr>
+                <tr><td class="label-cell">Minimum amount</td><td class="protocol-cell">QuickSwap</td></tr>
+                <tr><td class="label-cell">Minimum amounts to receive</td><td class="protocol-cell">Uniswap (plural)</td></tr>
+                <tr><td class="label-cell">Min amount to receive</td><td class="protocol-cell">Uniswap (abbreviated)</td></tr>
+                <tr><td class="label-cell">Receive minimum</td><td class="protocol-cell">1inch (reversed word order)</td></tr>
+                <tr><td class="label-cell">Amount to Receive</td><td class="protocol-cell">Paraswap, QuickSwap, Uniswap (ambiguous: also used for exact output)</td></tr>
+                <tr><td class="label-cell">Minimum Amount to receive</td><td class="protocol-cell">LiFi (definition)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 4: Deadline -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Signature expiry / deadline</span>
+            <span class="concept-count">12 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Deadline</td><td class="protocol-cell">QuickSwap</td></tr>
+                <tr><td class="label-cell">deadline</td><td class="protocol-cell">Lens (lowercase)</td></tr>
+                <tr><td class="label-cell">Expiry</td><td class="protocol-cell">Lombard, Tally</td></tr>
+                <tr><td class="label-cell">Expiration time</td><td class="protocol-cell">Paraswap, 1inch</td></tr>
+                <tr><td class="label-cell">Expiration Date</td><td class="protocol-cell">Dispatch</td></tr>
+                <tr><td class="label-cell">Expiration Time</td><td class="protocol-cell">POAP</td></tr>
+                <tr><td class="label-cell">signatureDeadline</td><td class="protocol-cell">Lens (camelCase, untransformed)</td></tr>
+                <tr><td class="label-cell">ValidUntil</td><td class="protocol-cell">DeGate (PascalCase, no space)</td></tr>
+                <tr><td class="label-cell">Valid Until</td><td class="protocol-cell">Lombard</td></tr>
+                <tr><td class="label-cell">Approval expire</td><td class="protocol-cell">Uniswap</td></tr>
+                <tr><td class="label-cell">Approval expires</td><td class="protocol-cell">Uniswap (plural vs singular within same protocol)</td></tr>
+                <tr><td class="label-cell">Valid before</td><td class="protocol-cell">Circle</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 5: Spender / approval -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Token approval / spender</span>
+            <span class="concept-count">6 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Spender</td><td class="protocol-cell">Lido, Lombard, Swell, Uniswap, WalletConnect</td></tr>
+                <tr><td class="label-cell">Approve to spender</td><td class="protocol-cell">Uniswap (Permit2)</td></tr>
+                <tr><td class="label-cell">Allowance</td><td class="protocol-cell">Lombard</td></tr>
+                <tr><td class="label-cell">Amount to Approve</td><td class="protocol-cell">Lombard</td></tr>
+                <tr><td class="label-cell">Amount allowance</td><td class="protocol-cell">Lido, Uniswap</td></tr>
+                <tr><td class="label-cell">Approve</td><td class="protocol-cell">Aave (used as label for boolean)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 6: Nonce -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Nonce</span>
+            <span class="concept-count">5 variants</span>
+          </div>
+          <span class="concept-severity severity-medium">Medium</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Nonce</td><td class="protocol-cell">DeGate, Dispatch, Tally</td></tr>
+                <tr><td class="label-cell">nonce</td><td class="protocol-cell">Lens (lowercase)</td></tr>
+                <tr><td class="label-cell">Nonce and metadata</td><td class="protocol-cell">Paraswap</td></tr>
+                <tr><td class="label-cell">Meta Transaction Nonce</td><td class="protocol-cell">Rarible</td></tr>
+                <tr><td class="label-cell">Unbond nonce</td><td class="protocol-cell">YieldXYZ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 7: Proposal ID -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Governance proposal reference</span>
+            <span class="concept-count">3 variants</span>
+          </div>
+          <span class="concept-severity severity-medium">Medium</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Proposal ID</td><td class="protocol-cell">Celo (uppercase ID)</td></tr>
+                <tr><td class="label-cell">Proposal Id</td><td class="protocol-cell">Flare (mixed case)</td></tr>
+                <tr><td class="label-cell">Proposal id</td><td class="protocol-cell">Tally (lowercase id)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP 8: Interest rate -->
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Interest rate type (Aave internal)</span>
+            <span class="concept-count">3 variants, same protocol</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Label</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Interest rate mode</td><td class="protocol-cell">Aave LP v2, LP v3 (repay)</td></tr>
+                <tr><td class="label-cell">Interest Rate mode</td><td class="protocol-cell">Aave LP v2 (borrow)</td></tr>
+                <tr><td class="label-cell">Current rate mode</td><td class="protocol-cell">Aave LP v2 (swapBorrowRateMode)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- WORST OFFENDERS -->
+    <section id="offenders" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Quality audit</div>
+        <h2 class="section-title">Worst quality offenders</h2>
+        <p class="section-desc">Protocols where the clear signing labels would actively confuse or mislead users on the hardware wallet screen.</p>
+      </div>
+
+      <div class="offender-card">
+        <div class="offender-header">
+          <div class="offender-rank">1</div>
+          <span class="offender-name">Lens Protocol</span>
+          <span class="concept-severity severity-critical">Critical</span>
+        </div>
+        <p class="offender-issue">25+ raw Solidity variable names used directly as labels with zero human-friendly transformation. Users would see camelCase and snake_case developer names on their Ledger screen.</p>
+        <div class="offender-examples">
+          <span class="label-tag bad">profileId</span>
+          <span class="label-tag bad">profile_id_pointed</span>
+          <span class="label-tag bad">pubid_pointed</span>
+          <span class="label-tag bad">publicationCollectedProfileId</span>
+          <span class="label-tag bad">signatureDeadline</span>
+          <span class="label-tag bad">metadataURI</span>
+          <span class="label-tag bad">followModule</span>
+          <span class="label-tag bad">byProfileId</span>
+          <span class="label-tag bad">actorProfileId</span>
+          <span class="label-tag bad">contentURI</span>
+          <span class="label-tag bad">handleId</span>
+          <span class="label-tag bad">configNumber</span>
+        </div>
+      </div>
+
+      <div class="offender-card">
+        <div class="offender-header">
+          <div class="offender-rank">2</div>
+          <span class="offender-name">Aave</span>
+          <span class="concept-severity severity-high">High</span>
+        </div>
+        <p class="offender-issue">Inconsistent within itself. Three different capitalizations of the same field ("Interest rate mode" / "Interest Rate mode" / "Current rate mode") across three files within the same protocol.</p>
+        <div class="offender-examples">
+          <span class="label-tag bad">Interest rate mode</span>
+          <span class="label-tag bad">Interest Rate mode</span>
+          <span class="label-tag bad">Current rate mode</span>
+        </div>
+      </div>
+
+      <div class="offender-card">
+        <div class="offender-header">
+          <div class="offender-rank">3</div>
+          <span class="offender-name">Rarible</span>
+          <span class="concept-severity severity-high">High</span>
+        </div>
+        <p class="offender-issue">Internal encoding logic leaked into label strings. Basis-point math explanation baked into what users see, rather than handled by the format system.</p>
+        <div class="offender-examples">
+          <span class="label-tag bad">Creator value (10000 = 100%)</span>
+          <span class="label-tag bad">Royalties value (10000 = 100%)</span>
+        </div>
+      </div>
+
+      <div class="offender-card">
+        <div class="offender-header">
+          <div class="offender-rank">4</div>
+          <span class="offender-name">DeGate</span>
+          <span class="concept-severity severity-medium">Medium</span>
+        </div>
+        <p class="offender-issue">PascalCase variable names used as labels without spaces. "ValidUntil" instead of "Valid until", "TokenID" instead of "Token ID", "FeeTokenID" instead of "Fee token".</p>
+        <div class="offender-examples">
+          <span class="label-tag bad">ValidUntil</span>
+          <span class="label-tag bad">TokenID</span>
+          <span class="label-tag bad">FeeTokenID</span>
+          <span class="label-tag bad">AccountID</span>
+          <span class="label-tag bad">StorageID</span>
+          <span class="label-tag bad">MaxFee</span>
+          <span class="label-tag bad">PublicKey</span>
+        </div>
+      </div>
+
+      <div class="offender-card">
+        <div class="offender-header">
+          <div class="offender-rank">5</div>
+          <span class="offender-name">9 files with zero labels</span>
+          <span class="concept-severity severity-critical">Critical</span>
+        </div>
+        <p class="offender-issue">Operations defined but no human-readable labels provided. Users would see raw hex on the device, completely defeating the purpose of clear signing.</p>
+        <div class="offender-examples">
+          <span class="label-tag bad">1inch Router V3</span>
+          <span class="label-tag bad">1inch Router V4</span>
+          <span class="label-tag bad">1inch Router V5</span>
+          <span class="label-tag bad">1inch Router V6</span>
+          <span class="label-tag bad">CoreStake Hub</span>
+          <span class="label-tag bad">MakerDAO Permit</span>
+          <span class="label-tag bad">Paraswap v6.2</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAT DISTRIBUTION -->
+    <section id="formats" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Data types</div>
+        <h2 class="section-title">Format distribution</h2>
+        <p class="section-desc">How values are rendered on the wallet screen. <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--surface);padding:2px 6px;border-radius:3px;color:var(--accent);">raw</code> means the value is shown as-is (hex, bytes, integers) with no formatting. The high raw count signals many fields where users see opaque data.</p>
+      </div>
+
+      <div style="max-width:720px;">
+        <div class="format-bar-row">
+          <span class="format-name">raw</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:100%;background:var(--red);opacity:0.7;"></div></div>
+          <span class="format-count">403</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">addressName</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:64%;background:var(--accent);"></div></div>
+          <span class="format-count">258</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">tokenAmount</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:33.7%;background:var(--green);"></div></div>
+          <span class="format-count">136</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">amount</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:15.1%;background:var(--accent-secondary);"></div></div>
+          <span class="format-count">61</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">date</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:10.4%;background:var(--purple);"></div></div>
+          <span class="format-count">42</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">unit</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:8.4%;background:var(--amber);"></div></div>
+          <span class="format-count">34</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">calldata</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:3.5%;background:var(--blue);"></div></div>
+          <span class="format-count">14</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">enum</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:3%;background:var(--cyan);"></div></div>
+          <span class="format-count">12</span>
+        </div>
+        <div class="format-bar-row">
+          <span class="format-name">duration</span>
+          <div class="format-bar-track"><div class="format-bar-fill" style="width:3%;background:var(--text-muted);"></div></div>
+          <span class="format-count">12</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WORKS WELL -->
+    <section id="good" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Positive patterns</div>
+        <h2 class="section-title">What works well</h2>
+        <p class="section-desc">Not everything is broken. These protocols demonstrate that consistent labeling is achievable at scale.</p>
+      </div>
+
+      <div class="good-card">
+        <span class="protocol-name">ERC-2612 Permit (87 files)</span>
+        <p>Perfectly consistent across every token: <span class="label-tag">Owner</span> <span class="label-tag">Spender</span> <span class="label-tag">Amount</span> <span class="label-tag">Deadline</span> <span class="label-tag">Nonce</span>. The same five labels, identically capitalized, across 87 files. This is the best-standardized UX pattern in the entire registry and proves that shared templates work.</p>
+      </div>
+
+      <div class="good-card">
+        <span class="protocol-name">Morpho / Kiln Vaults (100+ files)</span>
+        <p>Share common definitions via includes. Labels are uniform across all vault variants: <span class="label-tag">Assets</span> <span class="label-tag">Shares</span> <span class="label-tag">Owner</span>. The <code style="font-family:var(--font-mono);font-size:0.85rem;background:rgba(74,222,128,0.08);padding:2px 6px;border-radius:3px;color:var(--green);">includes</code> mechanism in ERC-7730 enables this reuse pattern.</p>
+      </div>
+
+      <div class="good-card">
+        <span class="protocol-name">Safe (25 files)</span>
+        <p>Thorough coverage across Safe 1.3.0, 1.4.1, 1.5.0, SafeL2, and SafeMigration. Sensible, actionable labels: <span class="label-tag">New Owner</span> <span class="label-tag">New threshold</span> <span class="label-tag">Transaction</span> <span class="label-tag">Module</span>. Descriptive without being verbose.</p>
+      </div>
+    </section>
+
+    <!-- FULL PROTOCOL BREAKDOWN -->
+    <section id="protocols" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Complete registry</div>
+        <h2 class="section-title">Full protocol breakdown</h2>
+        <p class="section-desc">Every protocol in the registry with file counts and key labels used. Sorted by number of descriptor files.</p>
+      </div>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table class="protocol-table">
+          <thead>
+            <tr>
+              <th>Protocol</th>
+              <th>Files</th>
+              <th>Key labels</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="protocol-name">Morpho</td>
+              <td class="file-count">107</td>
+              <td><div class="label-list"><span class="label-tag">Assets</span><span class="label-tag">Shares</span><span class="label-tag">On Behalf</span><span class="label-tag">Loan Token</span><span class="label-tag">Collateral Token</span><span class="label-tag">Oracle</span><span class="label-tag">Lltv</span><span class="label-tag">Owner</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Permit</td>
+              <td class="file-count">87</td>
+              <td><div class="label-list"><span class="label-tag">Owner</span><span class="label-tag">Spender</span><span class="label-tag">Amount</span><span class="label-tag">Deadline</span><span class="label-tag">Nonce</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Kiln</td>
+              <td class="file-count">32</td>
+              <td><div class="label-list"><span class="label-tag">Shares</span><span class="label-tag">Assets</span><span class="label-tag">Owner</span><span class="label-tag">Spender</span><span class="label-tag">Allowance</span><span class="label-tag">Validators</span><span class="label-tag">Amount Per Validator</span><span class="label-tag">New Owner</span><span class="label-tag">Role</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Safe</td>
+              <td class="file-count">25</td>
+              <td><div class="label-list"><span class="label-tag">Transaction</span><span class="label-tag">Gas price</span><span class="label-tag">Gas token</span><span class="label-tag">New Owner</span><span class="label-tag">New threshold</span><span class="label-tag">Module</span><span class="label-tag">Old signer</span><span class="label-tag">New signer</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Tally</td>
+              <td class="file-count">13</td>
+              <td><div class="label-list"><span class="label-tag">Proposal id</span><span class="label-tag">Support</span><span class="label-tag">Delegatee</span><span class="label-tag">Nonce</span><span class="label-tag">Expiry</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">1inch</td>
+              <td class="file-count">11</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Receive amount</span><span class="label-tag">Beneficiary</span><span class="label-tag">From</span><span class="label-tag">Send</span><span class="label-tag">Receive minimum</span><span class="label-tag">To</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Uniswap</td>
+              <td class="file-count">7</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Beneficiary</span><span class="label-tag">Minimum to Receive</span><span class="label-tag">Maximum Amount In</span><span class="label-tag">Approve to spender</span><span class="label-tag">Amount allowance</span><span class="label-tag">Approval expires</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Flare</td>
+              <td class="file-count">6</td>
+              <td><div class="label-list"><span class="label-tag">Reward Owner</span><span class="label-tag">Reward Amount</span><span class="label-tag">Beneficiary</span><span class="label-tag">Proposal Id</span><span class="label-tag">Voting Period</span><span class="label-tag">Threshold</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Celo</td>
+              <td class="file-count">5</td>
+              <td><div class="label-list"><span class="label-tag">Validator Group</span><span class="label-tag">Gold to Vote</span><span class="label-tag">Proposal ID</span><span class="label-tag">Vote</span><span class="label-tag">Amount to Lock</span><span class="label-tag">Delegatee</span><span class="label-tag">Commission</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">P2P</td>
+              <td class="file-count">5</td>
+              <td><div class="label-list"><span class="label-tag">ETH per validator</span><span class="label-tag">Public keys</span><span class="label-tag">Amount to deposit</span><span class="label-tag">Withdraw credentials</span><span class="label-tag">Client fee (bps)</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Paraswap</td>
+              <td class="file-count">4</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Minimum to Receive</span><span class="label-tag">Beneficiary</span><span class="label-tag">Maker amount</span><span class="label-tag">Taker amount</span><span class="label-tag">Expiration time</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Lido</td>
+              <td class="file-count">4</td>
+              <td><div class="label-list"><span class="label-tag">Amount to stake</span><span class="label-tag">Amount to withdraw</span><span class="label-tag">Spender</span><span class="label-tag">Amount allowance</span><span class="label-tag">Recipient</span><span class="label-tag">stETH amount</span><span class="label-tag">wstETH amount</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Lombard</td>
+              <td class="file-count">4</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Burn</span><span class="label-tag">Recipient</span><span class="label-tag">Network Fee</span><span class="label-tag">Valid Until</span><span class="label-tag">Amount to Approve</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Rarible</td>
+              <td class="file-count">4</td>
+              <td><div class="label-list"><span class="label-tag">Token ID</span><span class="label-tag">Token URI</span><span class="label-tag bad">Creator value (10000 = 100%)</span><span class="label-tag bad">Royalties value (10000 = 100%)</span><span class="label-tag">Order maker address</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Aave</td>
+              <td class="file-count">3</td>
+              <td><div class="label-list"><span class="label-tag">Amount to supply</span><span class="label-tag">Amount to repay</span><span class="label-tag">Amount to withdraw</span><span class="label-tag">Amount to borrow</span><span class="label-tag bad">Interest Rate mode</span><span class="label-tag bad">Interest rate mode</span><span class="label-tag">Collateral recipient</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">CoreStake</td>
+              <td class="file-count">3</td>
+              <td><div class="label-list"><span class="label-tag">Amount to stake</span><span class="label-tag">Validator Address</span><span class="label-tag">Amount to Redeem</span><span class="label-tag">CORE amount</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">SwissBorg</td>
+              <td class="file-count">3</td>
+              <td><div class="label-list"><span class="label-tag">CHSB Amount</span><span class="label-tag">Destination Address</span><span class="label-tag">Amount</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Circle</td>
+              <td class="file-count">2</td>
+              <td><div class="label-list"><span class="label-tag">From</span><span class="label-tag">To</span><span class="label-tag">Amount</span><span class="label-tag">Valid after</span><span class="label-tag">Valid before</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Lens</td>
+              <td class="file-count">2</td>
+              <td><div class="label-list"><span class="label-tag bad">profileId</span><span class="label-tag bad">pubid_pointed</span><span class="label-tag bad">signatureDeadline</span><span class="label-tag bad">metadataURI</span><span class="label-tag bad">followModule</span><span class="label-tag bad">publicationCollectedProfileId</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Midas</td>
+              <td class="file-count">2</td>
+              <td><div class="label-list"><span class="label-tag">You pay with</span><span class="label-tag">Amount to redeem</span><span class="label-tag">You receive</span><span class="label-tag">You will receive</span><span class="label-tag">Slippage</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">WalletConnect</td>
+              <td class="file-count">2</td>
+              <td><div class="label-list"><span class="label-tag">To</span><span class="label-tag">Amount</span><span class="label-tag">Spender</span><span class="label-tag">For</span><span class="label-tag">New Unlock Time</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">YieldXYZ</td>
+              <td class="file-count">2</td>
+              <td><div class="label-list"><span class="label-tag">Assets</span><span class="label-tag">Shares</span><span class="label-tag">Owner</span><span class="label-tag">Shares to redeem</span><span class="label-tag">Deposit asset</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Benqi</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to stake</span><span class="label-tag">sAVAX amount</span><span class="label-tag">Unlock index</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Consensus-specs</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Validator public key</span><span class="label-tag">Amount to deposit</span><span class="label-tag">Withdraw credentials</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">DeGate</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">From</span><span class="label-tag">To</span><span class="label-tag bad">TokenID</span><span class="label-tag bad">ValidUntil</span><span class="label-tag bad">AccountID</span><span class="label-tag bad">MaxFee</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Dispatch</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Profile Ids</span><span class="label-tag">Data</span><span class="label-tag">Nonce</span><span class="label-tag">Expiration Date</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Ethena</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount</span><span class="label-tag">Receiver</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Fellow Fund</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Fellowship ID</span><span class="label-tag">Total Funding</span><span class="label-tag">Program End Date</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Figment</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Validator Public Key</span><span class="label-tag">Amount to Deposit</span><span class="label-tag">Withdraw credentials</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Hyperliquid</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount</span><span class="label-tag">HyperEVM recipient</span><span class="label-tag">Mint recipient</span><span class="label-tag">Max fee</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">LedgerQuest</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Receiver</span><span class="label-tag">Collection</span><span class="label-tag">Quest Type</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">LiFi</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Beneficiary</span><span class="label-tag">Minimum to Receive</span><span class="label-tag">Recipient</span><span class="label-tag">Destination chain ID</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">MakerDAO</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag" style="color:var(--text-muted);font-style:italic;">screens-only (no labels)</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">OKX</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Minimum to Receive</span><span class="label-tag">Refund To</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">OpenCover</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Cover amount</span><span class="label-tag">Cover duration</span><span class="label-tag">Premium amount</span><span class="label-tag">Fee amount</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Opensea</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Offer expiration</span><span class="label-tag">Price</span><span class="label-tag">Contract address</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">POAP</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Token Id</span><span class="label-tag">Expiration Time</span><span class="label-tag">Migration Fee</span><span class="label-tag">To</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">QuickSwap</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to Send</span><span class="label-tag">Amount to Receive</span><span class="label-tag">Beneficiary</span><span class="label-tag">Minimum amount</span><span class="label-tag">Deadline</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Serenita</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to stake</span><span class="label-tag">Amount to withdraw</span><span class="label-tag">Rewards receiver</span><span class="label-tag">Withdrawal Index</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">SmartCredit</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Loan Amount</span><span class="label-tag">Collateral amount</span><span class="label-tag">Loan interest rate</span><span class="label-tag">Load Term</span><span class="label-tag">Debtor</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">StarkGate</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to deposit</span><span class="label-tag">Recipient</span><span class="label-tag">Deposit fee</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Swell</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Amount to stake</span><span class="label-tag">Referral</span><span class="label-tag">Spender</span><span class="label-tag">Amount</span><span class="label-tag">Address</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">Tether</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Spender</span><span class="label-tag">Amount</span><span class="label-tag">To</span></div></td>
+            </tr>
+            <tr>
+              <td class="protocol-name">WETH</td>
+              <td class="file-count">1</td>
+              <td><div class="label-list"><span class="label-tag">Spender</span><span class="label-tag">Amount</span><span class="label-tag">To</span><span class="label-tag">From</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-text">Clear Signing Registry Audit &middot; April 2026 &middot; <a href="https://ethux.design">EthUX</a></span>
+      <span class="footer-text">Data source: <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry" target="_blank" rel="noopener">LedgerHQ/clear-signing-erc7730-registry</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
