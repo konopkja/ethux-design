@@ -969,11 +969,12 @@
       <div class="toc-title">Contents</div>
       <ol class="toc-list">
         <li><a href="#explainer"><span class="toc-num">01</span> What is clear signing?</a></li>
-        <li><a href="#inconsistencies"><span class="toc-num">02</span> Semantic inconsistencies</a></li>
-        <li><a href="#offenders"><span class="toc-num">03</span> Worst quality offenders</a></li>
-        <li><a href="#formats"><span class="toc-num">04</span> Format distribution</a></li>
-        <li><a href="#good"><span class="toc-num">05</span> What works well</a></li>
-        <li><a href="#protocols"><span class="toc-num">06</span> Full protocol breakdown</a></li>
+        <li><a href="#inconsistencies"><span class="toc-num">02</span> Label inconsistencies</a></li>
+        <li><a href="#intents"><span class="toc-num">03</span> Intent inconsistencies</a></li>
+        <li><a href="#offenders"><span class="toc-num">04</span> Worst quality offenders</a></li>
+        <li><a href="#formats"><span class="toc-num">05</span> Format distribution</a></li>
+        <li><a href="#good"><span class="toc-num">06</span> What works well</a></li>
+        <li><a href="#protocols"><span class="toc-num">07</span> Full protocol breakdown</a></li>
       </ol>
     </div>
 
@@ -1010,7 +1011,7 @@
     <!-- SEMANTIC INCONSISTENCIES (sorted: critical first, then high, then medium) -->
     <section id="inconsistencies" class="section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">Core finding</div>
+        <div class="section-eyebrow">Label analysis</div>
         <h2 class="section-title">394 labels for ~30 concepts</h2>
         <p class="section-desc">The same underlying concept is expressed with wildly different labels across protocols. Each group below shows a single concept and every label variant used to describe it.</p>
       </div>
@@ -1249,6 +1250,272 @@
       </div>
 
     </section>
+
+
+    <!-- INTENT INCONSISTENCIES -->
+    <section id="intents" class="section reveal">
+      <div class="section-header">
+        <div class="section-eyebrow">Intent analysis</div>
+        <h2 class="section-title">251 intents for ~15 actions</h2>
+        <p class="section-desc">The intent is the headline users see before field details: "Swap", "Repay loan", "Stake ETH". Different protocols describe the same action with different wording, different casing, and different levels of specificity.</p>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Staking / depositing assets</span>
+            <span class="concept-count">16 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Stake ETH</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/consensus-specs/calldata-DepositContract.json#L84" target="_blank" rel="noopener">Consensus-specs</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/figment/calldata-figment-batch-deposit.json#L119" target="_blank" rel="noopener">Figment</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-stETH.json#L37" target="_blank" rel="noopener">Lido</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-P2pOrgUnlimitedEthDepositor.json#L407" target="_blank" rel="noopener">P2P</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/serenita/calldata-EthVault.json#L152" target="_blank" rel="noopener">Serenita</a></td></tr>
+                <tr><td class="label-cell">Stake AVAX</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/benqi/calldata-sAVAX.json#L51" target="_blank" rel="noopener">Benqi</a></td></tr>
+                <tr><td class="label-cell">Stake CORE</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-corestake.json#L32" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">Stake POL</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-pol-validator.json#L49" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Stake 32ETH per validators</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/kiln/calldata-kiln-batch-deposit-v2.json#L86" target="_blank" rel="noopener">Kiln</a></td></tr>
+                <tr><td class="label-cell">Stake any amount per validator</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/kiln/calldata-kiln-batch-deposit-v2.json#L96" target="_blank" rel="noopener">Kiln</a></td></tr>
+                <tr><td class="label-cell">Stake ETH with SSV</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-P2pSsvProxyFactory.json#L1229" target="_blank" rel="noopener">P2P</a></td></tr>
+                <tr><td class="label-cell">Stake ETH with p2p</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-NativeTokenVault.json#L452" target="_blank" rel="noopener">P2P</a></td></tr>
+                <tr><td class="label-cell">Supply</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/aave/calldata-WrappedTokenGatewayV3.json#L89" target="_blank" rel="noopener">Aave</a></td></tr>
+                <tr><td class="label-cell">Supply on Morpho Market</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/morpho/calldata-MorphoBlue.json#L770" target="_blank" rel="noopener">Morpho</a></td></tr>
+                <tr><td class="label-cell">Supply Collateral on Morpho Market</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/morpho/calldata-MorphoBlue.json#L839" target="_blank" rel="noopener">Morpho</a></td></tr>
+                <tr><td class="label-cell">Deposit</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swell/calldata-swell.json#L263" target="_blank" rel="noopener">Swell</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-usde-vault.json#L42" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Deposit via Manager</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swell/calldata-swell.json#L255" target="_blank" rel="noopener">Swell</a></td></tr>
+                <tr><td class="label-cell">Lock CELO</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-locked_celo.json#L642" target="_blank" rel="noopener">Celo</a></td></tr>
+                <tr><td class="label-cell">Lock Tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-stakeweight.json#L127" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Lock tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-stakeweight.json#L140" target="_blank" rel="noopener">WalletConnect</a> (case mismatch, same protocol)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Unstaking / withdrawing</span>
+            <span class="concept-count">24 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Withdraw</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/aave/calldata-WrappedTokenGatewayV3.json#L119" target="_blank" rel="noopener">Aave</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-celo_governance.json#L1348" target="_blank" rel="noopener">Celo</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-usde-vault.json#L65" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Withdraw All</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-stakeweight.json#L182" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Withdraw CELO</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-locked_celo.json#L682" target="_blank" rel="noopener">Celo</a></td></tr>
+                <tr><td class="label-cell">Withdraw CORE</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-corestake.json#L56" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">Withdraw from Morpho Market</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/morpho/calldata-MorphoBlue.json#L906" target="_blank" rel="noopener">Morpho</a></td></tr>
+                <tr><td class="label-cell">Withdraw Collateral from Morpho Market</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/morpho/calldata-MorphoBlue.json#L982" target="_blank" rel="noopener">Morpho</a></td></tr>
+                <tr><td class="label-cell">Withdraw POL rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-pol-validator.json#L79" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Unstake</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/ethena/calldata-ethena.json#L85" target="_blank" rel="noopener">Ethena</a></td></tr>
+                <tr><td class="label-cell">Unstake CORE</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-coreagent.json#L55" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">Unstake POL</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-pol-validator.json#L62" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Redeem</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L758" target="_blank" rel="noopener">Lombard</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-usde-vault.json#L79" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Redeem BTC</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L765" target="_blank" rel="noopener">Lombard</a></td></tr>
+                <tr><td class="label-cell">Redeem sAVAX</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/benqi/calldata-sAVAX.json#L78" target="_blank" rel="noopener">Benqi</a></td></tr>
+                <tr><td class="label-cell">Redeem Overdue</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/benqi/calldata-sAVAX.json#L76" target="_blank" rel="noopener">Benqi</a></td></tr>
+                <tr><td class="label-cell">Request Redeem</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-corestake.json#L45" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">Request Withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L21" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Request withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L59" target="_blank" rel="noopener">Lido</a> (case mismatch, same protocol)</td></tr>
+                <tr><td class="label-cell">Request unstaking</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/benqi/calldata-sAVAX.json#L57" target="_blank" rel="noopener">Benqi</a></td></tr>
+                <tr><td class="label-cell">request a redemption</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/midas/calldata-RedemptionVault.json#L183" target="_blank" rel="noopener">Midas</a> (lowercase)</td></tr>
+                <tr><td class="label-cell">Cooldown Assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/ethena/calldata-ethena.json#L68" target="_blank" rel="noopener">Ethena</a></td></tr>
+                <tr><td class="label-cell">Cooldown Shares</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/ethena/calldata-ethena.json#L51" target="_blank" rel="noopener">Ethena</a></td></tr>
+                <tr><td class="label-cell">claim withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L97" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">claim withdrawals</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L103" target="_blank" rel="noopener">Lido</a> (plural, same protocol)</td></tr>
+                <tr><td class="label-cell">Claim exited assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-NativeTokenVault.json#L510" target="_blank" rel="noopener">P2P</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Approving / authorizing spending</span>
+            <span class="concept-count">14 variants</span>
+          </div>
+          <span class="concept-severity severity-critical">Critical</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Approve</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-celo_governance.json#L1252" target="_blank" rel="noopener">Celo</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L722" target="_blank" rel="noopener">Lombard</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-wct.json#L53" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Approve Manager</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/aave/calldata-lpv3.json#L613" target="_blank" rel="noopener">Aave</a></td></tr>
+                <tr><td class="label-cell">Approve spender</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swell/calldata-swell.json#L218" target="_blank" rel="noopener">Swell</a></td></tr>
+                <tr><td class="label-cell">Approve stETH</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-stETH.json#L18" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Approve unstETH NFT</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L123" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Approve unstETH NFTs</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L175" target="_blank" rel="noopener">Lido</a> (plural, same protocol)</td></tr>
+                <tr><td class="label-cell">Approve Safe hash</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/safe/common-Safe.json#L183" target="_blank" rel="noopener">Safe</a></td></tr>
+                <tr><td class="label-cell">Authorize spending</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-wstETH.json#L21" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Authorize spending of token</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/eip712-uniswap-permit2.json#L56" target="_blank" rel="noopener">Uniswap</a></td></tr>
+                <tr><td class="label-cell">Authorize spending of tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/eip712-uniswap-permit2.json#L68" target="_blank" rel="noopener">Uniswap</a> (plural, same protocol)</td></tr>
+                <tr><td class="label-cell">Authorize USDC transfer</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/circle/eip712-ReceiveWithAuthorization.json#L41" target="_blank" rel="noopener">Circle</a></td></tr>
+                <tr><td class="label-cell">Authorize Signer</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-celo_accounts.json#L1004" target="_blank" rel="noopener">Celo</a></td></tr>
+                <tr><td class="label-cell">Authorize Validator</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-celo_accounts.json#L1049" target="_blank" rel="noopener">Celo</a></td></tr>
+                <tr><td class="label-cell">Authorize &amp; Set Vote</td><td class="protocol-cell">Celo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Swapping / trading</span>
+            <span class="concept-count">5 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Swap</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/1inch/calldata-AggregationRouterV3.json#L40" target="_blank" rel="noopener">1inch</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lifi/calldata-LIFIDiamond.json#L5153" target="_blank" rel="noopener">LiFi</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/okx/calldata-OkxDexRouterV1.0.8-suffix-compat.json#L450" target="_blank" rel="noopener">OKX</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/paraswap/calldata-AugustusSwapper-v5.json#L404" target="_blank" rel="noopener">Paraswap</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/quickswap/calldata-QuickSwap.json#L17" target="_blank" rel="noopener">QuickSwap</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/calldata-UniswapV3Router02.json#L18" target="_blank" rel="noopener">Uniswap</a></td></tr>
+                <tr><td class="label-cell">swap</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/calldata-UniswapV3Router02.json#L43" target="_blank" rel="noopener">Uniswap</a> (lowercase, same protocol)</td></tr>
+                <tr><td class="label-cell">Buy</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/paraswap/calldata-AugustusSwapper-v5.json#L497" target="_blank" rel="noopener">Paraswap</a></td></tr>
+                <tr><td class="label-cell">Fill order</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/1inch/common-AggregationRouterV6.json#L251" target="_blank" rel="noopener">1inch</a></td></tr>
+                <tr><td class="label-cell">Swap order</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/paraswap/eip712-Velora-DeltaV2.json#L54" target="_blank" rel="noopener">Paraswap</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Sending / transferring</span>
+            <span class="concept-count">7 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Send</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L775" target="_blank" rel="noopener">Lombard</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-wct.json#L45" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Transfer</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L785" target="_blank" rel="noopener">Lombard</a></td></tr>
+                <tr><td class="label-cell">Transfer Tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swell/calldata-swell.json#L289" target="_blank" rel="noopener">Swell</a></td></tr>
+                <tr><td class="label-cell">Transfer From</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swell/calldata-swell.json#L296" target="_blank" rel="noopener">Swell</a></td></tr>
+                <tr><td class="label-cell">Transfer stETH</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-stETH.json#L43" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Transfer wstETH</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-wstETH.json#L66" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Transfer unstETH NFT</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L135" target="_blank" rel="noopener">Lido</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Bridging cross-chain</span>
+            <span class="concept-count">3 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Bridge</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/starkgate/calldata-StarkGate-STRK.json#L18" target="_blank" rel="noopener">StarkGate</a></td></tr>
+                <tr><td class="label-cell">Bridge BORG</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/swissborg/calldata-NttManager.json#L721" target="_blank" rel="noopener">SwissBorg</a></td></tr>
+                <tr><td class="label-cell">Bridge USDC via CCTP</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/hyperliquid/calldata-CctpExtension.json#L56" target="_blank" rel="noopener">Hyperliquid</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Claiming rewards / withdrawals</span>
+            <span class="concept-count">9 variants</span>
+          </div>
+          <span class="concept-severity severity-high">High</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Claim rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-stakehub.json#L18" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">claim rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/flare/calldata-DistributionToDelegators-Flare.json#L796" target="_blank" rel="noopener">Flare</a> (lowercase)</td></tr>
+                <tr><td class="label-cell">Claim/Wrap Reward</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/flare/calldata-ValidatorRewardManager-Flare.json#L588" target="_blank" rel="noopener">Flare</a></td></tr>
+                <tr><td class="label-cell">batch claims rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/flare/calldata-DistributionToDelegators-Flare.json#L823" target="_blank" rel="noopener">Flare</a> (lowercase, grammatically odd)</td></tr>
+                <tr><td class="label-cell">Claim unstaked AVAX</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/benqi/calldata-sAVAX.json#L69" target="_blank" rel="noopener">Benqi</a></td></tr>
+                <tr><td class="label-cell">Claim unstaked POL</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-pol-validator.json#L75" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">Claim exited assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-NativeTokenVault.json#L510" target="_blank" rel="noopener">P2P</a></td></tr>
+                <tr><td class="label-cell">claim exited assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/serenita/calldata-EthVault.json#L146" target="_blank" rel="noopener">Serenita</a> (lowercase, same meaning)</td></tr>
+                <tr><td class="label-cell">claim withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L97" target="_blank" rel="noopener">Lido</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="concept-group" data-concept>
+        <div class="concept-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="concept-left">
+            <span class="concept-name">Case inconsistencies (identical meaning)</span>
+            <span class="concept-count">8 pairs</span>
+          </div>
+          <span class="concept-severity severity-medium">Medium</span>
+          <svg class="concept-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="concept-body"><div class="concept-body-inner">
+          <div class="concept-content">
+            <table class="variant-table">
+              <thead><tr><th>Intent</th><th>Used by</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Swap</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/1inch/calldata-AggregationRouterV3.json#L40" target="_blank" rel="noopener">1inch</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lifi/calldata-LIFIDiamond.json#L5153" target="_blank" rel="noopener">LiFi</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/okx/calldata-OkxDexRouterV1.0.8-suffix-compat.json#L450" target="_blank" rel="noopener">OKX</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/paraswap/calldata-AugustusSwapper-v5.json#L404" target="_blank" rel="noopener">Paraswap</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/quickswap/calldata-QuickSwap.json#L17" target="_blank" rel="noopener">QuickSwap</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/calldata-UniswapV3Router02.json#L18" target="_blank" rel="noopener">Uniswap</a></td></tr>
+                <tr><td class="label-cell">swap</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/uniswap/calldata-UniswapV3Router02.json#L43" target="_blank" rel="noopener">Uniswap</a></td></tr>
+                <tr><td class="label-cell">Mint</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/ledgerquest/eip712-ledgerquest.json#L31" target="_blank" rel="noopener">LedgerQuest</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L739" target="_blank" rel="noopener">Lombard</a>, <a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/yieldxyz/calldata-yieldxyz-usde-vault.json#L56" target="_blank" rel="noopener">YieldXYZ</a></td></tr>
+                <tr><td class="label-cell">mint</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lens/eip712-lens-lenshub.json#L546" target="_blank" rel="noopener">Lens</a></td></tr>
+                <tr><td class="label-cell">Burn</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lombard/calldata-lbtc-mainnet.json#L732" target="_blank" rel="noopener">Lombard</a></td></tr>
+                <tr><td class="label-cell">burn</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lens/eip712-lens-lenshub.json#L449" target="_blank" rel="noopener">Lens</a></td></tr>
+                <tr><td class="label-cell">Lock Tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-stakeweight.json#L127" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Lock tokens</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/walletconnect/calldata-stakeweight.json#L140" target="_blank" rel="noopener">WalletConnect</a></td></tr>
+                <tr><td class="label-cell">Request Withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L21" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Request withdrawal</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/lido/calldata-WithdrawalQueueERC721.json#L59" target="_blank" rel="noopener">Lido</a></td></tr>
+                <tr><td class="label-cell">Claim rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/corestake/calldata-stakehub.json#L18" target="_blank" rel="noopener">CoreStake</a></td></tr>
+                <tr><td class="label-cell">claim rewards</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/flare/calldata-DistributionToDelegators-Flare.json#L796" target="_blank" rel="noopener">Flare</a></td></tr>
+                <tr><td class="label-cell">Claim exited assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/p2p/calldata-NativeTokenVault.json#L510" target="_blank" rel="noopener">P2P</a></td></tr>
+                <tr><td class="label-cell">claim exited assets</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/serenita/calldata-EthVault.json#L146" target="_blank" rel="noopener">Serenita</a></td></tr>
+                <tr><td class="label-cell">Remove Signer</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/celo/calldata-celo_accounts.json#L1135" target="_blank" rel="noopener">Celo</a></td></tr>
+                <tr><td class="label-cell">Remove signer</td><td class="protocol-cell"><a href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/registry/safe/common-Safe.json#L132" target="_blank" rel="noopener">Safe</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+      </div>
+
+    </section>
+
 
     <!-- WORST OFFENDERS -->
     <section id="offenders" class="section reveal">
