@@ -1,5 +1,5 @@
 # EthUX Design — Complete Dataset
-Generated: 2026-04-09 | Source: https://ethux.design
+Generated: 2026-04-23 | Source: https://ethux.design
 
 A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
 
@@ -860,7 +860,7 @@ Opt-in privacy exists but requires active effort: Railgun ($4.5B+ shielded volum
 | Railgun (shielded balances) | Live | $4.5B+ cumulative volume |
 | Privacy Pools (0xbow) | Live | ~1,500 users, ~$6M volume |
 | Stealth addresses (ERC-5564) | Live | 77k addresses via Umbra, few wallets |
-| Aztec L2 (private execution) | Building | Ignition mainnet live, user txs expected early 2026 |
+| Aztec L2 (private execution) | Live | Alpha Mainnet since Mar 2026 |
 
 **User evidence:**
 > "Every time you text someone your wallet address, you give them your full balance and your entire transaction history." (User, community report)

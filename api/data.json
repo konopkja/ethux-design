@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-09",
+    "generatedAt": "2026-04-23",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -845,8 +845,8 @@
             },
             {
               "name": "Aztec L2 (private execution)",
-              "status": "Building",
-              "adoption": "Ignition mainnet live, user txs expected early 2026"
+              "status": "Live",
+              "adoption": "Alpha Mainnet since Mar 2026"
             }
           ],
           "eips": [
