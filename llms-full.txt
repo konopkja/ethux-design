@@ -1,5 +1,5 @@
 # EthUX Design — Complete Dataset
-Generated: 2026-04-23 | Source: https://ethux.design
+Generated: 2026-05-14 | Source: https://ethux.design
 
 A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
 
@@ -924,16 +924,16 @@ Additionally, wallets and centralized exchanges increasingly support local curre
 
 ---
 
-#### No Portfolio & Tax Tracking
+#### Tax Tracking Lives Outside Wallets
 - **Severity:** Medium
-- **Status:** Unsolved
+- **Status:** In-progress
 
-Tracking a complete financial picture across multiple chains, wallets, DeFi positions, LP rewards, airdrops, and bridge transactions is still impossible in a single tool. External tax software exists but requires manual reconciliation, often miscategorizes DeFi activity, and cannot reliably track cost basis across cross-chain swaps. Users who actively use DeFi face hours of manual work each tax season.
+Capable trackers exist — rotki, CoinTracker, Waltio, Koinly — but every one is a separate app you have to feed your wallets, exchanges, and addresses into. Categorization of complex DeFi positions remains imperfect, cross-chain cost basis is fragile, and free tiers cap at low event counts. No major wallet ships native tax-and-portfolio reporting as a first-class feature. Active DeFi users still spend hours each tax season reconciling output.
 
 | Solution | Status | Adoption |
 |----------|--------|----------|
-| Third-party tools (Koinly, CoinTracker) | Live | External, not integrated into wallets |
-| Wallet-native tax tracking | None | Nobody is building this |
+| Third-party trackers (rotki, CoinTracker, Koinly, Waltio) | Live | Separate apps, manual reconciliation required |
+| Wallet-native tax tracking | None | No major wallet ships this as first-class |
 
 ---
 

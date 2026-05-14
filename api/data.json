@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-23",
+    "generatedAt": "2026-05-14",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -919,20 +919,20 @@
           "checklist": "gas"
         },
         {
-          "title": "No Portfolio & Tax Tracking",
+          "title": "Tax Tracking Lives Outside Wallets",
           "severity": "medium",
-          "status": "unsolved",
-          "description": "Tracking a complete financial picture across multiple chains, wallets, DeFi positions, LP rewards, airdrops, and bridge transactions is still impossible in a single tool. External tax software exists but requires manual reconciliation, often miscategorizes DeFi activity, and cannot reliably track cost basis across cross-chain swaps. Users who actively use DeFi face hours of manual work each tax season.",
+          "status": "in-progress",
+          "description": "Capable trackers exist — rotki, CoinTracker, Waltio, Koinly — but every one is a separate app you have to feed your wallets, exchanges, and addresses into. Categorization of complex DeFi positions remains imperfect, cross-chain cost basis is fragile, and free tiers cap at low event counts. No major wallet ships native tax-and-portfolio reporting as a first-class feature. Active DeFi users still spend hours each tax season reconciling output.",
           "solutions": [
             {
-              "name": "Third-party tools (Koinly, CoinTracker)",
+              "name": "Third-party trackers (rotki, CoinTracker, Koinly, Waltio)",
               "status": "Live",
-              "adoption": "External, not integrated into wallets"
+              "adoption": "Separate apps, manual reconciliation required"
             },
             {
               "name": "Wallet-native tax tracking",
               "status": "None",
-              "adoption": "Nobody is building this"
+              "adoption": "No major wallet ships this as first-class"
             }
           ],
           "eips": [],
