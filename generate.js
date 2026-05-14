@@ -277,20 +277,18 @@ function generateNoscript() {
     return `        <li><strong>${cl.title}</strong> — ${stds} (${cl.items.length} patterns)</li>`;
   }).join('\n');
 
+  // Note: .noscript-content styles live in style.css so the markup that
+  // ships inside <noscript> stays free of inline CSS. Some HTML parsers
+  // (including the one afdocs uses) treat <noscript> content as raw text,
+  // which means an inline <style> here leaks into the agent-readable
+  // markdown conversion and pushes real content past the start-position
+  // threshold.
   return `  <noscript>
-    <style>
-      .noscript-content { max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; font-family: system-ui, sans-serif; color: #e0e0e6; background: #0a0a0f; line-height: 1.7; }
-      .noscript-content h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #f0f0f5; }
-      .noscript-content h2 { font-size: 1.3rem; margin-top: 2rem; color: #f0f0f5; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
-      .noscript-content ul { padding-left: 1.2rem; }
-      .noscript-content li { margin-bottom: 0.5rem; }
-      .noscript-content a { color: #8ab4f8; }
-      .noscript-content strong { color: #f0f0f5; }
-      .noscript-content .note { margin-top: 2rem; padding: 1rem; background: #151520; border-radius: 8px; font-size: 0.9rem; color: #a0a0aa; }
-    </style>
     <div class="noscript-content">
       <h1>EthUX — Ethereum UX Pain Points, Solutions & Research</h1>
       <p>A community-sourced map of ${DATA.categories.reduce((n, c) => n + c.problems.length, 0)} Ethereum UX pain points with real user evidence, solution checklists, and adoption tracking. Built from 32,000+ community reports.</p>
+
+      <p><strong>For AI agents and LLM tools:</strong> the index lives at <a href="/llms.txt">/llms.txt</a>, with the full dataset at <a href="/llms-full.txt">/llms-full.txt</a> and structured JSON at <a href="/api/data.json">/api/data.json</a>.</p>
 
       <h2>UX Problem Categories</h2>
       <ul>

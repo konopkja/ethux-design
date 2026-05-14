@@ -2,6 +2,10 @@
 
 > A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
 
+## Site
+
+- [EthUX home](https://ethux.design/): Interactive map of all 38 UX pain points across 8 categories, with solutions, adoption tracking, and user evidence. Best viewed in a browser; agents should prefer the machine-readable files below.
+
 ## Full data
 
 - [Complete dataset (markdown)](https://ethux.design/llms-full.txt): All 38 problems across 8 categories, with severity, status, solutions, adoption data, user evidence, and risk/opportunity analysis

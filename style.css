@@ -2706,3 +2706,13 @@ html.dark .skill-card-icon img { filter: brightness(1.3) saturate(1.2); }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal, .reveal-grid > * { opacity: 1; transform: none; }
 }
+
+/* No-JS fallback content (rendered from inside <noscript>) */
+.noscript-content { max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; font-family: system-ui, sans-serif; color: #e0e0e6; background: #0a0a0f; line-height: 1.7; }
+.noscript-content h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #f0f0f5; }
+.noscript-content h2 { font-size: 1.3rem; margin-top: 2rem; color: #f0f0f5; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
+.noscript-content ul { padding-left: 1.2rem; }
+.noscript-content li { margin-bottom: 0.5rem; }
+.noscript-content a { color: #8ab4f8; }
+.noscript-content strong { color: #f0f0f5; }
+.noscript-content .note { margin-top: 2rem; padding: 1rem; background: #151520; border-radius: 8px; font-size: 0.9rem; color: #a0a0aa; }
