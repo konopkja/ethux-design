@@ -3,6 +3,8 @@ name: wallets
 description: "Wallet connection UX patterns for Ethereum dApps: EIP-6963 multi-wallet discovery, mobile deep linking, session persistence and auto-reconnect, embedded/smart wallets for new users, and WalletConnect v2 fallback. Use this skill whenever building or reviewing ANY wallet connection flow, connect button, wallet modal, session management, embedded wallet, WalletConnect integration, or mobile wallet linking — even if the user just mentions 'wallet', 'connect', 'disconnect', 'WalletConnect', 'embedded wallet', or 'wallet discovery'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Wallet Connection
 
 **Scope:** Wallet discovery (EIP-6963), connection flows, mobile deep linking, session persistence, embedded/smart wallets, and WalletConnect fallback.
@@ -87,7 +89,8 @@ The "connecting" state must show: the wallet name and icon, a spinner or pulsing
 On mobile:
   1. User taps wallet icon
   2. Generate WC pairing URI
-  3. window.location.href = `${walletDeepLink}?uri=${encodeURIComponent(wcUri)}`
+  3. Navigate the page to: `${walletDeepLink}?uri=${encodeURIComponent(wcUri)}`
+     (in JavaScript, assign that URL string to the page's location.href property)
   4. Wallet opens, user approves
   5. Callback via WalletConnect relay
 ```

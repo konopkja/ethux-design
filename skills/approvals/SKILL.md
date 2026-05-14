@@ -3,6 +3,8 @@ name: approvals
 description: "Token approval UX patterns for Ethereum dApps: exact-amount approvals, Permit2 gasless signatures, EIP-5792 batched approve+action, human-readable approval display, and in-app approval management/revocation. Use this skill whenever building or reviewing ANY ERC-20 token approval flow, permit signing, spending permission UI, allowance checking, or approval revocation feature — even if the user just mentions 'approve', 'allowance', 'permit', or 'spending permission'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Token Approvals
 
 **Scope:** ERC-20 token approval flows (approve, Permit2, EIP-5792 batching), approval display, and revocation.

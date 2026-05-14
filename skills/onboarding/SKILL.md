@@ -3,6 +3,8 @@ name: onboarding
 description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase backup, jargon-free UI text, simple/advanced mode toggle, internationalization (i18n), and progressive disclosure. Use this skill whenever building or reviewing ANY first-run experience, new user flow, wallet creation UI, seed phrase backup, jargon replacement, i18n setup, or progressive disclosure pattern — even if the user just mentions 'onboarding', 'new users', 'first time', 'beginner friendly', or 'localization'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Onboarding
 
 **Scope:** First-run user experience: wallet creation, recovery phrase backup, jargon-free UI, simple/advanced modes, internationalization, and progressive disclosure.

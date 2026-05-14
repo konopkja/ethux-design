@@ -3,6 +3,8 @@ name: gas
 description: "Gas and fee UX patterns for Ethereum dApps: paymaster sponsorship (ERC-7677), fiat fee display, ERC-20 gas payment, L1/L2 fee breakdowns, and high-gas warnings. Use this skill whenever building or reviewing ANY fee display, gas estimation, transaction cost UI, paymaster integration, or fee-related warning — even if the user just mentions 'gas', 'fees', 'transaction cost', 'paymaster', or 'sponsored transactions'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Gas & Fees
 
 **Scope:** Gas estimation, fiat fee display, paymaster sponsorship, ERC-20 gas payment, L1/L2 fee breakdowns, and high-gas warnings.

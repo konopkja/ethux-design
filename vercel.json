@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/SKILL", "destination": "/SKILL.md" },
+    { "source": "/AGENTS", "destination": "/AGENTS.md" },
+    { "source": "/skills/approvals/SKILL", "destination": "/skills/approvals/SKILL.md" },
+    { "source": "/skills/signing/SKILL", "destination": "/skills/signing/SKILL.md" },
+    { "source": "/skills/gas/SKILL", "destination": "/skills/gas/SKILL.md" },
+    { "source": "/skills/multichain/SKILL", "destination": "/skills/multichain/SKILL.md" },
+    { "source": "/skills/onboarding/SKILL", "destination": "/skills/onboarding/SKILL.md" },
+    { "source": "/skills/wallets/SKILL", "destination": "/skills/wallets/SKILL.md" },
+    { "source": "/skills/safety/SKILL", "destination": "/skills/safety/SKILL.md" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\", </llms-full.txt>; rel=\"describedby\"; type=\"text/markdown\""
+        }
+      ]
+    }
+  ]
+}

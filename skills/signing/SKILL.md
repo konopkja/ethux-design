@@ -3,6 +3,8 @@ name: signing
 description: "Transaction signing UX patterns for Ethereum dApps: EIP-712 typed structured data, human-readable transaction summaries, transaction simulation/preview, multi-step signing progress, EIP-7702 batch signing, and Sign-In with Ethereum (SIWE/EIP-4361). Use this skill whenever building or reviewing ANY signature request, transaction confirmation UI, signing flow, SIWE implementation, transaction preview, or multi-step transaction progress — even if the user just mentions 'signing', 'signature', 'confirm transaction', 'SIWE', 'sign in with ethereum', or 'transaction preview'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Transaction Signing
 
 **Scope:** Signature requests (EIP-712 typed data, personal_sign, SIWE), transaction simulation, multi-step progress, and batch signing.

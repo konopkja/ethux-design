@@ -3,6 +3,8 @@ name: multichain
 description: "Multi-chain UX patterns for Ethereum dApps: unified cross-chain balances, automatic network switching, chain-aware address validation (ERC-7930), intent-based cross-chain transfers (ERC-7683), and consistent smart account addresses via CREATE2. Use this skill whenever building or reviewing ANY multi-chain feature, cross-chain transfer, bridge UI, network switching flow, or aggregated balance view — even if the user just mentions 'multi-chain', 'cross-chain', 'bridge', 'network switch', or 'L2'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Multi-Chain
 
 **Scope:** Multi-chain UX: aggregated balances, network switching, chain-aware address validation, cross-chain transfers (ERC-7683), and consistent smart account addresses.

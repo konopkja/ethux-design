@@ -3,6 +3,8 @@ name: ethux-design
 description: "Ethereum dApp UX patterns and implementation guidance. Routes to domain-specific skills for token approvals, transaction signing, gas/fees, multi-chain, onboarding, wallet connection, safety, and shared cross-cutting patterns. Use this skill whenever building, reviewing, or designing ANY Ethereum dApp UI — it will point you to the right detailed skill for your task."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # EthUX Design
 
 UX patterns and implementation guidance for Ethereum dApps, sourced from 32,000+ community reports of real user pain points.

@@ -3,6 +3,8 @@ name: safety
 description: "Safety and security UX patterns for Ethereum dApps: risk-differentiated warnings (info/caution/danger tiers), ENS name resolution, ERC-55 address checksum validation, spam token filtering, and safe max-send calculations. Use this skill whenever building or reviewing ANY address input, warning system, risk indicator, token filtering, ENS display, send-max feature, or phishing protection — even if the user just mentions 'safety', 'security', 'warnings', 'address validation', 'ENS', 'spam tokens', or 'send max'."
 ---
 
+> Agent index: <https://ethux.design/llms.txt>
+
 # Safety & Security
 
 **Scope:** Address validation (ERC-55 checksum), ENS resolution, risk-differentiated warnings, spam token filtering, and safe max-send calculations.
