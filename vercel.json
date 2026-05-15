@@ -9,14 +9,7 @@
     { "source": "/skills/multichain/SKILL", "destination": "/skills/multichain/SKILL.md" },
     { "source": "/skills/onboarding/SKILL", "destination": "/skills/onboarding/SKILL.md" },
     { "source": "/skills/wallets/SKILL", "destination": "/skills/wallets/SKILL.md" },
-    { "source": "/skills/safety/SKILL", "destination": "/skills/safety/SKILL.md" },
-    {
-      "source": "/",
-      "has": [
-        { "type": "header", "key": "accept", "value": "(.*text/markdown.*)" }
-      ],
-      "destination": "/llms.txt"
-    }
+    { "source": "/skills/safety/SKILL", "destination": "/skills/safety/SKILL.md" }
   ],
   "headers": [
     {
