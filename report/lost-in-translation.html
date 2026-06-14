@@ -164,6 +164,27 @@
       font-size:.86rem; color:var(--text-dim); max-width:70ch; }
     .scope-note b{ color:var(--text); font-weight:600; }
 
+    /* SEVERITY */
+    .sev-split{ display:grid; grid-template-columns:1fr 1fr; gap:30px; margin:30px 0 8px; }
+    .sev-head{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+    .sev-split p{ font-size:.96rem; color:var(--text-dim); line-height:1.55; }
+    .sev-split .ex{ margin-top:14px; font-family:var(--font-mono); font-size:.84rem; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .bug-block{ margin-top:34px; border:1px solid var(--border); border-radius:10px; background:var(--bg-raised); padding:26px; }
+    .bug-label{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.05em; color:var(--red); margin-bottom:18px; }
+    .bug-rows{ display:flex; flex-direction:column; gap:13px; }
+    .bug-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-family:var(--font-mono); font-size:.96rem; }
+    .bug-row .en{ color:var(--text); min-width:104px; font-weight:600; }
+    .bug-row .arr{ color:var(--text-muted); }
+    .bug-row .got{ color:var(--text-dim); }
+    .bug-row .mean{ color:var(--red); font-weight:600; }
+    .bug-note{ margin-top:20px; font-size:.9rem; color:var(--text-dim); line-height:1.55; max-width:74ch; }
+    .ladder{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:34px; }
+    .rung{ border:1px solid var(--border); border-radius:8px; padding:18px; background:var(--bg-raised); }
+    .rung b{ display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-size:1.05rem; }
+    .rung b::before{ content:""; width:10px; height:10px; border-radius:3px; background:var(--c); display:inline-block; flex-shrink:0; }
+    .rung span{ display:block; margin-top:8px; font-size:.86rem; color:var(--text-dim); line-height:1.5; }
+    @media (max-width:768px){ .sev-split{ grid-template-columns:1fr; } .ladder{ grid-template-columns:1fr; } }
+
     /* FOOTER */
     .site-footer{ padding:36px 0; border-top:1px solid var(--border); }
     .footer-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
@@ -315,12 +336,51 @@
     </div>
   </section>
 
+  <hr class="section-divider">
+
+  <!-- SEVERITY: cosmetic vs consequential -->
+  <section class="reveal">
+    <div class="container">
+      <div class="eyebrow">Cosmetic vs. consequential</div>
+      <h2>Be honest: a lot of this<br>doesn't matter. Some of it<br>is a real bug.</h2>
+
+      <div class="sev-split">
+        <div>
+          <div class="sev-head" style="color:var(--green)">Mostly cosmetic</div>
+          <p>Plenty of the differences are just synonyms. "Amount" shows up as three valid Spanish words — a reader understands all of them. Forcing one isn't worth much.</p>
+          <div class="ex"><span class="v" style="color:var(--green)">Monto</span><span class="v" style="color:var(--green)">Cantidad</span><span class="v" style="color:var(--green)">Importe</span><span class="vs">all mean "amount"</span></div>
+        </div>
+        <div>
+          <div class="sev-head" style="color:var(--red)">Sometimes wrong</div>
+          <p>But once you reach the jargon, it stops being a synonym game. Pick the wrong sense of a word in an app that moves money, and it's no longer cosmetic — it's a defect.</p>
+        </div>
+      </div>
+
+      <div class="bug-block">
+        <div class="bug-label">Aave · Russian — a lending app, where these words move your money</div>
+        <div class="bug-rows">
+          <div class="bug-row"><span class="en">Repay</span><span class="arr">→</span><span class="got">Вознаграждать</span><span class="arr">→</span><span class="mean">actually means "reward"</span></div>
+          <div class="bug-row"><span class="en">Collateral</span><span class="arr">→</span><span class="got">Побочный</span><span class="arr">→</span><span class="mean">actually means "side / secondary"</span></div>
+          <div class="bug-row"><span class="en">Stake</span><span class="arr">→</span><span class="got">Столб</span><span class="arr">→</span><span class="mean">actually means "pillar / post"</span></div>
+          <div class="bug-row"><span class="en">Withdraw</span><span class="arr">→</span><span class="got">Отводить</span><span class="arr">→</span><span class="mean">actually means "divert away"</span></div>
+        </div>
+        <div class="bug-note">The same app's Spanish gets every one of these right — it's broken only in Russian, and nobody noticed. They read like a dictionary picking the wrong sense of each word. This isn't a style preference. A user is told "reward" when the button repays their loan.</div>
+      </div>
+
+      <div class="ladder">
+        <div class="rung" style="--c:var(--green)"><b>Cosmetic</b><span>A synonym. The reader copes. Monto vs Cantidad.</span></div>
+        <div class="rung" style="--c:var(--amber)"><b>Comprehension</b><span>English left in — "slippage", "Stakear". The newcomer it's for can't read it.</span></div>
+        <div class="rung" style="--c:var(--red)"><b>Correctness</b><span>The wrong meaning. In an app that moves money, that's a hazard.</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROPOSAL -->
   <section class="proposal reveal">
     <div class="container">
       <div class="eyebrow">The proposal</div>
       <h2>One dictionary the whole<br>ecosystem can pull from.</h2>
-      <p class="kicker">A single open, machine-readable source of truth for how Ethereum terms are written in every language — that apps <em>and</em> the AI models translating them ground against. The rainbow collapses to one word.</p>
+      <p class="kicker">A single open, machine-readable source of truth for how Ethereum terms are written in every language — that apps <em>and</em> the AI models translating them ground against. The wrong-meaning bugs get caught once, by a human, and every app pulls the same correct word.</p>
 
       <div class="before-after">
         <div class="ba-chaos">
