@@ -444,41 +444,38 @@
       es: {
         apps: ["Uniswap","1inch","Polymarket","Aave","Tornado","Fluidkey"],
         rows: [
-          { en:"Connect wallet", action:"Conectar…", cells:["billetera","wallet","na","cartera","na","wallet"] },
-          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto"] },
+          { en:"Connect wallet", action:"Connect",  cells:["billetera","wallet","na","cartera","na","wallet"] },
+          { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","Aprobar","Aprobar","Aprobar","na"] },
           { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na","na"] },
-          { en:"Withdraw",       action:"Withdraw",  cells:["na","na","Retirar","Retirar","Retiro","na"] },
-          { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","na","na","Aprobar","na"] },
-          { en:"Buy",            action:"Buy",       cells:["Comprar","Comprar","Comprar","na","na","na"] },
-          { en:"Sell",           action:"Sell",      cells:["Vender","Vender","Vender","na","na","na"] }
+          { en:"Withdraw",       action:"Withdraw",  cells:["Retirar","na","Retirar","Retirar","Retiro","na"] },
+          { en:"Gas",            action:"Gas",       cells:["Gas","Gas","na","na","Gas","na"] },
+          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto"] }
         ],
-        note: "Spanish across six apps (Fluidkey added). “wallet” alone is billetera (LatAm) / wallet (kept English) / cartera (Spain). “amount” — a plain field label — fragments into three words, with two apps disagreeing with themselves."
+        note: "Spanish across six apps. Approving a token mostly lands on Aprobar, except Uniswap, which flips between Aprobar and Aprueba in its own UI. The word wallet is most often just left in English. Amount (bottom row) is the cosmetic case: three valid synonyms a reader copes with."
       },
       pt: {
         apps: ["Uniswap · PT","Uniswap · BR","1inch","Polymarket"],
         rows: [
-          { en:"Connect wallet", action:"Conectar…", cells:["Conectar","Conectar","Ligar","Ligar"] },
+          { en:"Connect wallet", action:"Connect",  cells:["Conectar","Conectar","Ligar","Ligar"] },
+          { en:"Approve",        action:"Approve",   cells:["Aprovar","Aprovar","na","Aprovar"] },
           { en:"Swap",           action:"Swap",      cells:["Fazer swap","Trocar","Troca / Swap / Efetuar swap","na"] },
-          { en:"Slippage",       action:"Slippage",  cells:["slippage","derrapagem","Slippage","na"] },
           { en:"Withdraw",       action:"Withdraw",  cells:["Saque","Saque","na","Levantar"] },
-          { en:"Amount",         action:"Amount",    cells:["Valor","Valor","Montante / Valor","Valor"] },
-          { en:"Buy",            action:"Buy",       cells:["Comprar","Comprar","Comprar","Comprar"] },
-          { en:"Sell",           action:"Sell",      cells:["Vender","Vender","Vender","Vender"] }
+          { en:"Gas",            action:"Gas",       cells:["Gas","Gas","Gas / gás","na"] },
+          { en:"Amount",         action:"Amount",    cells:["Valor","Valor","Montante / Valor","Valor"] }
         ],
-        note: "Portuguese. Uniswap ships two contradictory variants; its “pt-PT” file actually uses Brazilian “Conectar”/“Saque”. “connect” is Conectar (LatAm) vs Ligar (European); “swap” takes six forms in all."
+        note: "Portuguese. Uniswap ships two contradictory variants; its pt-PT file actually uses Brazilian forms (Conectar, Saque). connect is Conectar (LatAm) vs Ligar (European), and swap takes six forms. Approve is the rare point of agreement (Aprovar)."
       },
       ru: {
         apps: ["Uniswap","1inch","Polymarket","Aave","Tornado"],
         rows: [
           { en:"Connect wallet", action:"Connect", cells:["Подключить кошелёк","Подключите кошелёк","na","Подключить кошелёк","na"] },
+          { en:"Approve",  action:"Approve",  cells:["Одобрить / Разрешить / Утвердить","na","Одобрить","Утвердить","Разрешить"] },
           { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","na","na"] },
-          { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма"] },
-          { en:"Slippage", action:"Slippage", cells:["na","Проскальзывание","na","Проскальзывание","na"] },
           { en:"Withdraw", action:"Withdraw", cells:["Вывод","na","Вывод","Отводить","Вывод / Снять"] },
-          { en:"Buy",      action:"Buy",      cells:["Купить","Купить / Покупка","Купить / Покупка","na","na"] },
-          { en:"Sell",     action:"Sell",     cells:["Продать","Продажа","Продать / Продажа","na","na"] }
+          { en:"Gas",      action:"Gas",      cells:["Газ","Газ","na","na","Газ"] },
+          { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма"] }
         ],
-        note: "Russian (Cyrillic) — the language all five apps share. \"swap\" splits at the root: Uniswap transliterates it to Своп, 1inch translates it to Обмен. And buy/sell — identical in every app in Spanish and Portuguese — here fracture into verb vs noun (Купить vs Покупка). Harder language, worse fragmentation."
+        note: "Russian. Approve, a security-critical action, is rendered three different ways across apps: Одобрить (approve), Разрешить (allow), Утвердить (confirm). Aave mistranslates Withdraw as Отводить, which means divert away. Gas is uniformly transliterated to Газ."
       }
     };
     var PALETTE = ["green","amber","blue","purple","cyan","red"];
