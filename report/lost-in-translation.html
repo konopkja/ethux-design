@@ -306,10 +306,10 @@
           <div class="ex"><span class="v" style="color:var(--green)">Comprar</span><span class="vs">es/pt</span><span class="v" style="color:var(--amber)">Купить</span><span class="v" style="color:var(--red)">Покупка</span><span class="vs">ru</span></div>
         </div>
         <div class="card">
-          <div class="tag" style="color:var(--text-muted)">Zero coverage</div>
-          <h3>Some apps don't even try</h3>
-          <p>Fluidkey, a privacy wallet, ships English only — no localization at all. Non-English users don't get inconsistency. They get nothing.</p>
-          <div class="ex"><span class="v">English</span><span class="vs">·</span><span class="v">English</span><span class="vs">·</span><span class="v">English</span></div>
+          <div class="tag amber">When in doubt</div>
+          <h3>The most common move is no move</h3>
+          <p>For "wallet" in Spanish, the most popular choice across these apps isn't billetera or cartera — it's to keep the English word. Fluidkey ships "Conectar Wallet"; 1inch does the same.</p>
+          <div class="ex"><span class="v" style="color:var(--amber)">wallet</span><span class="vs">kept</span><span class="v" style="color:var(--blue)">billetera</span><span class="v" style="color:var(--purple)">cartera</span></div>
         </div>
       </div>
     </div>
@@ -366,7 +366,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-text">
-        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash. Fluidkey ships English only; OpenSea could not be measured. June 2026.
+        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash, Fluidkey (Spanish only — it has no pt/ru). OpenSea could not be measured. June 2026.
         &nbsp;·&nbsp; <a href="https://ethux.design">EthUX</a>
       </p>
     </div>
@@ -382,17 +382,17 @@
     // ---- Data (verified from shipped catalogs; "na" = action absent in that app) ----
     var DATA = {
       es: {
-        apps: ["Uniswap","1inch","Polymarket","Aave","Tornado"],
+        apps: ["Uniswap","1inch","Polymarket","Aave","Tornado","Fluidkey"],
         rows: [
-          { en:"Connect wallet", action:"Conectar…", cells:["billetera","wallet","na","cartera","na"] },
-          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad"] },
-          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na"] },
-          { en:"Withdraw",       action:"Withdraw",  cells:["na","na","Retirar","Retirar","Retiro"] },
-          { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","na","na","Aprobar"] },
-          { en:"Buy",            action:"Buy",       cells:["Comprar","Comprar","Comprar","na","na"] },
-          { en:"Sell",           action:"Sell",      cells:["Vender","Vender","Vender","na","na"] }
+          { en:"Connect wallet", action:"Conectar…", cells:["billetera","wallet","na","cartera","na","wallet"] },
+          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto"] },
+          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na","na"] },
+          { en:"Withdraw",       action:"Withdraw",  cells:["na","na","Retirar","Retirar","Retiro","na"] },
+          { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","na","na","Aprobar","na"] },
+          { en:"Buy",            action:"Buy",       cells:["Comprar","Comprar","Comprar","na","na","na"] },
+          { en:"Sell",           action:"Sell",      cells:["Vender","Vender","Vender","na","na","na"] }
         ],
-        note: "Spanish across five live apps. “wallet” alone is billetera (LatAm) / wallet (kept English) / cartera (Spain). “amount” — a plain field label — fragments into three words, with two apps disagreeing with themselves."
+        note: "Spanish across six apps (Fluidkey added). “wallet” alone is billetera (LatAm) / wallet (kept English) / cartera (Spain). “amount” — a plain field label — fragments into three words, with two apps disagreeing with themselves."
       },
       pt: {
         apps: ["Uniswap · PT","Uniswap · BR","1inch","Polymarket"],
