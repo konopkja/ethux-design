@@ -206,7 +206,7 @@
     <div class="container">
       <div class="eyebrow">EthUX · Terminology Research</div>
       <h1>The same action.<br>A <em>different word</em><br>in every app.</h1>
-      <p class="lede">AI made translating Ethereum apps cheap and good. It did not make them <em>agree</em>. Each app localizes alone — so a Spanish or Portuguese speaker meets a new word for the same button in every wallet they open.</p>
+      <p class="lede">AI made translating Ethereum apps cheap and good. It did not make them <em>agree</em>. Each app localizes alone — so a Spanish, Portuguese, or Russian speaker meets a new word for the same button in every wallet they open.</p>
 
       <div class="hero-morph" aria-label="The English verb swap, as rendered across apps in Portuguese">
         <span class="src">"swap"</span><span class="arrow">→</span>
@@ -243,6 +243,7 @@
         <div class="toggle" role="tablist" aria-label="Language">
           <button id="tab-pt" class="on" onclick="setLang('pt')">Português</button>
           <button id="tab-es" onclick="setLang('es')">Español</button>
+          <button id="tab-ru" onclick="setLang('ru')">Русский</button>
         </div>
       </div>
       <div class="legend">
@@ -300,9 +301,15 @@
         </div>
         <div class="card">
           <div class="tag green">The honest control</div>
-          <h3>Some words do agree</h3>
-          <p>"Buy" and "Sell" are Comprar and Vender everywhere. The chaos isn't random — it lands on jargon and dialect, exactly where a shared reference would help.</p>
-          <div class="ex"><span class="v" style="color:var(--green)">Comprar</span><span class="v" style="color:var(--green)">Vender</span><span class="vs">every app</span></div>
+          <h3>Some words agree — until the language gets harder</h3>
+          <p>"Buy" / "Sell" are Comprar / Vender in every app — in Spanish and Portuguese. Switch to Russian and even those fracture into verb-vs-noun forms.</p>
+          <div class="ex"><span class="v" style="color:var(--green)">Comprar</span><span class="vs">es/pt</span><span class="v" style="color:var(--amber)">Купить</span><span class="v" style="color:var(--red)">Покупка</span><span class="vs">ru</span></div>
+        </div>
+        <div class="card">
+          <div class="tag" style="color:var(--text-muted)">Zero coverage</div>
+          <h3>Some apps don't even try</h3>
+          <p>Fluidkey, a privacy wallet, ships English only — no localization at all. Non-English users don't get inconsistency. They get nothing.</p>
+          <div class="ex"><span class="v">English</span><span class="vs">·</span><span class="v">English</span><span class="vs">·</span><span class="v">English</span></div>
         </div>
       </div>
     </div>
@@ -359,7 +366,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-text">
-        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n). Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash. OpenSea could not be measured. June 2026.
+        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash. Fluidkey ships English only; OpenSea could not be measured. June 2026.
         &nbsp;·&nbsp; <a href="https://ethux.design">EthUX</a>
       </p>
     </div>
@@ -399,6 +406,19 @@
           { en:"Sell",           action:"Sell",      cells:["Vender","Vender","Vender","Vender"] }
         ],
         note: "Portuguese. Uniswap ships two contradictory variants; its “pt-PT” file actually uses Brazilian “Conectar”/“Saque”. “connect” is Conectar (LatAm) vs Ligar (European); “swap” takes six forms in all."
+      },
+      ru: {
+        apps: ["Uniswap","1inch","Polymarket","Aave","Tornado"],
+        rows: [
+          { en:"Connect wallet", action:"Connect", cells:["Подключить кошелёк","Подключите кошелёк","na","Подключить кошелёк","na"] },
+          { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","na","na"] },
+          { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма"] },
+          { en:"Slippage", action:"Slippage", cells:["na","Проскальзывание","na","Проскальзывание","na"] },
+          { en:"Withdraw", action:"Withdraw", cells:["Вывод","na","Вывод","Отводить","Вывод / Снять"] },
+          { en:"Buy",      action:"Buy",      cells:["Купить","Купить / Покупка","Купить / Покупка","na","na"] },
+          { en:"Sell",     action:"Sell",     cells:["Продать","Продажа","Продать / Продажа","na","na"] }
+        ],
+        note: "Russian (Cyrillic) — the language all five apps share. \"swap\" splits at the root: Uniswap transliterates it to Своп, 1inch translates it to Обмен. And buy/sell — identical in every app in Spanish and Portuguese — here fracture into verb vs noun (Купить vs Покупка). Harder language, worse fragmentation."
       }
     };
     var PALETTE = ["green","amber","blue","purple","cyan","red"];
@@ -439,8 +459,7 @@
       document.getElementById('matrix-note').textContent = d.note;
     }
     function setLang(lang){
-      document.getElementById('tab-es').classList.toggle('on', lang==='es');
-      document.getElementById('tab-pt').classList.toggle('on', lang==='pt');
+      ['es','pt','ru'].forEach(function(l){ document.getElementById('tab-'+l).classList.toggle('on', lang===l); });
       renderMatrix(lang);
     }
     renderMatrix('pt');
