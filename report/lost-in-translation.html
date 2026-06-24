@@ -335,8 +335,8 @@
         <div class="card">
           <div class="tag cyan">For contrast</div>
           <h3>Even careful localization doesn't close the gap</h3>
-          <p>Binance (a centralized exchange) localizes professionally and deliberately maintains separate Spain and Latin-American Spanish. Yet it independently renames swap to "Convert", sharing no terminology with any dapp. Good localization isn't the missing piece. A shared source is.</p>
-          <div class="ex"><span class="v" style="color:var(--text-dim)">swap</span><span class="vs">dapps</span><span class="v" style="color:var(--cyan)">Convert</span><span class="vs">Binance</span></div>
+          <p>Binance localizes professionally and keeps separate regional Spanish on purpose. Yet its exchange calls the action "Convert" while its own Web3 wallet calls it "Swap", and neither lines up with the dapps. Without a shared source, even one company drifts.</p>
+          <div class="ex"><span class="v" style="color:var(--blue)">Convert</span><span class="vs">exchange</span><span class="v" style="color:var(--cyan)">Swap</span><span class="vs">Web3 wallet</span></div>
         </div>
       </div>
     </div>
@@ -432,7 +432,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-text">
-        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash, Fluidkey (Spanish only — it has no pt/ru). Binance (a centralized exchange) is shown for contrast. OpenSea could not be measured. June 2026.
+        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash, Fluidkey (Spanish only — it has no pt/ru). Binance (a centralized exchange) is shown for contrast; its Connect/Approve/Gas live on wallet-gated screens we could not capture, so a blank Binance cell there means not-captured, not absent. OpenSea could not be measured. June 2026.
         &nbsp;·&nbsp; <a href="https://ethux.design">EthUX</a>
       </p>
     </div>
@@ -452,10 +452,10 @@
         rows: [
           { en:"Connect wallet", action:"Connect",  cells:["billetera","wallet","na","cartera","na","wallet","na"] },
           { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","Aprobar","Aprobar","Aprobar","na","na"] },
-          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na","na","na"] },
+          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na","na","Intercambios"] },
           { en:"Withdraw",       action:"Withdraw",  cells:["Retirar","na","Retirar","Retirar","Retiro","na","Retirar"] },
           { en:"Gas",            action:"Gas",       cells:["Gas","Gas","na","na","Gas","na","na"] },
-          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto","na"] }
+          { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto","Cantidad"] }
         ],
         note: "Spanish across six apps. Approving a token mostly lands on Aprobar, except Uniswap, which flips between Aprobar and Aprueba in its own UI. The word wallet is most often just left in English. Amount (bottom row) is the cosmetic case: three valid synonyms a reader copes with."
       },
@@ -464,10 +464,10 @@
         rows: [
           { en:"Connect wallet", action:"Connect",  cells:["Conectar","Conectar","Ligar","Ligar","na"] },
           { en:"Approve",        action:"Approve",   cells:["Aprovar","Aprovar","na","Aprovar","na"] },
-          { en:"Swap",           action:"Swap",      cells:["Fazer swap","Trocar","Troca / Swap / Efetuar swap","na","na"] },
+          { en:"Swap",           action:"Swap",      cells:["Fazer swap","Trocar","Troca / Swap / Efetuar swap","na","Troque"] },
           { en:"Withdraw",       action:"Withdraw",  cells:["Saque","Saque","na","Levantar","Saque"] },
           { en:"Gas",            action:"Gas",       cells:["Gas","Gas","Gas / gás","na","na"] },
-          { en:"Amount",         action:"Amount",    cells:["Valor","Valor","Montante / Valor","Valor","na"] }
+          { en:"Amount",         action:"Amount",    cells:["Valor","Valor","Montante / Valor","Valor","Valor"] }
         ],
         note: "Portuguese. Uniswap ships two contradictory variants; its pt-PT file actually uses Brazilian forms (Conectar, Saque). connect is Conectar (LatAm) vs Ligar (European), and swap takes six forms. Approve is the rare point of agreement (Aprovar)."
       },
@@ -476,10 +476,10 @@
         rows: [
           { en:"Connect wallet", action:"Connect", cells:["Подключить кошелёк","Подключите кошелёк","na","Подключить кошелёк","na","na"] },
           { en:"Approve",  action:"Approve",  cells:["Одобрить / Разрешить / Утвердить","na","Одобрить","Утвердить","Разрешить","na"] },
-          { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","na","na","na"] },
+          { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","na","na","Своп"] },
           { en:"Withdraw", action:"Withdraw", cells:["Вывод","na","Вывод","Отводить","Вывод / Снять","Вывод"] },
           { en:"Gas",      action:"Gas",      cells:["Газ","Газ","na","na","Газ","na"] },
-          { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма","na"] }
+          { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма","Сумма"] }
         ],
         note: "Russian. Approve, a security-critical action, is rendered three different ways across apps: Одобрить (approve), Разрешить (allow), Утвердить (confirm). Aave mistranslates Withdraw as Отводить, which means divert away. Gas is uniformly transliterated to Газ."
       }
