@@ -432,7 +432,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-text">
-        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash, Fluidkey (Spanish only — it has no pt/ru). Binance (a centralized exchange) is shown for contrast; its Connect/Approve/Gas live on wallet-gated screens we could not capture, so a blank Binance cell there means not-captured, not absent. OpenSea could not be measured. June 2026.
+        Method: terminology read from each app's shipped translation catalogs (open-source repos, live CDN locale files, in-app i18n), in Portuguese, Spanish and Russian. Apps: Uniswap, 1inch, Polymarket, Aave, Tornado Cash, Fluidkey (Spanish only — it has no pt/ru). A blank cell means the action isn't offered by that app, verified against each full catalog (a prediction market has no swap; a mixer no buy; 1inch uses Permit2 with no separate approve button). Binance (a centralized exchange) is shown for contrast; its Connect/Approve/Gas live on wallet-gated screens we could not capture, so a blank Binance cell there means not-captured, not absent. OpenSea could not be measured. June 2026.
         &nbsp;·&nbsp; <a href="https://ethux.design">EthUX</a>
       </p>
     </div>
@@ -450,9 +450,9 @@
       es: {
         apps: ["Uniswap","1inch","Polymarket","Aave","Tornado","Fluidkey","Binance"],
         rows: [
-          { en:"Connect wallet", action:"Connect",  cells:["billetera","wallet","na","cartera","na","wallet","na"] },
+          { en:"Connect wallet", action:"Connect",  cells:["billetera","wallet","na","cartera","Conectar","wallet","na"] },
           { en:"Approve",        action:"Approve",   cells:["Aprobar / Aprueba","na","Aprobar","Aprobar","Aprobar","na","na"] },
-          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","na","na","na","Intercambios"] },
+          { en:"Swap",           action:"Swap",      cells:["Intercambiar","Intercambio / Swap","na","Swap","na","na","Intercambios"] },
           { en:"Withdraw",       action:"Withdraw",  cells:["Retirar","na","Retirar","Retirar","Retiro","na","Retirar"] },
           { en:"Gas",            action:"Gas",       cells:["Gas","Gas","na","na","Gas","na","na"] },
           { en:"Amount",         action:"Amount",    cells:["Monto","Cantidad / Importe","Importe / Monto","Cantidad","Cantidad","Cantidad / Monto","Cantidad"] }
@@ -474,9 +474,9 @@
       ru: {
         apps: ["Uniswap","1inch","Polymarket","Aave","Tornado","Binance"],
         rows: [
-          { en:"Connect wallet", action:"Connect", cells:["Подключить кошелёк","Подключите кошелёк","na","Подключить кошелёк","na","na"] },
+          { en:"Connect wallet", action:"Connect", cells:["Подключить кошелёк","Подключите кошелёк","na","Подключить кошелёк","Подключить","na"] },
           { en:"Approve",  action:"Approve",  cells:["Одобрить / Разрешить / Утвердить","na","Одобрить","Утвердить","Разрешить","na"] },
-          { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","na","na","Своп"] },
+          { en:"Swap",     action:"Swap",     cells:["Своп / Выполнить своп","Обмен / Обменять","na","Swap","na","Своп"] },
           { en:"Withdraw", action:"Withdraw", cells:["Вывод","na","Вывод","Отводить","Вывод / Снять","Вывод"] },
           { en:"Gas",      action:"Gas",      cells:["Газ","Газ","na","na","Газ","na"] },
           { en:"Amount",   action:"Amount",   cells:["Сумма","Сумма","Сумма","Количество","Сумма","Сумма"] }
