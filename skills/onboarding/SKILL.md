@@ -76,7 +76,7 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Sign / Signing | Confirm / Approve |
 | Gas fee | Network fee |
 | Wallet address | Account / Your address |
-| Seed phrase / Mnemonic | Recovery phrase / Backup words |
+| Seed phrase / Mnemonic / Secret Recovery Phrase | Recovery phrase / Backup words |
 | Block confirmation | Processing |
 | Nonce | (omit entirely in simple mode) |
 | Smart contract | App / Service |
@@ -85,16 +85,15 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Revoke | Remove permission |
 | Slippage | Price change tolerance |
 | Liquidity | Available funds |
-| Secret Recovery Phrase | Backup words |
 | Allowance | Spending limit |
-| Tx Hash | Receipt ID |
+| Tx Hash | Transaction ID |
 | Mainnet | Main network |
 | Testnet | Practice network |
-| Layer 2 | Express network |
-| ENS name | Onchain name |
+| Layer 2 | (use the network's name, e.g. Base, Arbitrum) |
+| ENS name | Username / .eth name |
 | dApp | App |
 
-Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design), with replacements chosen for comprehension at a reading age of 9–11.
+Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension.
 
 2. Apply this in code by abstracting all user-facing strings through a string constants file or i18n framework. Never hardcode crypto jargon in component JSX/HTML.
 3. In advanced mode, show the technical term in parentheses: "Network fee (gas)".
