@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-05-14",
+    "generatedAt": "2026-08-09",
     "source": "https://ethux.design",
     "description": "Ethereum UX pain points, solutions, adoption tracking, and builder checklists from 32,000+ community reports.",
     "license": "MIT (code), CC-BY 4.0 (content)"
@@ -1348,7 +1348,7 @@
     "Permit2": "https://docs.uniswap.org/contracts/permit2/overview",
     "EIP-5792": "https://eips.ethereum.org/EIPS/eip-5792",
     "EIP-712": "https://eips.ethereum.org/EIPS/eip-712",
-    "ERC-7730": "https://clear-signing.org/",
+    "ERC-7730": "https://eips.ethereum.org/EIPS/eip-7730",
     "EIP-4361": "https://login.xyz/",
     "ERC-7677": "https://eips.ethereum.org/EIPS/eip-7677",
     "EIP-7702": "https://eip7702.io/",
@@ -1405,8 +1405,8 @@
       "label": "login.xyz"
     },
     "ERC-7730": {
-      "url": "https://clear-signing.org/",
-      "label": "clear-signing.org"
+      "url": "https://clearsigning.org/",
+      "label": "clearsigning.org"
     },
     "ENS": {
       "url": "https://docs.ens.domains/",

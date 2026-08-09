@@ -1,5 +1,5 @@
 # EthUX Design — Complete Dataset
-Generated: 2026-05-14 | Source: https://ethux.design
+Generated: 2026-08-09 | Source: https://ethux.design
 
 A community-sourced map of Ethereum UX pain points with solution checklists, adoption tracking, and real user evidence from 32,000+ reports.
 
@@ -174,7 +174,7 @@ Every wallet transaction is a trust decision. Users are asked to approve things 
 - **Severity:** Critical
 - **Status:** In-progress
 - **Checklist:** [signing](#checklist-signing)
-- **Related EIPs:** [EIP-712](https://eips.ethereum.org/EIPS/eip-712), [ERC-7730](https://clear-signing.org/)
+- **Related EIPs:** [EIP-712](https://eips.ethereum.org/EIPS/eip-712), [ERC-7730](https://eips.ethereum.org/EIPS/eip-7730)
 
 Users are prompted to approve transactions without a clear, human-readable summary. This is a leading enabler of phishing attacks. Even hardware wallets, designed as the most secure signing method, often display raw hexadecimal data that users cannot interpret. The gap between what the user intends and what they actually authorize remains the primary attack surface for wallet drains.
 
@@ -238,7 +238,7 @@ Fatigued users rubber-stamp every signature request.
 - **Severity:** Medium
 - **Status:** In-progress
 - **Checklist:** [signing](#checklist-signing)
-- **Related EIPs:** [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792), [ERC-7730](https://clear-signing.org/), ERC-7715
+- **Related EIPs:** [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792), [ERC-7730](https://eips.ethereum.org/EIPS/eip-7730), ERC-7715
 
 When a app requires multiple signatures in sequence, wallets present each prompt in isolation with no indication of how many are coming or why. Users doing a swap might see three prompts (approve, permit, execute) with no explanation of the sequence. Without context, users either rubber-stamp everything to get through it or abandon mid-flow because they are unsure if the next prompt is legitimate.
 
@@ -517,7 +517,7 @@ One bad experience, one lost transaction, and a user is gone for good. Solutions
 - **Severity:** Critical
 - **Status:** In-progress
 - **Checklist:** [safety](#checklist-safety)
-- **Related EIPs:** [ERC-7730](https://clear-signing.org/)
+- **Related EIPs:** [ERC-7730](https://eips.ethereum.org/EIPS/eip-7730)
 
 Phishing attacks and address poisoning cause thousands of victims monthly. But scams don't only happen in transactions. They happen in support channels too.
 
@@ -1044,7 +1044,7 @@ Standards: [EIP-6963](https://eip6963.org/), [EIP-7702](https://eip7702.io/), [W
 
 ### <a id="checklist-safety"></a>Safety & Security
 *Risk-differentiated warnings, address verification, ENS support, spam token filtering, and max-send gas accounting.*
-Standards: [ERC-55](https://eips.ethereum.org/EIPS/eip-55), [ENS](https://docs.ens.domains/), [ERC-7730](https://clear-signing.org/)
+Standards: [ERC-55](https://eips.ethereum.org/EIPS/eip-55), [ENS](https://docs.ens.domains/), [ERC-7730](https://eips.ethereum.org/EIPS/eip-7730)
 
 | Priority | Pattern | Standard | Benefit |
 |----------|---------|----------|---------|
@@ -1076,7 +1076,7 @@ Detailed implementation guidance for each checklist area. Each skill contains pa
 | Permit2 | https://docs.uniswap.org/contracts/permit2/overview |
 | EIP-5792 | https://eips.ethereum.org/EIPS/eip-5792 |
 | EIP-712 | https://eips.ethereum.org/EIPS/eip-712 |
-| ERC-7730 | https://clear-signing.org/ |
+| ERC-7730 | https://eips.ethereum.org/EIPS/eip-7730 |
 | EIP-4361 | https://login.xyz/ |
 | ERC-7677 | https://eips.ethereum.org/EIPS/eip-7677 |
 | EIP-7702 | https://eip7702.io/ |
