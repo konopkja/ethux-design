@@ -68,7 +68,13 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 **When:** Writing any user-facing text in the application.
 
 **How:**
-1. Maintain a terminology map and apply it globally through your i18n/string system:
+1. Maintain a terminology map and apply it globally through your i18n/string system. Terms are grouped by the action to take, not by a confusion score. The group is the signal: it tells the agent whether to swap the word, keep it and explain it, or hide it. Place any new term by these criteria:
+
+   - **Replace by default:** the term is jargon with a clean everyday equivalent, and new users lose little when it is dropped. Swap it in default mode.
+   - **Keep the term, explain in place:** the term is established across web3, technically load-bearing, or contested, so a rename misleads or alienates existing users. Keep the real word and add a short plain-language gloss on first use. This satisfies the NEVER rule against bare jargon: the gloss is the plain-language equivalent.
+   - **Omit in simple mode:** the term names a detail beginners never need. Hide it entirely until advanced mode.
+
+**Replace by default**
 
 | Crypto term | Plain language |
 |---|---|
@@ -78,10 +84,7 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Wallet address | Account / Your address |
 | Seed phrase / Mnemonic / Secret Recovery Phrase | Recovery phrase / Backup words |
 | Block confirmation | Processing |
-| Nonce | (omit entirely in simple mode) |
-| Smart contract | App / Service |
-| Token | Asset / Coin |
-| Approve (ERC-20) | Give permission |
+| Approve (spending permission) | Give permission |
 | Revoke | Remove permission |
 | Slippage | Price change tolerance |
 | Liquidity | Available funds |
@@ -93,7 +96,25 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | ENS name | Username / .eth name |
 | dApp | App |
 
-Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension.
+**Keep the term, explain in place**
+
+Show the real term with a plain-language gloss on first use. Do not rename these. (Reviewer feedback, July 2026: renaming units and standards reads as an explanation, not a label, and blanket swaps like token to coin are inaccurate because NFTs are tokens too.)
+
+| Crypto term | Keep as | Plain-language gloss on first use |
+|---|---|---|
+| Token | Token | an item you own onchain, such as a coin or a collectible |
+| Gwei / Wei | Gwei / Wei | the unit network fees are measured in |
+| ERC-20 | ERC-20 | a common token standard (show to developers only; omit in retail-facing UI) |
+| Bridge | Bridge | move funds from one network to another |
+| Smart contract | Smart contract | the onchain code an app runs on |
+
+**Omit in simple mode**
+
+| Crypto term | Plain language |
+|---|---|
+| Nonce | (omit entirely in simple mode) |
+
+Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "dApp" maps to "App"; "Smart contract" keeps its term with a gloss, so the two no longer collapse into the same word.
 
 2. Apply this in code by abstracting all user-facing strings through a string constants file or i18n framework. Never hardcode crypto jargon in component JSX/HTML.
 3. In advanced mode, show the technical term in parentheses: "Network fee (gas)".
