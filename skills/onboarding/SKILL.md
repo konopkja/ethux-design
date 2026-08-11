@@ -103,11 +103,11 @@ Show the real term with a plain-language gloss on first use. Do not rename these
 
 | Crypto term | Keep as | Plain-language gloss on first use |
 |---|---|---|
-| Token | Token | an item you own onchain, such as a coin or a collectible |
-| Gwei / Wei | Gwei / Wei | the unit network fees are measured in |
+| Token | Token | an item you own, like a coin or a collectible |
+| Gwei / Wei | Gwei / Wei | the unit that network fees are measured in |
 | ERC-20 | ERC-20 | a common token standard (show to developers only; omit in retail-facing UI) |
-| Bridge | Bridge | move funds from one network to another |
-| Smart contract | Smart contract | the onchain code an app runs on |
+| Bridge | Bridge | move tokens from one network to another |
+| Smart contract | Smart contract | the app's code |
 
 Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "dApp" maps to "App"; "Smart contract" keeps its term with a gloss, so the two no longer collapse into the same word.
 
