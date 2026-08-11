@@ -68,11 +68,12 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 **When:** Writing any user-facing text in the application.
 
 **How:**
-1. Maintain a terminology map and apply it globally through your i18n/string system. Terms are grouped by the action to take, not by a confusion score. The group is the signal: it tells the agent whether to swap the word, keep it and explain it, or hide it. Place any new term by these criteria:
+1. Maintain a terminology map and apply it globally through your i18n/string system. Terms are grouped by the action to take, not by a confusion score. The group is the signal: it tells the agent whether to swap the word or keep it and explain it. Place any new term by these criteria:
 
    - **Replace by default:** the term is jargon with a clean everyday equivalent, and new users lose little when it is dropped. Swap it in default mode.
    - **Keep the term, explain in place:** the term is established across web3, technically load-bearing, or contested, so a rename misleads or alienates existing users. Keep the real word and add a short plain-language gloss on first use. This satisfies the NEVER rule against bare jargon: the gloss is the plain-language equivalent.
-   - **Omit in simple mode:** the term names a detail beginners never need. Hide it entirely until advanced mode.
+
+   Terms with no clean equivalent that beginners never need (nonce is the standard example) are already handled by the NEVER rule above: omit them from default mode and reveal them only in advanced mode. They do not need a table row.
 
 **Replace by default**
 
@@ -107,12 +108,6 @@ Show the real term with a plain-language gloss on first use. Do not rename these
 | ERC-20 | ERC-20 | a common token standard (show to developers only; omit in retail-facing UI) |
 | Bridge | Bridge | move funds from one network to another |
 | Smart contract | Smart contract | the onchain code an app runs on |
-
-**Omit in simple mode**
-
-| Crypto term | Plain language |
-|---|---|
-| Nonce | (omit entirely in simple mode) |
 
 Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "dApp" maps to "App"; "Smart contract" keeps its term with a gloss, so the two no longer collapse into the same word.
 
