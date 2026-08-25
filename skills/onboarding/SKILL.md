@@ -73,7 +73,7 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
    - **Replace by default:** the term is jargon with a clean everyday equivalent, and new users lose little when it is dropped. Swap it in default mode.
    - **Keep the term, explain in place:** the term is established across web3, technically load-bearing, or contested, so a rename misleads or alienates existing users. Keep the real word and add a short plain-language gloss on first use. This satisfies the NEVER rule against bare jargon: the gloss is the plain-language equivalent.
 
-   Terms with no clean equivalent that beginners never need (nonce is the standard example) are already handled by the NEVER rule above: omit them from default mode and reveal them only in advanced mode. They do not need a table row.
+   - **Omit from default mode:** the term names an implementation detail that a non-technical user never has to act on. Nonce, Gwei, Wei and the ERC-* standard numbers are the standard examples. The NEVER rules above already ban bare use of these in default UI, and no gloss makes them useful to a beginner, so leave them out of default mode entirely and reveal them only in advanced mode. They do not need a table row.
 
 **Replace by default**
 
@@ -96,20 +96,18 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Layer 2 | (use the network's name, e.g. Base, Arbitrum) |
 | ENS name | Username / .eth name |
 | dApp | App |
+| Smart contract | App |
 
 **Keep the term, explain in place**
 
-Show the real term with a plain-language gloss on first use. Do not rename these. (Reviewer feedback, July 2026: renaming units and standards reads as an explanation, not a label, and blanket swaps like token to coin are inaccurate because NFTs are tokens too.)
+Show the real term with a plain-language gloss on first use. Do not rename these. (Reviewer feedback, July 2026: a blanket swap like token to coin is inaccurate, because NFTs are tokens too.)
 
 | Crypto term | Keep as | Plain-language gloss on first use |
 |---|---|---|
 | Token | Token | an item you own, like a coin or a collectible |
-| Gwei / Wei | Gwei / Wei | the unit that network fees are measured in |
-| ERC-20 | ERC-20 | a common token standard (show to developers only; omit in retail-facing UI) |
-| Bridge | Bridge | move tokens from one network to another |
-| Smart contract | Smart contract | the app's code |
+| Bridge | Bridge | moves your tokens from one network to another |
 
-Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "dApp" maps to "App"; "Smart contract" keeps its term with a gloss, so the two no longer collapse into the same word.
+Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "Smart contract" and "dApp" both map to "App" on purpose: the distinction is an implementation detail that a non-technical user never has to act on. Where one screen has to refer to both, name the app ("Uniswap needs permission to spend your USDC") instead of reintroducing the technical term.
 
 2. Apply this in code by abstracting all user-facing strings through a string constants file or i18n framework. Never hardcode crypto jargon in component JSX/HTML.
 3. In advanced mode, show the technical term in parentheses: "Network fee (gas)".
