@@ -182,7 +182,7 @@ const mode = useContext(UIModeContext)
 **How:**
 1. **First layer (always visible):** The one thing the user came to do. On a swap page: token pair, amount input, swap button.
 2. **Second layer (expandable):** Settings and details. Slippage tolerance, route info, fee breakdown. Hidden behind a "Details" toggle or accordion.
-3. **Third layer (on demand):** Technical and advanced data. Transaction calldata, contract addresses, nonce. Only in advanced mode (Pattern 3) or via a "Technical details" link.
+3. **Third layer (on demand):** Technical and advanced data. Transaction calldata, contract addresses, nonce, token standard numbers (ERC-20, ERC-721, etc). Only in advanced mode (Pattern 3) or via a "Technical details" link.
 4. Apply the same principle to errors:
    - First layer: "Transaction failed."
    - Second layer (expandable): "The swap could not complete because the price moved beyond your tolerance."
