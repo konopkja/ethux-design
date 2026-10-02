@@ -68,7 +68,14 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 **When:** Writing any user-facing text in the application.
 
 **How:**
-1. Maintain a terminology map and apply it globally through your i18n/string system:
+1. Maintain a terminology map and apply it globally through your i18n/string system. Terms are grouped by the action to take, not by a confusion score. The group is the signal: it tells the agent whether to swap the word or keep it and explain it. Place any new term by these criteria:
+
+   - **Replace by default:** the term is jargon with a clean everyday equivalent, and new users lose little when it is dropped. Swap it in default mode.
+   - **Keep the term, explain in place:** the term is established across web3, technically load-bearing, or contested, so a rename misleads or alienates existing users. Keep the real word and add a short plain-language gloss on first use. This satisfies the NEVER rule against bare jargon: the gloss is the plain-language equivalent.
+
+   - **Omit from default mode:** the term names an implementation detail that a non-technical user never has to act on. Nonce, Gwei, Wei and the ERC-* standard numbers are the standard examples. The NEVER rules above already ban bare use of these in default UI, and no gloss makes them useful to a beginner, so leave them out of default mode entirely and reveal them only in advanced mode. They do not need a table row.
+
+**Replace by default**
 
 | Crypto term | Plain language |
 |---|---|
@@ -78,10 +85,7 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Wallet address | Account / Your address |
 | Seed phrase / Mnemonic / Secret Recovery Phrase | Recovery phrase / Backup words |
 | Block confirmation | Processing |
-| Nonce | (omit entirely in simple mode) |
-| Smart contract | App / Service |
-| Token | Asset / Coin |
-| Approve (ERC-20) | Give permission |
+| Approve (spending permission) | Give permission |
 | Revoke | Remove permission |
 | Slippage | Price change tolerance |
 | Liquidity | Available funds |
@@ -92,8 +96,18 @@ description: "Onboarding UX patterns for Ethereum dApps: delayed recovery phrase
 | Layer 2 | (use the network's name, e.g. Base, Arbitrum) |
 | ENS name | Username / .eth name |
 | dApp | App |
+| Smart contract | App |
 
-Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension.
+**Keep the term, explain in place**
+
+Show the real term with a plain-language gloss on first use. Do not rename these. (Reviewer feedback, July 2026: a blanket swap like token to coin is inaccurate, because NFTs are tokens too.)
+
+| Crypto term | Keep as | Plain-language gloss on first use |
+|---|---|---|
+| Token | Token | an item you own, like a coin or a collectible |
+| Bridge | Bridge | moves your tokens from one network to another |
+
+Terms are drawn from the onboarding pain points documented on [ethux.design](https://ethux.design) and community glossary discussions, with replacements chosen for plain-language comprehension. No per-term confusion counts exist in the published data yet, so the grouping rests on cited judgement rather than measured frequency. "Smart contract" and "dApp" both map to "App" on purpose: the distinction is an implementation detail that a non-technical user never has to act on. Where one screen has to refer to both, name the app ("Uniswap needs permission to spend your USDC") instead of reintroducing the technical term.
 
 2. Apply this in code by abstracting all user-facing strings through a string constants file or i18n framework. Never hardcode crypto jargon in component JSX/HTML.
 3. In advanced mode, show the technical term in parentheses: "Network fee (gas)".
@@ -168,7 +182,7 @@ const mode = useContext(UIModeContext)
 **How:**
 1. **First layer (always visible):** The one thing the user came to do. On a swap page: token pair, amount input, swap button.
 2. **Second layer (expandable):** Settings and details. Slippage tolerance, route info, fee breakdown. Hidden behind a "Details" toggle or accordion.
-3. **Third layer (on demand):** Technical and advanced data. Transaction calldata, contract addresses, nonce. Only in advanced mode (Pattern 3) or via a "Technical details" link.
+3. **Third layer (on demand):** Technical and advanced data. Transaction calldata, contract addresses, nonce, token standard numbers (ERC-20, ERC-721, etc). Only in advanced mode (Pattern 3) or via a "Technical details" link.
 4. Apply the same principle to errors:
    - First layer: "Transaction failed."
    - Second layer (expandable): "The swap could not complete because the price moved beyond your tolerance."
